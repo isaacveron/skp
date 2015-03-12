@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+ {% if user.is_authenticated %}
+	<h1>Felicidades ingreso al sistema</h1>
+	<ul>
+		<li><a href="{% url 'apps.autenticacion.views.cerrar_sesion' %}">Cerrar Sesion</a></li>
+	</ul>	             
+{% else %}
+    <h1>Usted no se encuentra logueado por favor inicie sesion</h1>
+{% endif %}
+
+
+</body>
+</html>
