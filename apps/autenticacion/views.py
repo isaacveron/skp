@@ -8,9 +8,6 @@ from django.contrib.auth.decorators import login_required, permission_required
 
 # Create your views here.
 
-def index(request):
-	return render_to_response('index.html', context_instance = RequestContext(request))
-
 def iniciar_sesion(request):
     mensaje = ""
     if request.user.is_authenticated():
@@ -30,6 +27,12 @@ def iniciar_sesion(request):
         form = LoginForms()
         ctx = {'form':form, 'mensaje':mensaje}
         return render_to_response ('autenticacion/login.html', ctx, context_instance=RequestContext(request))      
+
+def index(request):
+    return render_to_response('index.html', context_instance = RequestContext(request))
+
+def nuevo_usuario(request):
+    return render_to_response('registro_usuario/nuevo_usuario.html', context_instance = RequestContext(request))
 
 @login_required(login_url = '/')
 def cerrar_sesion(request):
