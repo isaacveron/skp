@@ -3,10 +3,21 @@ from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, authenticate
 from django.contrib.auth import	login, authenticate, logout 
-from apps.autenticacion.forms import LoginForms
+from apps.autenticacion.forms import LoginForms, FormularioRegistro
 from django.contrib.auth.decorators import login_required, permission_required
 
 # Create your views here.
+def nuevo_usuario(request):
+    if request.method == 'POST':
+        formulario = FormularioRegistro(request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            return HttpResponseRedirect('/index/')
+        else:
+            return HttpResponseRedirect('/')
+    else:
+        formulario = FormularioRegistro()
+        return render_to_response('autenticacion/nuevo_usuario.html', {'formulario':formulario}, context_instance = RequestContext(request))
 
 def iniciar_sesion(request):
     mensaje = ""
@@ -30,9 +41,6 @@ def iniciar_sesion(request):
 
 def index(request):
     return render_to_response('index.html', context_instance = RequestContext(request))
-
-def nuevo_usuario(request):
-    return render_to_response('registro_usuario/nuevo_usuario.html', context_instance = RequestContext(request))
 
 @login_required(login_url = '/')
 def cerrar_sesion(request):
