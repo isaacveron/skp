@@ -18,7 +18,7 @@ class LoginForms (forms.Form):
 class FormularioRegistro(UserCreationForm):
     email = forms.EmailField(required=True)
 	
-	class Meta:
+class Meta:
 		model = User
 		fields = ('username', 'email', 'password1', 'password2')
 	def save(self, commit=True):

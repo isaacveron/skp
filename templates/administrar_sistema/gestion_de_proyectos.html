@@ -1,0 +1,47 @@
+{% extends 'index.html' %}
+
+{% block cuerpo %}
+	<section id="main" class="column">
+		<article class="module width_full">
+			<header><h3>Gestion de pryectos</h3></header>
+			<div class="module_content">
+				<div class="tab_container">
+					<div id="tab1" class="tab_content">
+						<table class="tablesorter" cellspacing="0"> 
+							<thead> 
+								<tr> 
+   									<th>Crear Proyecto</th> 				   				
+										<th align="right"><input type="image" src="{{ STATIC_URL }}pagina_principal/images/icn_edit.png" title="Edit"><a href="#">Editar</a></th>  
+									</tr>
+							</thead> 
+							<thead> 
+								<tr> 
+   									<th>Consultar Proyecto</th>  
+										<th align="right"><input type="image" src="{{ STATIC_URL }}pagina_principal/images/icn_edit.png" title="Edit"><a>Editar</a></th>     				
+    							</tr> 
+							</thead>
+							<thead> 
+								<tr>
+   									<th>Modificar Proyecto</th>  				
+    								<th align="right"><input type="image" src="{{ STATIC_URL }}pagina_principal/images/icn_edit.png" title="Edit"><a>Editar</a></th>  
+								</tr> 
+							</thead>
+							<thead> 
+								<tr>
+   									<th>Asignar Usuario a Grupo de Trabajo</th>  				
+    								<th align="right"><input type="image" src="{{ STATIC_URL }}pagina_principal/images/icn_edit.png" title="Edit"><a>Editar</a></th>  
+								</tr> 
+							</thead> 
+							<thead> 
+								<tr>
+   									<th>Buscar Proyecto</th>  				
+    								<th align="right"><input type="image" src="{{ STATIC_URL }}pagina_principal/images/icn_edit.png" title="Edit"><a>Editar</a></th>  
+								</tr> 
+							</thead>		 			
+						</table>
+					</div>
+				</div>
+			</div>	
+		</article>
+	</section>	
+{% endblock %}
