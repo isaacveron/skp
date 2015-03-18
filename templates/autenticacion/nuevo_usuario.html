@@ -1,0 +1,31 @@
+{% extends 'index.html' %}
+
+{% block cuerpo %}
+	<section id="main" class="column">
+		<article class="module width_full">
+			<header><h3>Stats</h3></header>
+			<div class="module_content">
+				<div class="tab_container">
+					<div id="tab1" class="tab_content">
+						<table class="tablesorter" cellspacing="0"> 
+							<div class="module_content">
+								<fieldset>
+									<form method="POSt">
+										{% csrf_token %}
+										<input type="text" name="username" placeholder = "Usuario">
+										<input type="email" name="email" placeholder = "Email">
+										<input type="password" name="password1" placeholder = "Contraseña">
+										<input type="password" name="password2" placeholder = "Contraseña">
+										<div class="submit_link">	
+											<input type="submit" value="Registrar">
+										</div>
+									</form>
+								</fieldset>
+							</div>
+						</table>
+					</div>
+				</div>
+			</div>
+		</article>
+	</section>
+{% endblock cuerpo %}
