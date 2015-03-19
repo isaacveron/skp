@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, auth
 from django.contrib.auth import	login, authenticate, logout 
 from apps.autenticacion.forms import LoginForms, FormularioRegistro
 from django.contrib.auth.decorators import login_required, permission_required
+from django.views.decorators.csrf import csrf_protect
 
 # Create your views here.
 def nuevo_usuario(request):
@@ -19,6 +20,7 @@ def nuevo_usuario(request):
         formulario = FormularioRegistro()
         return render_to_response('autenticacion/nuevo_usuario.html', {'formulario':formulario}, context_instance = RequestContext(request))
 
+@csrf_protect
 def iniciar_sesion(request):
     mensaje = ""
     if request.user.is_authenticated():
@@ -27,8 +29,8 @@ def iniciar_sesion(request):
         if request.method == "POST":
             form = LoginForms(request.POST)
             if form.is_valid():
-                username = form.cleaned_data['Usuario']
-                password = form.cleaned_data['Clave']
+                username = form.cleaned_data['username']
+                password = form.cleaned_data['password1']
                 usuario = authenticate(username=username, password=password)
                 if usuario is not None and usuario.is_active:
                     login(request, usuario)

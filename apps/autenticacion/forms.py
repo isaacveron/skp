@@ -12,20 +12,20 @@ class LoginForms (forms.Form):
         @author: Marcelo Denis
         
     """
-    Usuario = forms.CharField(widget=forms.TextInput())
-    Clave = forms.CharField(widget=forms.PasswordInput(render_value=False))
+    username = forms.CharField(widget=forms.TextInput())
+    password1 = forms.CharField(widget=forms.PasswordInput(render_value=False))
 
 class FormularioRegistro(UserCreationForm):
-    email = forms.EmailField(required=True)
+	email = forms.EmailField(required=True)
 	
-    class Meta:
+	class Meta:
 		model = User
 		fields = ('username', 'email', 'password1', 'password2')
-	    def save(self, commit=True):
-		    user = super(FormularioRegistro, self).save(commit=False)
-		    user.email = self.cleaned_data['email']
+	def save(self, commit=True):
+		user = super(FormularioRegistro, self).save(commit=False)
+	 	user.email = self.cleaned_data['email']
 
-		    if commit:
-			    user.save()
-
+	    	if commit:
+			user.save()
+		
 		return user
