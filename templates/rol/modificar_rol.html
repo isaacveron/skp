@@ -1,0 +1,14 @@
+{% extends 'rol/administrar_rol.html' %}
+{% block titulo %}Modificacion de Rol{% endblock %}
+{% block encabezado %}Modificacion de {{ rol.name }}{% endblock %}
+{% block activo-admin %}active{% endblock %}
+
+{%  block botones %}
+    <li><a href="/administracion/roles/" class="btn btn-default">Volver</a></li>
+{% endblock %}
+{% block contenido %}
+    <form id="formulario" method="post" action="">{% csrf_token %}
+        <table class="table"><p>{{ formulario }}</p></table>
+        <p><input class="btn btn-default" type="submit" value="Confirmar"></p>
+    </form>
+{% endblock %}

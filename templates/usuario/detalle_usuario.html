@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+
+{% block cuerpo %}
+    <section id="main" class="column">
+        <article class="module width_full">
+            <header><h3>Detalles del Usuario</h3></header>
+            <div class="module_content">
+                <div class="tab_container">
+                    <div id="tab1" class="tab_content">
+                        <table class="tablesorter" cellspacing="0"> 
+                            <div class="message"><p><strong>Username: </strong>{{ usuario_parametro.username }}</p></div>
+                            <div class="message"><p><strong>Nombre: </strong>{{ usuario_parametro.first_name }}</p></div>
+                            <div class="message"><p><strong>Apellido: </strong>{{ usuario_parametro.last_name }}</p></div>
+                            <div class="message"><p><strong>Email: </strong>{{ usuario_parametro.email }}</p></div>
+                            <div class="message"><p><strong>Telefono: </strong>{{ usuario_parametro.telefono }}</p></div>
+                            <div class="message"><p><strong>Direccion: </strong>{{ usuario_parametro.direccion }}</p></div>
+                            <div class="message"><p><strong>Observacion: </strong>{{ usuario_parametro.observacion }}</p></div>
+                            <div class="message"><p><strong>Registrado: </strong>{{ usuario_parametro.date_joined|date:'SHORT_DATETIME_FORMAT' }}</p></div>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+{% endblock cuerpo %}

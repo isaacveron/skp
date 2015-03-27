@@ -1,0 +1,64 @@
+
+{% block titulo %}Administracion{% endblock %}
+
+{% block activo-admin %}active{% endblock %}
+{% block usuario%} {{ usuario_actor.get_username }} {% endblock %}
+{% block encabezado %}Lista de Usuarios <small>Haz click en el usuario para mas detalles</small>{% endblock %}
+
+{% block botones %}
+    <li>
+        {% if usuario_actor.can_administrar_proyecto %}
+            <a href="/administracion/proyectos" class="btn btn-default">Administrar Proyecto</a>
+        {% else %}
+            <a class="btn btn-default" disabled = "disabled">Administrar Proyecto</a>
+        {% endif %}
+    </li>
+    <li>
+         <a href="/administracion/usuarios" class="btn btn-default">Administrar Usuario</a>
+    </li>
+    <li>
+        {% if usuario_actor.can_administrar_rol %}
+            <a href="/administracion/roles" class="btn btn-default">Administrar Roles</a>
+        {% else %}
+            <a class="btn btn-default" disabled = "disabled">Administrar Roles</a>
+        {% endif %}
+    </li>
+    <li>
+        {% if usuario_actor.can_administrar_proyecto %}
+            <a href="/administracion/credenciales" class="btn btn-default">Administrar Credenciales</a>
+        {% else %}
+            <a class="btn btn-default" disabled = "disabled">Administrar Credenciales</a>
+        {% endif %}
+    </li>
+
+{% endblock %}
+
+{% block contenido %}
+    {% if usuario_actor.can_administrar_usuario %}
+        <table class="table table-condensed table-hover" id="tablaUsuario" rel="tabla" title="Ver detalles..">
+            <thead>
+                <tr>
+                    <td>Nombre</td>
+                    <td>Estado</td>
+                </tr>
+            </thead>
+            {% for usuario in lista_usuarios %}
+                {% if usuario.is_active %}
+                    <tr class="clickableRow" href='{% url "administracion.views.detalle_usuario" usuario.id %}'>
+                        <td>{{ usuario.username }}</td>
+                        <td>Activo</td>
+                    </tr>
+                {% else %}
+                    <tr class="clickableRow warning" href='{% url "administracion.views.detalle_usuario" usuario.id %}'>
+                        <td>{{ usuario.username }}</td>
+                        <td>Inactivo</td>
+                    </tr>
+                {% endif %}
+            {% empty %}
+                <p>No hay usuarios registrados aun</p>
+            {% endfor %}
+        </table>
+    {% else %}
+        <div class="alert alert-danger">No tienes permiso para ver este contenido</div>
+    {% endif %}
+{% endblock %}
