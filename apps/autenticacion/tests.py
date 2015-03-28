@@ -1,7 +1,9 @@
 from django.test import TestCase
-from django.contrib.auth.models import User
+import unittest, time
+from datetime import datetime
+from django.contrib.auth.models import User, Group, Permission
+from django.core.urlresolvers import reverse
 # Create your tests here.
-
 
 class TestUserBD(TestCase):
    def test_numero_elementos(self):
@@ -14,10 +16,10 @@ class TestUserBD(TestCase):
        print("Prueba exitosa, el numero de usuarios es igual a 0")
 
 class TestLogin(TestCase):
-   usuario='admin'
+   usuario='admin2'
    password='admin'
    #cargamos los usuarios
-   fixtures = ['fixtures/Usuarios.json']
+   fixtures = ["usuario"]
    def test_login_usuario(self):
        print("\nTEST: Loguear usuario registrado")
        try:
