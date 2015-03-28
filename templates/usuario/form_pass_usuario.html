@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+
+{% block cuerpo %}
+	<section id="main" class="column">
+		<article class="module width_full">
+			<header><h3>Cambiar Contraseña</h3></header>
+			<div class="module_content">
+				<div class="tab_container">
+					<div id="tab1" class="tab_content">
+						<table class="tablesorter" cellspacing="0"> 
+							<div class="module_content">
+								<fieldset>
+									<form method="POSt">
+										{% csrf_token %}
+										<p><input id="id_new_password1" name="new_password1" type="password" placeholder="New Password"/></p>
+										<p><input id="id_new_password2" name="new_password2" type="password"placeholder="Confirm New Password"/></p>
+										<div class="submit_link">	
+											<input type="submit" value="Guardar">
+										</div>
+   									</form>
+   								</fieldset>
+   							</div>
+   						</table>
+   					</div>
+   				</div>
+   			</div>
+   		</article>
+   	</section>
+{% endblock cuerpo %}

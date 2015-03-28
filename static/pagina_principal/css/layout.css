@@ -44,8 +44,9 @@ width: 100%;
 background: #222222 url(../images/header_bg.png) repeat-x;
 }
 
-header#header h1.site_title, header#header h2.section_title {
+header#header h1.site_title, header#header h2.section_title{
 font-family: "billabong";
+text-decoration:none;  
 float: left;
 margin: 0;
 font-size: 38px;
@@ -301,7 +302,9 @@ color: #444444;
 }
 
 /* Sidebar Icons */
-
+#sidebar li.icn_home a {
+background: url(../images/home.png) no-repeat center left;
+}
 #sidebar li.icn_new_article a {
 background: url(../images/icn_new_article.png) no-repeat center left;
 }
