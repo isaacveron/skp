@@ -5,12 +5,21 @@ from django.contrib.auth.forms import UserCreationForm, ReadOnlyPasswordHashFiel
 
 
 class UsuarioForm(UserCreationForm):
+    """
+    Formulario para la creacion de usuarios
+    Hereda del formulario UserCreationForm y utiliza la clase user
+    para agregar ciertos campos de la clase a la hora de la creacion
+    """
     class Meta:
         model = User
         fields = ('username', 'password1', 'password2', 'email', 'first_name', 'last_name', 'telefono', 'direccion', 'observacion')
 
 class UsuarioModForm(forms.ModelForm):
-    
+    """
+    Formluario para la modificacion de usuarios
+    Hereda de forms.ModelForm y utiliza la clase user para
+    agregar ciertos campos a la hora de la modificacion
+    """    
     username = forms.RegexField(
         label=("Username"), max_length=30, regex=r"^[\w.@+-]+$",
         help_text=("Required. 30 characters or fewer. Letters, digits and "

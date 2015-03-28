@@ -3,7 +3,7 @@
 {% block cuerpo %}
 	<section id="main" class="column">
 		<article class="module width_full">
-			<header><h3>Stats</h3></header>
+			<header><h3>Modificar Usuario</h3></header>
 			<div class="module_content">
 				<div class="tab_container">
 					<div id="tab1" class="tab_content">
@@ -12,11 +12,11 @@
 								<fieldset>
 									<form method="POSt">
 										{% csrf_token %}
-										<p><input id="id_username" maxlength="30" name="username" type="text" value="{{ formulario.username.value }}" /></p>
-										<p><input title="Se necesita un nombre" id="id_first_name" maxlength="30" name="first_name" type="text" value="{{ formulario.first_name.value }}"required/></p>
-										<p><input id="id_last_name" maxlength="30" name="last_name" type="text" value="{{ formulario.last_name.value }}" /></p>
-										<p><input id="id_email" maxlength="75" name="email" type="email" value="{{ formulario.email.value }}"/></p>
-	 									<p><input id="id_telefono" min="0" name="telefono" type="text" value="{{ formulario.telefono.value }}"/></p>
+										<p><input id="id_username" maxlength="30" name="username" type="text" value="{{ formulario.username.value }}" title="Ingrese un username" required/></p>
+										<p><inputid="id_first_name" maxlength="30" name="first_name" type="text" value="{{ formulario.first_name.value }}"title="Ingrese su Nombre" required/></p>
+										<p><input id="id_last_name" maxlength="30" name="last_name" type="text" value="{{ formulario.last_name.value }}"title="Ingrese su apellido" required/></p>
+										<p><input id="id_email" maxlength="75" name="email" type="email" value="{{ formulario.email.value }}"title="Ingrese su email" required/></p>
+	 									<p><input id="id_telefono" min="0" name="telefono" type="text" value="{{ formulario.telefono.value }}"title="Ingrese su numero telefonico" required/></p>
 										<p><textarea cols="40" id="id_direccion" name="direccion" rows="5">{{ formulario.direccion.value }}</textarea></p>
 										<p><textarea cols="40" id="id_observacion" name="observacion" rows="5">{{ formulario.observacion.value }}</textarea></p>
 										<div class="submit_link">	

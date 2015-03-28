@@ -3,7 +3,7 @@
 {% block cuerpo %}
 	<section id="main" class="column">
 		<article class="module width_full">
-			<header><h3>Stats</h3></header>
+			<header><h3>Agregar Usuario</h3></header>
 			<div class="module_content">
 				<div class="tab_container">
 					<div id="tab1" class="tab_content">
@@ -12,13 +12,13 @@
 								<fieldset>
 									<form method="POSt">
 										{% csrf_token %}
-										<p><input type="text"  name="username" placeholder="Username" ></p>
-	 									<p><input type="password" name="password1" placeholder="Password"></p>
-										<p><input type="password" name="password2" placeholder="Password"></p>
-	 									<p><input type="text"  name="first_name" placeholder="Nombre"></p>
-	 									<p><input type="text"  name="last_name" placeholder="Apellido"></p>
-										<p><input type="text" name="email" placeholder="Email"></p>
-										<p><input type="text"  name="telefono" placeholder="Telefono"></p>
+										<p><input type="text"  name="username" placeholder="Username"title="Ingrese un username" required ></p>
+	 									<p><input type="password" name="password1" placeholder="Password" title="Ingrese su contraseña" required ></p>
+										<p><input type="password" name="password2" placeholder=" Confirm Password"title="Ingrese de nuevo su contraseña" required></p>
+	 									<p><input type="text"  name="first_name" placeholder="Nombre" title="Ingrese su nombre"required></p>
+	 									<p><input type="text"  name="last_name" placeholder="Apellido" title="Ingrese su apellido" required></p>
+										<p><input type="text" name="email" placeholder="Email" title="Ingrese su Email" required></p>
+										<p><input type="text"  name="telefono" placeholder="Telefono" title="Ingrese su numero telefonico" required></p>
 										<p><input type="text"  name="direccion" placeholder="Direccion"></p>
 										<p><input type="text"  name="observacion" placeholder="Observacion">
 										<div class="submit_link">	
