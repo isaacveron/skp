@@ -1,0 +1,22 @@
+{% extends "index.html" %}
+
+{% block cuerpo %}
+    <section id="main" class="column">
+        <article class="module width_full">
+            <header><h3>Eliminar del Usuario</h3></header>
+            <div class="module_content">
+                <div class="tab_container">
+                    <div id="tab1" class="tab_content">
+                        <table class="tablesorter" cellspacing="0"> 
+                           <p>Desea eliminar al usuario {{ usuario_parametro.name }}?</p>
+   								<p>
+        							<a  class="btn btn-primary btn-lg" href="{% url 'apps.usuario.views.eliminar_usuario' usuario_parametro.id %}">Si</a>
+        							<a class="btn btn-default btn-lg" href="{% url 'apps.usuario.views.administrar_usuario' %}">No</a>
+   								 </p>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+{% endblock cuerpo %}

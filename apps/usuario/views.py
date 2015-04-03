@@ -3,7 +3,8 @@ from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, authenticate
 from django.contrib.auth import	login, authenticate, logout 
-from apps.autenticacion.forms import UsuarioForm, UsuarioModForm, RolForm
+from apps.usuario.forms import UsuarioForm, UsuarioModForm
+from apps.roles.forms import AsignarRol
 from django.contrib.auth.models import User, Group, Permission
 from django.contrib.auth.decorators import login_required, permission_required
 from django.views.decorators.csrf import csrf_protect
@@ -60,22 +61,43 @@ def crear_usuario(request):
         -   formulario: es el fomrulario que debe completar el usuario_actor
         -   lista_usuarios: es la lista de usuarios existentes en el sistema
     """
+    mensaje = "El usuario ha sido creado con exito"
     usuario_actor = request.user
     if request.method == 'POST':
         formulario = UsuarioForm(request.POST)
         if formulario.is_valid():
             formulario.save()
             lista_usuarios = User.objects.all()
-            return render_to_response('usuario/operacion_usuario_exito.html',{'mensaje': 'El usuario ha sido creado con exito', 'usuario_actor': usuario_actor,'lista_usuarios': lista_usuarios}, context_instance=RequestContext(request))
+            return render_to_response('usuario/operacion_usuario_exito.html',{'mensaje': mensaje, 'usuario_actor': usuario_actor,'lista_usuarios': lista_usuarios}, context_instance=RequestContext(request))
     else:
         formulario = UsuarioForm()
     return render_to_response('usuario/form_add_usuario.html',
                               {'formulario': formulario, 'operacion': 'Creacion de un nuevo usuario',
                                'usuario_actor': usuario_actor}, context_instance=RequestContext(request))
 
+def administrar_usuario(request):
+    """
+
+    :param request:
+    :return:
+
+    Vista de administrar usuario
+
+    | Recibe como parametro un request y retorna la pagina web administrar_usuario.html donde se muestra
+    | la lista de usuarios si el usuario_actor posee los permsos correspondientes
+
+    * Variables
+        -   usuario_actor: es el usuario que realiza la accion
+        -   lista_usuarios: es la lista de usuarios existentes en el sistema
+    """
+    usuario_actor = request.user
+    lista_usuarios = User.objects.all()
+    return render_to_response('usuario/administrar_usuario.html', {'usuario_actor':usuario_actor,'lista_usuarios':lista_usuarios},
+                              context_instance=RequestContext(request))
+
 @csrf_protect
 @login_required(login_url = '/')
-def detalle_usuario(request, id_usuario_p):
+def detalle_usuario(request, idUsuario):
     """
     Vista detalle del usuario
 
@@ -83,11 +105,12 @@ def detalle_usuario(request, id_usuario_p):
     * Variables
         -usuario_parametro: es el usuario que se vera en detalle en la pagina web detalle_usuario.html
     """
-    usuario_parametro = User.objects.get(pk=id_usuario_p)
+    usuario_parametro = User.objects.get(pk=idUsuario)
     return render_to_response('usuario/detalle_usuario.html', {'usuario_actor': request.user,'usuario_parametro': usuario_parametro}, context_instance=RequestContext(request))
 
+
 @login_required(login_url = '/')
-def modificar_usuario(request):
+def modificar_usuario(request, idUsuario):
     """"  
     Vista de modificacion de nuevo usuario
 
@@ -98,7 +121,8 @@ def modificar_usuario(request):
         -   formulario: es el fomrulario que debe completar el usuario_actor
         -   lista_usuarios: es la lista de usuarios existentes en el sistema
     """
-    usuario_actor = request.user
+    mensaje = "Se ha actualizado tu informacion personal"
+    usuario_actor = User.objects.get(pk=idUsuario)
     if request.method == 'POST':
         formulario = UsuarioModForm(request.POST, instance=usuario_actor)
         if formulario.is_valid():
@@ -107,13 +131,57 @@ def modificar_usuario(request):
            form.save()
            lista_usuarios = User.objects.all()
            return render_to_response('usuario/operacion_usuario_exito.html',
-                                     {'mensaje': 'Se ha actualizado tu informacion personal', 'usuario_actor': usuario_actor,
+                                     {'mensaje': mensaje, 'usuario_actor': usuario_actor,
                                       'lista_usuarios': lista_usuarios}, context_instance=RequestContext(request))
     else:
         formulario = UsuarioModForm(instance=usuario_actor)
     return render(request, 'usuario/form_mov_usuario.html',
                   {'usuario_actor': usuario_actor, 'formulario': formulario, 'operacion': 'Gestion de datos personales'},
                   context_instance=RequestContext(request))
+
+def asignar_rol(request, idRol): 
+    mensaje="Rol asignado con exito"
+    usuario_actor = request.user
+    usuario_parametro = User.objects.get(pk=idRol)
+    if request.method == 'POST':
+        formulario = AsignarRol(request.POST, instance=usuario_parametro)
+        if formulario.is_valid():
+           formulario.save()
+           roles = Group.objects.all()
+           return render_to_response('usuario/operacion_usuario_exito.html',{'mensaje': mensaje, 'usuario_actor': usuario_actor}, context_instance=RequestContext(request))
+    else:
+        formulario = AsignarRol(instance=usuario_parametro)
+    return render(request, 'rol/form_rol.html', {'usuario_parametro': usuario_parametro, 'formulario': formulario,
+                                                 'operacion': 'Asignacion de rol', 'usuario_actor': usuario_actor},
+                  context_instance=RequestContext(request))
+
+def vista_eliminar_usuario(request, idUsuario):
+    """
+
+    :param request:
+    :param idRol:
+    :return:
+    """
+    usuario_actor = request.user
+    usuario_parametro = User.objects.get(pk=idUsuario)
+    return render_to_response('usuario/eliminar_usuario.html', {'usuario_actor': usuario_actor, 'usuario_parametro': usuario_parametro},
+                              context_instance=RequestContext(request))
+
+def eliminar_usuario(request, idUsuario):
+    """
+
+    :param request:
+    :param idRol:
+    :return:
+    """
+    mensaje="Usuario eliminido con exito"
+    usuario = User.objects.get(pk=idUsuario)
+    usuario.delete()
+    usuario_actor = request.user
+    lista_usuarios = User.objects.all()
+    return render_to_response('usuario/operacion_usuario_exito.html', {'mensaje':mensaje, 'usuario_actor': usuario_actor, 'lista_usuarios': lista_usuarios}, context_instance=RequestContext(request))
+
+
 
 @login_required(login_url = '/')
 def cerrar_sesion(request):
@@ -126,43 +194,3 @@ def cerrar_sesion(request):
     logout(request)
     return HttpResponseRedirect('/')
 
-@login_required(login_url = '/')
-def crear_rol(request):
-    """
-    Vista de creacion de nuevo rol
-
-    Recibe como parametro un request y retorna la pagina web crear_rol.html donde se debe completar
-    los datos del rol y luego crear_rol_exito.html si se completo debidamente el formulario
-    * Variables
-        -   usuario_actor: es el usuario que realiza la accion
-        -   formulario: es el fomrulario que debe completar el usuario_actor
-        -   roles: es la lista de roles existentes en el sistema
-    """
-    mensaje="Rol creado con exito"
-    usuario_actor = request.user
-    rol = Group(Usuario=usuario_actor)
-    if request.method == 'POST':
-        formulario = RolForm(request.POST, instance=rol)
-        if formulario.is_valid():
-            formulario.save()
-            roles = Group.objects.all()
-            return render_to_response('rol/crear_rol_exito.html',
-                                      {'mensaje': mensaje, 'usuario_actor': usuario_actor, 'roles': roles},
-                                      context_instance=RequestContext(request))
-    else:
-        formulario = RolForm()
-    return render_to_response('rol/crear_rol.html',
-                              {'formulario': formulario, 'operacion': 'Crear rol',
-                               'usuario_actor': usuario_actor},
-                              context_instance=RequestContext(request))
-def administrar_roles(request):
-    usuario_actor = request.user
-    roles = Group.objects.all()
-    return render_to_response('rol/administrar_rol.html',
-                              {'usuario_actor': usuario_actor, 'roles': roles}, context_instance=RequestContext(request))
-
-def detalle_rol(request, idRol):
-    usuario_actor = request.user
-    rol = Group.objects.get(pk=idRol)
-    return render_to_response('rol/detallerol.html', {'usuario_actor': usuario_actor, 'rol': rol},
-                              context_instance=RequestContext(request))

@@ -3,12 +3,19 @@
 {% block cuerpo %}
 	<section id="main" class="column">
 		<article class="module width_full">
-			<header><h3>Cambiar Contraseña</h3></header>
+			<header><h3>Cambio de contraseña</h3></header>
 			<div class="module_content">
 				<div class="tab_container">
-					<p>Cambio de Contraseña Exitosa</p>
-   				</div>
-   			</div>
-   		</article>
-   	</section>
-{% endblock cuerpo %}
+					<div id="tab1" class="tab_content">
+						<table class="tablesorter" cellspacing="0"> 
+							<div class="module_content">
+								<h4 class="alert_success">Contraseña cambiada correctamente</h4>
+								<br><a href="{% url 'apps.usuario.views.administrar_usuario' %}">Volver</a>
+							</div>
+						</table>
+					</div>
+				</div>
+			</div>
+		</article>
+	</section>
+{%endblock cuerpo%}

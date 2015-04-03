@@ -16,7 +16,7 @@ class TestUserBD(TestCase):
        print("Prueba exitosa, el numero de usuarios es igual a 0")
 
 class TestLogin(TestCase):
-   usuario='admin2'
+   usuario='admin'
    password='admin'
    #cargamos los usuarios
    fixtures = ["usuario"]

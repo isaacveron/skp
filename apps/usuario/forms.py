@@ -47,11 +47,3 @@ class UsuarioModForm(forms.ModelForm):
             # field does not have access to the initial value
             return self.initial["password"]
 
-class RolForm(forms.ModelForm):
-    """
-    Formulario para el la creacion de roles
-    Hereda de forms.ModelForm y utiliza la clase Group para
-    """
-    class Meta:
-        model = Group
-        exclude = ['Usuario']

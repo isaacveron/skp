@@ -1,0 +1,28 @@
+{% extends "index.html" %}
+
+{% block cuerpo %}
+    <section id="main" class="column">
+        <article class="module width_full">
+            <header><h3>Eliminar rol</h3></header>
+            <div class="module_content">
+                <div class="tab_container">
+                    <div id="tab1" class="tab_content">
+                        <table class="tablesorter" cellspacing="0"> 
+                           <p>Desea eliminar el rol {{ rol.name }}?</p>
+   								<p>
+        							<a  class="btn btn-primary btn-lg" href="{% url 'apps.roles.views.eliminar_rol' rol.id %}">Si</a>
+        							<a class="btn btn-default btn-lg" href="{% url 'apps.roles.views.administrar_roles' %}">No</a>
+   								 </p>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+{% endblock cuerpo %}
+
+{% block contenido %}
+    
+
+
+{% endblock %}

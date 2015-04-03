@@ -1,0 +1,35 @@
+
+{% extends 'index.html' %}
+
+{% block cuerpo %}
+    <section id="main" class="column">
+        <article class="module width_full">
+            <header><h3>Detalles del rol</h3></header>
+            <div class="module_content">
+                <div class="tab_container">
+                    <div id="tab1" class="tab_content">
+                        <table class="tablesorter" cellspacing="0"> 
+                            <div class="message"><p><strong>Nombre: </strong>{{ rol.name }}</p></div>
+                            <div class="message"><p><strong>Creado por: </strong>{{ rol.Usuario }}</p></div>
+                            <div class="message"><p><strong>Fecha de Creacion: </strong>{{ rol.Fecha }}</p></div>
+                            <div class="message">
+                                <p>
+                                    <a href="{% url 'apps.roles.views.modificar_rol' rol.id %}">Modificar</a>
+                                    <strong> | </strong>
+                                    <a href="{% url 'apps.roles.views.vista_eliminar_rol' rol.id %}">Eliminar</a>
+                                    <strong> | </strong>
+                                    <a href="{% url 'apps.roles.views.administrar_roles' %}">Volver</a>
+                                </p>
+                            </div>                            
+                        </div>
+                        </table>
+                        
+                    </div>
+                </div>
+            </div>
+        </article>
+        
+        
+        
+    </section>
+{% endblock cuerpo %}

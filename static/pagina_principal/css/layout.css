@@ -302,8 +302,8 @@ color: #444444;
 }
 
 /* Sidebar Icons */
-#sidebar li.icn_home a {
-background: url(../images/home.png) no-repeat center left;
+#sidebar li.icn_mas a {
+background: url(../images/mas.png) no-repeat center left;
 }
 #sidebar li.icn_new_article a {
 background: url(../images/icn_new_article.png) no-repeat center left;

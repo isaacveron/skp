@@ -1,14 +1,28 @@
-{% extends 'rol/administrar_rol.html' %}
-{% block titulo %}Modificacion de Rol{% endblock %}
-{% block encabezado %}Modificacion de {{ rol.name }}{% endblock %}
-{% block activo-admin %}active{% endblock %}
+{% extends "index.html" %}
 
-{%  block botones %}
-    <li><a href="/administracion/roles/" class="btn btn-default">Volver</a></li>
-{% endblock %}
-{% block contenido %}
-    <form id="formulario" method="post" action="">{% csrf_token %}
-        <table class="table"><p>{{ formulario }}</p></table>
-        <p><input class="btn btn-default" type="submit" value="Confirmar"></p>
-    </form>
-{% endblock %}
+{% block cuerpo %}
+    <section id="main" class="column">
+        <article class="module width_full">
+            <header><h3>Detalles del Usuario</h3></header>
+            <div class="module_content">
+                <div class="tab_container">
+                    <div id="tab1" class="tab_content">
+                        <table class="tablesorter" cellspacing="0"> 
+                            <form id="formulario" method="post" action="">
+                            	{% csrf_token %}
+        						<table class="table">
+        							<p>{{ formulario }}</p>
+        						</table>
+        						<p>
+                                    <input class="btn btn-default" type="submit" value="Confirmar">
+                                    <a href="{% url 'apps.roles.views.administrar_roles' %}"><input class="btn btn-default" type="submit" value="Cancelar"></a>
+                                </p>
+
+    						</form>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+{% endblock cuerpo %}

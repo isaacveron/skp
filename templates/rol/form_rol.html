@@ -1,15 +1,11 @@
-{% extends 'rol/administrar_rol.html' %}
-{% block titulo %}form rol{% endblock %}
+{% extends 'index.html' %}
 
-{% block encabezado %}{{ operacion }} {{ rol.name }}{% endblock %}
-
-{%  block botones %}
-    <li><a href="/administracion/roles/" class="btn btn-default">Volver</a></li>
-{% endblock %}
-
-{% block contenido %}
-    <form id="formulario" method="post" action="">{% csrf_token %}
+{% block cuerpo %}
+     <form id="formulario" method="post" action="">{% csrf_token %}
         <table class="table"><p>{{ formulario }}{{ form }}</p></table>
-        <p><input class="btn btn-default" type="submit" value="Guardar"></p>
-    </form>
+        <p>
+        	<input class="btn btn-default" type="submit" value="Guardar">
+        	<a href="{% url 'apps.usuario.views.detalle_usuario' usuario_parametro.id %}">Cancelar</a>
+        </p>
+        </form>
 {% endblock %}
