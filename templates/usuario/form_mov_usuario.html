@@ -13,7 +13,7 @@
 									<form method="POSt">
 										{% csrf_token %}
 										<p><input id="id_username" maxlength="30" name="username" type="text" value="{{ formulario.username.value }}" title="Ingrese un username" required/></p>
-										<p><inputid="id_first_name" maxlength="30" name="first_name" type="text" value="{{ formulario.first_name.value }}"title="Ingrese su Nombre" required/></p>
+										<p><input id="id_first_name" maxlength="30" name="first_name" type="text" value="{{ formulario.first_name.value }}"title="Ingrese su Nombre" required/></p>
 										<p><input id="id_last_name" maxlength="30" name="last_name" type="text" value="{{ formulario.last_name.value }}"title="Ingrese su apellido" required/></p>
 										<p><input id="id_email" maxlength="75" name="email" type="email" value="{{ formulario.email.value }}"title="Ingrese su email" required/></p>
 	 									<p><input id="id_telefono" min="0" name="telefono" type="text" value="{{ formulario.telefono.value }}"title="Ingrese su numero telefonico" required/></p>

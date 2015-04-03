@@ -14,7 +14,10 @@
         							<table class="table">
         								<p>{{ formulario }}</p>
         							</table>
-        							<p><input  type="submit" value="Confirmar"></p>
+        							<p>
+                                        <input  type="submit" value="Confirmar">
+                                        <a href="{% url 'apps.roles.views.administrar_roles' %}"><input type="submit" value=" Cancelar"></ins></a>
+                                    </p>
     							</form>
     						</div>
     					</table>
