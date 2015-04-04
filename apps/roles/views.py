@@ -4,6 +4,8 @@ from django.template import RequestContext
 from apps.roles.forms import RolForm, AsignarRol
 from django.contrib.auth.models import User, Group, Permission
 from django.contrib.auth.decorators import login_required, permission_required
+from django.db.models import Q
+
 
 # Create your views here.
 
@@ -100,4 +102,18 @@ def eliminar_rol(request, idRol):
     return render_to_response('rol/operacion_rol_exito.html',
                               {'mensaje':mensaje, 'usuario_actor': usuario_actor, 'roles': roles},
                               context_instance=RequestContext(request))
+
+def buscar_rol(request):
+    '''
+    vista para buscar un usuario dentro del listado de usuarios del sistema
+    '''
+    query = request.GET.get('q', '')
+    if query:
+        qset = (
+            Q(name=query)
+        )
+        results = Group.objects.filter(qset).distinct()
+    else:
+        results = []
+    return render_to_response('rol/administrar_rol.html', {'roles': results}, context_instance=RequestContext(request))
 

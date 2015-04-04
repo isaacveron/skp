@@ -57,7 +57,6 @@
 <body>
 {% block body %}
 	
-
 	<header id="header">
 	{% block header %}
 		<hgroup>
@@ -66,7 +65,6 @@
 		</hgroup>
 	{% endblock header %}
 	</header>
-	
 	
 	<aside id="sidebar" class="column">
 	{% block aside %}
@@ -101,13 +99,18 @@
 		</ul>
 		<hr>
 	{% endblock aside %}
-	</aside><!-- end of sidebar -->
+	</aside>
 	
 	<section id="main" class="column">
+		
+	{% block buscador %}
+		
+	{% endblock buscador %}
+
 	{% block mensaje %}
 		
 	{% endblock mensaje %}
-	
+
 	{% block cuerpo %}		
 			
 

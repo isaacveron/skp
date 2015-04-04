@@ -1,38 +1,43 @@
 {% extends 'index.html' %}
+
+{% block buscador %}
+    <form class="quick_search" action='{% url "apps.usuario.views.buscar_usuario" %}'>
+            <input type="text" value="Quick Search" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;" name="q" value="{{ query|escape }}" required>
+    </form>
+ {% endblock buscador %}
+
 {% block cuerpo %}
-    <section id="main" class="column">
-        <article class="module width_full">
-            <header>
-                <h3>Gestion de usuarios </h3>
-                <a href="{% url 'apps.usuario.views.crear_usuario' %}"><th align="right"><input type="image" src="{{ STATIC_URL }}pagina_principal/images/mas.png" title="Crear"></th></a>
-            </header>
-            <div class="module_content">
-                <div class="tab_container">
-                    <div id="tab1" class="tab_content">
-                        <table class="tablesorter" cellspacing="0"> 
-                            <thead> 
-                                {% for usuario in lista_usuarios %}
-                                    {% if  usuario.id != usuario_actor.id  %}
-                                        {% if usuario.is_active %}
-                                             <tr class="clickableRow" href='{% url "apps.usuario.views.detalle_usuario" usuario.id %}'>
-                                                <th>{{ usuario.username }}</th>
-                                                <th>Activo</th>
-                                            </tr>                                       
-                                        {% else %}
-                                            <tr class="clickableRow warning" href='{% url "administracion.views.detalle_usuario" usuario.id %}'>
-                                                <td>{{ usuario.username }}</td>
-                                                <td>Inactivo</td>
-                                            </tr>
-                                        {% endif %}
+    <article class="module width_full">
+        <header>
+            <h3>Gestion de usuarios </h3>
+            <a href="{% url 'apps.usuario.views.crear_usuario' %}"><th align="right"><input type="image" src="{{ STATIC_URL }}pagina_principal/images/mas.png" title="Crear"></th></a>
+        </header>
+           
+        <div class="module_content">
+            <div class="tab_container">
+                <div id="tab1" class="tab_content">
+                    <table class="tablesorter" cellspacing="0"> 
+                        <thead> 
+                            {% for usuario in lista_usuarios %}
+                                {% if  usuario.id != usuario_actor.id  %}
+                                    {% if usuario.is_active %}
+                                         <tr class="clickableRow" href='{% url "apps.usuario.views.detalle_usuario" usuario.id %}'>
+                                            <th>{{ usuario.username }}</th>
+                                        </tr>                                       
+                                    {% else %}
+                                        <tr class="clickableRow warning" href='{% url "administracion.views.detalle_usuario" usuario.id %}'>
+                                            <td>{{ usuario.username }}</td>
+                                            <td>Inactivo</td>
+                                        </tr>
                                     {% endif %}
-                                {% empty %}
-                                    <p>No hay usuarios registrados aun</p>
-                                {% endfor %}
-                            </thead>                        
-                        </table>
-                    </div>
+                                {% endif %}
+                            {% empty %}
+                                <p>No hay usuarios registrados aun</p>
+                            {% endfor %}
+                        </thead>                        
+                    </table>
                 </div>
-            </div>  
-        </article>
-    </section>  
+            </div>
+        </div>  
+    </article> 
 {% endblock %}

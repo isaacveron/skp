@@ -18,7 +18,7 @@
                             <div class="message"><p><strong>Registrado: </strong>{{ usuario_parametro.date_joined|date:'SHORT_DATETIME_FORMAT' }}</p></div>
                             <div class="message">
                                 <p>
-                                    <a href="{% url 'apps.usuario.views.modificar_usuario' usuario_parametro.id %}">Modificar</a>
+                                    <a href="{% url 'apps.usuario.views.modificar_usuario' usuario_parametro.id %}">Modificar </a>
                                     <strong> | </strong>
                                     <a href="{% url 'apps.usuario.views.vista_eliminar_usuario' usuario_parametro.id %}">Eliminar</a>
                                     <strong> | </strong>

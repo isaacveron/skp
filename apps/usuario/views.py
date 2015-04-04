@@ -8,6 +8,7 @@ from apps.roles.forms import AsignarRol
 from django.contrib.auth.models import User, Group, Permission
 from django.contrib.auth.decorators import login_required, permission_required
 from django.views.decorators.csrf import csrf_protect
+from django.db.models import Q
 
 # Create your views here.
 @csrf_protect
@@ -181,6 +182,21 @@ def eliminar_usuario(request, idUsuario):
     lista_usuarios = User.objects.all()
     return render_to_response('usuario/operacion_usuario_exito.html', {'mensaje':mensaje, 'usuario_actor': usuario_actor, 'lista_usuarios': lista_usuarios}, context_instance=RequestContext(request))
 
+def buscar_usuario(request):
+    '''
+    vista para buscar un usuario dentro del listado de usuarios del sistema
+    '''
+    query = request.GET.get('q', '')
+    if query:
+        qset = (
+            Q(username=query) |
+            Q(first_name=query) |
+            Q(last_name=query)
+        )
+        results = User.objects.filter(qset).distinct().order_by('is_active').reverse()
+    else:
+        results = []
+    return render_to_response('usuario/administrar_usuario.html', {'lista_usuarios': results}, context_instance=RequestContext(request))
 
 
 @login_required(login_url = '/')

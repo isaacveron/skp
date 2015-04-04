@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from .views import iniciar_sesion, index, cerrar_sesion, crear_usuario, detalle_usuario, modificar_usuario, administrar_usuario, asignar_rol, vista_eliminar_usuario, eliminar_usuario
+from .views import iniciar_sesion, index, cerrar_sesion, crear_usuario, detalle_usuario, modificar_usuario, administrar_usuario, asignar_rol, vista_eliminar_usuario, eliminar_usuario, buscar_usuario
 from django.contrib.auth.views import SetPasswordForm
 
 
@@ -23,6 +23,7 @@ urlpatterns = patterns('',
     url(r'^vista_eliminar_usuario/(?P<idUsuario>\d+)/$', vista_eliminar_usuario),
     url(r'^usuario_eliminado/(?P<idUsuario>\d+)/$', eliminar_usuario),
     url(r'^asignado/(?P<idRol>\d+)$', asignar_rol),
+    url(r'^search_user/$', buscar_usuario),
     url(r'^salir/$', cerrar_sesion, name='salir'),
 
 )
