@@ -10,7 +10,9 @@
     <article class="module width_full">
         <header>
             <h3>Gestion de Roles </h3>
-                <a href="{% url 'apps.roles.views.crear_rol' %}"><th align="right"><input type="image" src="{{ STATIC_URL }}pagina_principal/images/mas.png" title="Crear"></th></a>
+                {% if perms.auth.add_group %}
+                    <a href="{% url 'apps.roles.views.crear_rol' %}"><th align="right"><input type="image" src="{{ STATIC_URL }}pagina_principal/images/mas.png" title="Crear"></th></a>
+                {% endif %}
         </header>
         <div class="module_content">
             <div class="tab_container">

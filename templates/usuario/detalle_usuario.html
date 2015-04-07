@@ -18,12 +18,22 @@
                             <div class="message"><p><strong>Registrado: </strong>{{ usuario_parametro.date_joined|date:'SHORT_DATETIME_FORMAT' }}</p></div>
                             <div class="message">
                                 <p>
-                                    <a href="{% url 'apps.usuario.views.modificar_usuario' usuario_parametro.id %}">Modificar </a>
-                                    <strong> | </strong>
-                                    <a href="{% url 'apps.usuario.views.vista_eliminar_usuario' usuario_parametro.id %}">Eliminar</a>
-                                    <strong> | </strong>
-                                    <a href="{% url 'apps.usuario.views.asignar_rol' usuario_parametro.id %}">Asignar Rol</a>
-                                    <strong> | </strong>
+                                    {% if perms.auth.change_user %}
+                                        <a href="{% url 'apps.usuario.views.modificar_usuario' usuario_parametro.id %}">Modificar </a>
+                                        <strong> | </strong>
+                                    {% endif %}
+                                    
+                                    
+                                    {% if perms.auth.delete_user %}
+                                        <a href="{% url 'apps.usuario.views.vista_eliminar_usuario' usuario_parametro.id %}">Eliminar</a>
+                                        <strong> | </strong>
+                                    {% endif %}
+
+
+                                    {% if perms.auth.add_group %}   
+                                        <a href="{% url 'apps.usuario.views.asignar_rol' usuario_parametro.id %}">Asignar Rol</a>
+                                        <strong> | </strong>
+                                    {% endif %}
                                     <a href="{% url 'apps.usuario.views.administrar_usuario' %}">Volver</a>
 
                                 </p>

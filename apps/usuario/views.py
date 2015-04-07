@@ -10,7 +10,6 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.views.decorators.csrf import csrf_protect
 from django.db.models import Q
 
-# Create your views here.
 @csrf_protect
 def iniciar_sesion(request):
     """
@@ -25,6 +24,12 @@ def iniciar_sesion(request):
         -   clave: es la clave secreta introducida por el usuario_actor
         -   acceso: contiene el resultado de la funcion authenticate que lleva como parametro
             el par(usuario, contrasenha) verificando su existencia y estado en el sistema
+    @type request: django.http.HttpRequest
+    @param request: Contiene informacion sobre la solicitud web actual que llamo a esta vista
+    @rtype: django.http.HttpResponseRedirect
+    @rtype: django.shortcuts.render_to_response
+    @return: Se retorna al inicio o se manda a la pagina de login
+    @author: Isaac Veron  
     """
     if not request.user.is_anonymous():
         return HttpResponseRedirect('/index/')
@@ -46,11 +51,20 @@ def iniciar_sesion(request):
         formulario = AuthenticationForm()
     return render_to_response('autenticacion/login.html', {'formulario': formulario}, context_instance=RequestContext(request))
 
-@login_required(login_url = '/')
-def index(request):
-    return render_to_response('index.html', context_instance = RequestContext(request))
 
 @login_required(login_url = '/')
+def index(request):
+    """
+    Vista principal del sistema
+    @rtype: django.http.HttpResponseRedirect
+    @author: Isaac Veron
+    """
+
+    return render_to_response('index.html', context_instance = RequestContext(request))
+
+
+@login_required(login_url = '/')
+@permission_required('auth.add_user', login_url='/index/')
 def crear_usuario(request):
     """
     Vista de creacion de nuevo usuario
@@ -61,7 +75,13 @@ def crear_usuario(request):
         -   usuario_actor: es el usuario que realiza la accion
         -   formulario: es el fomrulario que debe completar el usuario_actor
         -   lista_usuarios: es la lista de usuarios existentes en el sistema
+    @type request: django.http.HttpRequest
+    @param request: Contiene informacion sobre la solic. web actual que llamo a esta vista
+    @rtype: django.http.HttpResponse
+    @return: usuariocreado.html, mensaje de exito
+    @author: Isaac Veron
     """
+
     mensaje = "El usuario ha sido creado con exito"
     usuario_actor = request.user
     if request.method == 'POST':
@@ -76,25 +96,31 @@ def crear_usuario(request):
                               {'formulario': formulario, 'operacion': 'Creacion de un nuevo usuario',
                                'usuario_actor': usuario_actor}, context_instance=RequestContext(request))
 
+
+@login_required(login_url = '/')
 def administrar_usuario(request):
     """
-
-    :param request:
-    :return:
-
     Vista de administrar usuario
 
-    | Recibe como parametro un request y retorna la pagina web administrar_usuario.html donde se muestra
-    | la lista de usuarios si el usuario_actor posee los permsos correspondientes
+    Recibe como parametro un request y retorna la pagina web administrar_usuario.html donde se muestra
+    la lista de usuarios si el usuario_actor posee los permsos correspondientes
 
     * Variables
         -   usuario_actor: es el usuario que realiza la accion
         -   lista_usuarios: es la lista de usuarios existentes en el sistema
+    
+    @type request: django.http.HttpRequest
+    @param request: Contiene informacion sobre la solic. web actual que llamo a esta vista
+    @rtype: django.http.HttpResponse
+    @return: usuarios.html, donde se listan los usuarios, ademas de las funcionalidades para un usuario
+    @author: Isaac Veron
     """
+
     usuario_actor = request.user
     lista_usuarios = User.objects.all()
     return render_to_response('usuario/administrar_usuario.html', {'usuario_actor':usuario_actor,'lista_usuarios':lista_usuarios},
                               context_instance=RequestContext(request))
+
 
 @csrf_protect
 @login_required(login_url = '/')
@@ -105,12 +131,22 @@ def detalle_usuario(request, idUsuario):
     Recibe un request y un id de usuario como parametro y retorna la pagina web detalle_usuario.html
     * Variables
         -usuario_parametro: es el usuario que se vera en detalle en la pagina web detalle_usuario.html
+
+    @type request: django.http.HttpRequest
+    @param request: Contiene informacion sobre la solic. web actual que llamo a esta vista
+    @type idUsuario: integer
+    @param idUsuario: es el id del usuario cuyos datos se quieren consultar
+    @rtype: django.HttpResponse
+    @return: detalle_usuario.html, donde se le despliega al usuario los datos
+    @author: Isaac Veron
     """
+
     usuario_parametro = User.objects.get(pk=idUsuario)
     return render_to_response('usuario/detalle_usuario.html', {'usuario_actor': request.user,'usuario_parametro': usuario_parametro}, context_instance=RequestContext(request))
 
 
 @login_required(login_url = '/')
+@permission_required('auth.change_user', login_url='/index/')
 def modificar_usuario(request, idUsuario):
     """"  
     Vista de modificacion de nuevo usuario
@@ -121,7 +157,17 @@ def modificar_usuario(request, idUsuario):
         -   usuario_actor: es el usuario que realiza la accion
         -   formulario: es el fomrulario que debe completar el usuario_actor
         -   lista_usuarios: es la lista de usuarios existentes en el sistema
+
+    @type request: django.http.HttpRequest
+    @param request: Contiene informacion sobre la solic. web actual que llamo a esta vista
+    @type idUsuario: integer
+    @param idUsuario: es el id del usuario cuyos datos se quieren modificar
+    @rtype: django.HttpResponse
+    @return: modificar_usuario.html,un formulario donde se despliegan los datos que el usuario puede modificar,
+    operacion_usuario_exito.html, donde se notifica al usuario el exito de la operacion 
+    @author: Isaac Veron
     """
+
     mensaje = "Se ha actualizado tu informacion personal"
     usuario_actor = User.objects.get(pk=idUsuario)
     if request.method == 'POST':
@@ -140,7 +186,10 @@ def modificar_usuario(request, idUsuario):
                   {'usuario_actor': usuario_actor, 'formulario': formulario, 'operacion': 'Gestion de datos personales'},
                   context_instance=RequestContext(request))
 
+
+@login_required(login_url = '/')
 def asignar_rol(request, idRol): 
+
     mensaje="Rol asignado con exito"
     usuario_actor = request.user
     usuario_parametro = User.objects.get(pk=idRol)
@@ -156,8 +205,12 @@ def asignar_rol(request, idRol):
                                                  'operacion': 'Asignacion de rol', 'usuario_actor': usuario_actor},
                   context_instance=RequestContext(request))
 
+
+@login_required(login_url = '/')
 def vista_eliminar_usuario(request, idUsuario):
-    """
+    """ 
+    Esta vista obtiene el usuario que quiere ser eliminado, pregunta si quiere ser eliminado y llama 
+    a la funcion eliminar_usuario
 
     :param request:
     :param idRol:
@@ -168,13 +221,22 @@ def vista_eliminar_usuario(request, idUsuario):
     return render_to_response('usuario/eliminar_usuario.html', {'usuario_actor': usuario_actor, 'usuario_parametro': usuario_parametro},
                               context_instance=RequestContext(request))
 
+
+@login_required(login_url = '/')
+@permission_required('auth.delete_user', login_url='/index/')
 def eliminar_usuario(request, idUsuario):
     """
+    Recibe el id del usuario que se desea eliminar y lo elimina de la base de datos
 
-    :param request:
-    :param idRol:
-    :return:
+    @type request: django.http.HttpRequest
+    @param request: Contiene informacion sobre la solicitud web actual que llamo a esta vista
+    @type idUsuario : integer
+    @param idUsuario : Contiene el id del usuario a ser eliminado.
+    @rtype: django.shortcuts.render_to_response
+    @return: retorna a la pagina de eliminacion exitosa
+    @author: Isaac Veron
     """
+
     mensaje="Usuario eliminido con exito"
     usuario = User.objects.get(pk=idUsuario)
     usuario.delete()
@@ -182,10 +244,16 @@ def eliminar_usuario(request, idUsuario):
     lista_usuarios = User.objects.all()
     return render_to_response('usuario/operacion_usuario_exito.html', {'mensaje':mensaje, 'usuario_actor': usuario_actor, 'lista_usuarios': lista_usuarios}, context_instance=RequestContext(request))
 
+
+@login_required(login_url = '/')
 def buscar_usuario(request):
-    '''
-    vista para buscar un usuario dentro del listado de usuarios del sistema
-    '''
+    """
+    Vista para buscar un usuario dentro del listado de usuarios del sistema
+
+    @return: Se retorna a la a la pagina de vista de usuario(s) con los roles que coinciden con el query o vacio
+    @author: Isaac Veron
+    """
+
     query = request.GET.get('q', '')
     if query:
         qset = (
@@ -202,8 +270,7 @@ def buscar_usuario(request):
 @login_required(login_url = '/')
 def cerrar_sesion(request):
     """
-    Vista para cerrar la sesion de un ususario
-
+    Vista para cerrar la sesion de un ususario.
     Recibe como parametro un request y llama a la funcion logout con tal parametro, redirigiendo al
     usuario a la pagina web '/' (raiz) donde se solicita el inicio de sesion de un usuario
     """

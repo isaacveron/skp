@@ -12,9 +12,11 @@
 								<fieldset>
 									<form method="POSt">
 										{% csrf_token %}
+										<p><input id="id_old_password" name="old_password" type="password" placeholder="Old Password"/></p>
 										<p><input id="id_new_password1" name="new_password1" type="password" placeholder="New Password"/></p>
 										<p><input id="id_new_password2" name="new_password2" type="password"placeholder="Confirm New Password"/></p>
-										<div class="submit_link">	
+										<div class="submit_link">
+										<!-- <table class="table"><p>{{ form }}</p></table>-->
 											<input type="submit" value="Guardar">
 										</div>
    									</form>
