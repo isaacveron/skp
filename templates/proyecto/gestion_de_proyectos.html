@@ -1,0 +1,31 @@
+{% extends 'index.html' %}
+{% block cuerpo %}
+    <section id="main" class="column">
+        <article class="module width_full">
+            <header>
+                <h3>Gestion de Proyectos </h3>
+                <a href="{% url 'apps.proyectos.views.crear_proyecto' %}"><th align="right"><input type="image" src="{{ STATIC_URL }}pagina_principal/images/mas.png" title="Crear"></th></a>
+            </header>
+            <div class="module_content">
+                <div class="tab_container">
+                    <div id="tab1" class="tab_content">
+                        <table class="tablesorter" cellspacing="0"> 
+                            <thead> 
+                                {% if proyectos|length > 0 %}
+                                    {% for proyecto in proyectos %}
+                                        {% if proyecto.pk > 0 %}
+                                            <tr class="clickableRow" href='{% url "apps.proyectos.views.detalle_proyecto" proyecto.id %}' id="tablaproyecto" rel="tabla">
+                                            <th>{{ proyecto.Nombre }}</th>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    <tr><td class="warning">No hay proyectos de usuario registrados aun</td>
+                                {% endif %}
+                            </thead>                        
+                        </table>
+                    </div>
+                </div>
+            </div>  
+        </article>
+    </section>  
+{% endblock %}

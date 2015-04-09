@@ -1,9 +1,12 @@
 from django.conf.urls import patterns, include, url
+<<<<<<< Updated upstream
 from .views import gestion_de_proyectos, crear_rol, administrar_roles, detalle_rol, modificar_rol, vista_eliminar_rol, eliminar_rol, buscar_rol
+=======
+from .views import crear_rol, administrar_roles, detalle_rol, modificar_rol, vista_eliminar_rol, eliminar_rol
+>>>>>>> Stashed changes
 
 urlpatterns = patterns('',
      
-    url(r'^gestion_de_proyectos', gestion_de_proyectos, name = 'gestion_de_proyectos'),
     url(r'^crear_rol/$', crear_rol),
 	url(r'^listar_roles/$', administrar_roles),
 	url(r'^detalle_rol/(?P<idRol>\d+)/$', detalle_rol),

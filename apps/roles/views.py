@@ -10,8 +10,6 @@ from django.db.models import Q
 # Create your views here.
 
 
-def gestion_de_proyectos(request):
-    return render_to_response('administrar_sistema/gestion_de_proyectos.html', context_instance = RequestContext(request))
 
 
 @login_required(login_url = '/')
