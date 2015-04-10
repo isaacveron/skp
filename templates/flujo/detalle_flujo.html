@@ -1,0 +1,37 @@
+{% extends 'index.html' %}
+
+{% block cuerpo %}
+    <section id="main" class="column">
+        <article class="module width_full">
+            <header><h3>Detalles del rol</h3></header>
+            <div class="module_content">
+                <div class="tab_container">
+                    <div id="tab1" class="tab_content">
+                        <table class="tablesorter" cellspacing="0"> 
+                            <div class="message"><p><strong>Nombre: </strong>{{ flujo.Nombre }}</p></div>
+                            <div class="message"><p><strong>Creado por: </strong>{{ flujo.Usuario_creador }}</p></div>
+                            <div class="message"><p><strong>Fecha de Creacion: </strong>{{ flujo.Fecha_creacion }}</p></div>
+                            <div class="message">
+                                <p>
+                                    {% if usuario_actor.can_change_flujo %}
+                                        <a href="{% url 'apps.flujos.views.modificar_flujo' flujo.id %}">Modificar</a>
+                                        <strong> | </strong>
+                                    {% endif %}
+
+                                    {% if usuario_actor.can_delete_flujo %}
+                                        <a href="{% url 'apps.flujos.views.vista_eliminar_flujo' flujo.id %}">Eliminar</a>
+                                        <strong> | </strong>
+                                    {% endif %}
+                                    
+                                    <a href="{% url 'apps.flujos.views.administrar_flujos' %}">Volver</a>
+                                </p>
+                            </div>                            
+                        </div>
+                        </table>
+                        
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+{% endblock cuerpo %}

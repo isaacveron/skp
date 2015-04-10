@@ -1,6 +1,7 @@
 from django.db import models
 from apps.roles.models import Group
 from apps.usuario.models import User
+
 # Create your models here.
 class Proyecto(models.Model):
     """
@@ -8,7 +9,7 @@ class Proyecto(models.Model):
         * Contiene los campos de la tabla proyecto en la base de datos
 
         * Variales
-            -   Lider: es el usuario lider del proyecto
+            -   Scrum_Master: es el usuario lider del proyecto
             -   Nombre: es el nombre que posee el proyecto
             -   Descripcion: es la decripcion del proyecto
             -   Fecha de inicio: es la fecha en que el proyecto dara inicio

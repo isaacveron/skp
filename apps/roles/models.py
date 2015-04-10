@@ -29,6 +29,21 @@ def can_change_proyecto(self):
     permiso = 'change_proyecto'
     return self.tienePermiso(permiso)
 
+def can_add_flujo(self):
+    permiso = 'add_flujo'
+    return self.tienePermiso(permiso)
+
+def can_delete_flujo(self):
+    permiso = 'delete_flujo'
+    return self.tienePermiso(permiso)
+
+def can_change_flujo(self):
+    permiso = 'change_flujo'
+    return self.tienePermiso(permiso)
+
 User.add_to_class('can_add_proyecto', can_add_proyecto)
-User.add_to_class('can_change_proyecto', can_add_proyecto)
-User.add_to_class('can_delete_proyecto', can_add_proyecto)
+User.add_to_class('can_change_proyecto', can_change_proyecto)
+User.add_to_class('can_delete_proyecto', can_delete_proyecto)
+User.add_to_class('can_add_flujo', can_add_flujo)
+User.add_to_class('can_change_flujo', can_change_flujo)
+User.add_to_class('can_delete_flujo', can_delete_flujo)

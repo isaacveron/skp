@@ -50,7 +50,7 @@ def crear_rol(request):
 def administrar_roles(request):
     """
     Recibe un request, obtiene la lista de todos los Roles del sistema y 
-    luego retorna el html renderizado con la lista de usuarios 
+    luego retorna el html renderizado con la lista de roles
 
     @type request: django.http.HttpRequest
     @param request: Contiene informacion sobre la solic. web actual que llamo a esta vista
