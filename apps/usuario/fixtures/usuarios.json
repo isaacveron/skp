@@ -1,0 +1,57 @@
+[
+{
+    "pk": 1, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "admin", 
+        "first_name": "Admi", 
+        "last_name": "Nistrador", 
+        "is_active": true,  
+        "last_login": "2014-04-20T02:20:07.100Z", 
+        "groups": [
+            1, 
+            7
+        ], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$15000$s9JevDzOgvGD$dhtnCvy2BSXVVJga58XBC6Jis5LV9DO2Qyp38xCbH04=", 
+        "email": "admin@admin.com", 
+        "date_joined": "2014-04-20T02:19:13.458Z"
+    }
+},
+{
+    "pk": 2, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "isaac", 
+        "first_name": "Isaac", 
+        "last_name": "Veron", 
+        "is_active": true, 
+        "last_login": "2015-03-20T02:26:47.112Z", 
+        "groups": [
+            2, 
+        ], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$15000$g6P8PXzXTVWZ$nWYpyuQXtuCPe1EDDXVw/NMdRtVB2/xixyQ4BIzV/QM=", 
+        "email": "isaacveron@gmail.com", 
+        "date_joined": "2015-03-20T02:26:47.112Z"
+    }
+},
+{
+    "pk": 3, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "cesar", 
+        "first_name": "Cesar", 
+        "last_name": "Recalde", 
+        "is_active": true, 
+        "last_login": "2015-03-20T02:32:27.584Z", 
+        "groups": [
+            3, 
+        ], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$15000$2jNlM1HFw4oi$7N6fOLl+iziw8O3C2N1gMOyhCUN1/UyyXa4ldOdcTSs=", 
+        "email": "cesarelcalde@gmail.com", 
+        "date_joined": "2015-03-20T02:32:27.584Z"
+    }
+},
+]

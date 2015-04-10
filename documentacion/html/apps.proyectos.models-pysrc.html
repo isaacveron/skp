@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>apps.proyectos.models</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="apps-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="apps-module.html">Package&nbsp;apps</a> ::
+        <a href="apps.proyectos-module.html">Package&nbsp;proyectos</a> ::
+        Module&nbsp;models
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="apps.proyectos.models-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="apps.proyectos.models-module.html">Module apps.proyectos.models</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">django</tt><tt class="py-op">.</tt><tt class="py-name">db</tt> <tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Module apps.proyectos.models=apps.proyectos.models-module.html,Module apps.roles.models=apps.roles.models-module.html,Module apps.usuario.models=apps.usuario.models-module.html"><a title="apps.proyectos.models
+apps.roles.models
+apps.usuario.models" class="py-name" href="#" onclick="return doclink('link-0', 'models', 'link-0');">models</a></tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-1" class="py-name" targets="Package apps=apps-module.html"><a title="apps" class="py-name" href="#" onclick="return doclink('link-1', 'apps', 'link-1');">apps</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Package apps.roles=apps.roles-module.html"><a title="apps.roles" class="py-name" href="#" onclick="return doclink('link-2', 'roles', 'link-2');">roles</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name"><a title="apps.proyectos.models
+apps.roles.models
+apps.usuario.models" class="py-name" href="#" onclick="return doclink('link-3', 'models', 'link-0');">models</a></tt> <tt class="py-keyword">import</tt> <tt class="py-name">Group</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-4" class="py-name"><a title="apps" class="py-name" href="#" onclick="return doclink('link-4', 'apps', 'link-1');">apps</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Package apps.usuario=apps.usuario-module.html"><a title="apps.usuario" class="py-name" href="#" onclick="return doclink('link-5', 'usuario', 'link-5');">usuario</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="apps.proyectos.models
+apps.roles.models
+apps.usuario.models" class="py-name" href="#" onclick="return doclink('link-6', 'models', 'link-0');">models</a></tt> <tt class="py-keyword">import</tt> <tt class="py-name">User</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-comment"># Create your models here.</tt> </tt>
+<a name="Proyecto"></a><div id="Proyecto-def"><a name="L5"></a><tt class="py-lineno"> 5</tt> <a class="py-toggle" href="#" id="Proyecto-toggle" onclick="return toggle('Proyecto');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="apps.proyectos.models.Proyecto-class.html">Proyecto</a><tt class="py-op">(</tt><tt class="py-base-class">models</tt><tt class="py-op">.</tt><tt class="py-base-class">Model</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Proyecto-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Proyecto-expanded"><a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-docstring">    Clase Proyecto:</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-docstring">        * Contiene los campos de la tabla proyecto en la base de datos</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-docstring">        * Variales</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-docstring">            -   Lider: es el usuario lider del proyecto</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-docstring">            -   Nombre: es el nombre que posee el proyecto</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-docstring">            -   Descripcion: es la decripcion del proyecto</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-docstring">            -   Fecha de inicio: es la fecha en que el proyecto dara inicio</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-docstring">            -   Fecha de finalizacion: es la fecha en la que el proyecto estara finalizado</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-docstring">            -   Fecha: es la fecha de creacion del proyecto</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">    <tt id="link-7" class="py-name" targets="Variable apps.proyectos.models.Proyecto.Scrum_Master=apps.proyectos.models.Proyecto-class.html#Scrum_Master"><a title="apps.proyectos.models.Proyecto.Scrum_Master" class="py-name" href="#" onclick="return doclink('link-7', 'Scrum_Master', 'link-7');">Scrum_Master</a></tt> <tt class="py-op">=</tt> <tt id="link-8" class="py-name"><a title="apps.proyectos.models
+apps.roles.models
+apps.usuario.models" class="py-name" href="#" onclick="return doclink('link-8', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">ForeignKey</tt><tt class="py-op">(</tt><tt class="py-name">User</tt><tt class="py-op">,</tt> <tt class="py-name">related_name</tt><tt class="py-op">=</tt><tt class="py-string">'Scrum_Master'</tt><tt class="py-op">)</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">    <tt id="link-9" class="py-name" targets="Variable apps.proyectos.models.Proyecto.Grupo_trabajo=apps.proyectos.models.Proyecto-class.html#Grupo_trabajo"><a title="apps.proyectos.models.Proyecto.Grupo_trabajo" class="py-name" href="#" onclick="return doclink('link-9', 'Grupo_trabajo', 'link-9');">Grupo_trabajo</a></tt> <tt class="py-op">=</tt> <tt id="link-10" class="py-name"><a title="apps.proyectos.models
+apps.roles.models
+apps.usuario.models" class="py-name" href="#" onclick="return doclink('link-10', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">ManyToManyField</tt><tt class="py-op">(</tt><tt class="py-name">User</tt><tt class="py-op">,</tt> <tt class="py-name">related_name</tt><tt class="py-op">=</tt><tt class="py-string">'Proyectos'</tt><tt class="py-op">)</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">    <tt id="link-11" class="py-name" targets="Variable apps.proyectos.models.Proyecto.Nombre=apps.proyectos.models.Proyecto-class.html#Nombre"><a title="apps.proyectos.models.Proyecto.Nombre" class="py-name" href="#" onclick="return doclink('link-11', 'Nombre', 'link-11');">Nombre</a></tt> <tt class="py-op">=</tt> <tt id="link-12" class="py-name"><a title="apps.proyectos.models
+apps.roles.models
+apps.usuario.models" class="py-name" href="#" onclick="return doclink('link-12', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">CharField</tt><tt class="py-op">(</tt><tt class="py-name">max_length</tt><tt class="py-op">=</tt><tt class="py-number">30</tt><tt class="py-op">,</tt> <tt class="py-name">unique</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">    <tt id="link-13" class="py-name" targets="Variable apps.proyectos.models.Proyecto.Descripcion=apps.proyectos.models.Proyecto-class.html#Descripcion"><a title="apps.proyectos.models.Proyecto.Descripcion" class="py-name" href="#" onclick="return doclink('link-13', 'Descripcion', 'link-13');">Descripcion</a></tt> <tt class="py-op">=</tt> <tt id="link-14" class="py-name"><a title="apps.proyectos.models
+apps.roles.models
+apps.usuario.models" class="py-name" href="#" onclick="return doclink('link-14', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">TextField</tt><tt class="py-op">(</tt><tt class="py-name">null</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> <tt class="py-name">blank</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">    <tt id="link-15" class="py-name" targets="Variable apps.proyectos.models.Proyecto.Fecha_inicio=apps.proyectos.models.Proyecto-class.html#Fecha_inicio"><a title="apps.proyectos.models.Proyecto.Fecha_inicio" class="py-name" href="#" onclick="return doclink('link-15', 'Fecha_inicio', 'link-15');">Fecha_inicio</a></tt> <tt class="py-op">=</tt> <tt id="link-16" class="py-name"><a title="apps.proyectos.models
+apps.roles.models
+apps.usuario.models" class="py-name" href="#" onclick="return doclink('link-16', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">DateField</tt><tt class="py-op">(</tt><tt class="py-string">'Fecha de inicio'</tt><tt class="py-op">,</tt> <tt class="py-name">blank</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> <tt class="py-name">null</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">    <tt id="link-17" class="py-name" targets="Variable apps.proyectos.models.Proyecto.Fecha_finalizacion=apps.proyectos.models.Proyecto-class.html#Fecha_finalizacion"><a title="apps.proyectos.models.Proyecto.Fecha_finalizacion" class="py-name" href="#" onclick="return doclink('link-17', 'Fecha_finalizacion', 'link-17');">Fecha_finalizacion</a></tt> <tt class="py-op">=</tt> <tt id="link-18" class="py-name"><a title="apps.proyectos.models
+apps.roles.models
+apps.usuario.models" class="py-name" href="#" onclick="return doclink('link-18', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">DateField</tt><tt class="py-op">(</tt><tt class="py-string">'Fecha de finalizacion'</tt><tt class="py-op">,</tt> <tt class="py-name">blank</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> <tt class="py-name">null</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">    <tt id="link-19" class="py-name" targets="Variable apps.proyectos.models.Proyecto.Cliente=apps.proyectos.models.Proyecto-class.html#Cliente"><a title="apps.proyectos.models.Proyecto.Cliente" class="py-name" href="#" onclick="return doclink('link-19', 'Cliente', 'link-19');">Cliente</a></tt> <tt class="py-op">=</tt> <tt id="link-20" class="py-name"><a title="apps.proyectos.models
+apps.roles.models
+apps.usuario.models" class="py-name" href="#" onclick="return doclink('link-20', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">CharField</tt><tt class="py-op">(</tt> <tt class="py-name">max_length</tt><tt class="py-op">=</tt><tt class="py-number">30</tt> <tt class="py-op">,</tt> <tt class="py-name">blank</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> <tt class="py-name">null</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">    <tt id="link-21" class="py-name" targets="Variable apps.proyectos.models.Proyecto.Estado=apps.proyectos.models.Proyecto-class.html#Estado"><a title="apps.proyectos.models.Proyecto.Estado" class="py-name" href="#" onclick="return doclink('link-21', 'Estado', 'link-21');">Estado</a></tt> <tt class="py-op">=</tt> <tt id="link-22" class="py-name"><a title="apps.proyectos.models
+apps.roles.models
+apps.usuario.models" class="py-name" href="#" onclick="return doclink('link-22', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">CharField</tt><tt class="py-op">(</tt> <tt class="py-name">max_length</tt><tt class="py-op">=</tt><tt class="py-number">15</tt><tt class="py-op">,</tt> <tt class="py-name">default</tt><tt class="py-op">=</tt><tt class="py-string">'Pendiente'</tt><tt class="py-op">,</tt> <tt class="py-name">unique</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">    <tt id="link-23" class="py-name" targets="Variable apps.proyectos.models.Proyecto.Usuario_creador=apps.proyectos.models.Proyecto-class.html#Usuario_creador"><a title="apps.proyectos.models.Proyecto.Usuario_creador" class="py-name" href="#" onclick="return doclink('link-23', 'Usuario_creador', 'link-23');">Usuario_creador</a></tt> <tt class="py-op">=</tt> <tt id="link-24" class="py-name"><a title="apps.proyectos.models
+apps.roles.models
+apps.usuario.models" class="py-name" href="#" onclick="return doclink('link-24', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">ForeignKey</tt><tt class="py-op">(</tt><tt class="py-name">User</tt><tt class="py-op">,</tt> <tt class="py-name">null</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">    <tt id="link-25" class="py-name" targets="Variable apps.proyectos.models.Proyecto.Fecha_creacion=apps.proyectos.models.Proyecto-class.html#Fecha_creacion"><a title="apps.proyectos.models.Proyecto.Fecha_creacion" class="py-name" href="#" onclick="return doclink('link-25', 'Fecha_creacion', 'link-25');">Fecha_creacion</a></tt> <tt class="py-op">=</tt> <tt id="link-26" class="py-name"><a title="apps.proyectos.models
+apps.roles.models
+apps.usuario.models" class="py-name" href="#" onclick="return doclink('link-26', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">DateTimeField</tt><tt class="py-op">(</tt><tt class="py-name">auto_now</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> <tt class="py-name">null</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="apps-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Apr 10 13:46:34 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

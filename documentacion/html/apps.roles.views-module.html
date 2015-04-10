@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>apps.roles.views</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="apps-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="apps-module.html">Package&nbsp;apps</a> ::
+        <a href="apps.roles-module.html">Package&nbsp;roles</a> ::
+        Module&nbsp;views
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="apps.roles.views-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module views</h1><p class="nomargin-top"><span class="codelink"><a href="apps.roles.views-pysrc.html">source&nbsp;code</a></span></p>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="apps.roles.views-module.html#crear_rol" class="summary-sig-name">crear_rol</a>(<span class="summary-sig-arg">request</span>)</span><br />
+      Vista de creacion de nuevo rol
+Recibe como parametro un request y retorna la pagina web crear_rol.html donde se debe completar
+los datos del rol y luego crear_rol_exito.html si se completo debidamente el formulario
+* Variables
+    -usuario_actor: es el usuario que realiza la accion
+    -formulario: es el fomrulario que debe completar el usuario_actor
+    -roles: es la lista de roles existentes en el sistema
+@type request: django.http.HttpRequest
+@param request: Contiene informacion sobre la solic.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="apps.roles.views-pysrc.html#crear_rol">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">django.http.HttpResponse</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="apps.roles.views-module.html#administrar_roles" class="summary-sig-name">administrar_roles</a>(<span class="summary-sig-arg">request</span>)</span><br />
+      Recibe un request, obtiene la lista de todos los Roles del sistema y 
+      luego retorna el html renderizado con la lista de usuarios</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="apps.roles.views-pysrc.html#administrar_roles">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">django.HttpResponse</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="apps.roles.views-module.html#detalle_rol" class="summary-sig-name">detalle_rol</a>(<span class="summary-sig-arg">request</span>,
+        <span class="summary-sig-arg">idRol</span>)</span><br />
+      Busca en la base de datos al Rol cuyos datos se quieren consultar y 
+      los presenta en un vista html</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="apps.roles.views-pysrc.html#detalle_rol">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">django.HttpResponse</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="apps.roles.views-module.html#modificar_rol" class="summary-sig-name">modificar_rol</a>(<span class="summary-sig-arg">request</span>,
+        <span class="summary-sig-arg">idRol</span>)</span><br />
+      Busca en la base de datos el Rol cuyos datos se quieren modificar.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="apps.roles.views-pysrc.html#modificar_rol">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="apps.roles.views-module.html#vista_eliminar_rol" class="summary-sig-name">vista_eliminar_rol</a>(<span class="summary-sig-arg">request</span>,
+        <span class="summary-sig-arg">idRol</span>)</span><br />
+      Esta vista obtiene el rol que quiere ser eliminado, pregunta si 
+      quiere ser eliminado y llama a la funcion eliminar_usuario</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="apps.roles.views-pysrc.html#vista_eliminar_rol">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">django.shortcuts.render_to_response</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="apps.roles.views-module.html#eliminar_rol" class="summary-sig-name">eliminar_rol</a>(<span class="summary-sig-arg">request</span>,
+        <span class="summary-sig-arg">idRol</span>)</span><br />
+      Eliminar de manera logica los registros del rol.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="apps.roles.views-pysrc.html#eliminar_rol">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="apps.roles.views-module.html#buscar_rol" class="summary-sig-name">buscar_rol</a>(<span class="summary-sig-arg">request</span>)</span><br />
+      Vista para buscar un usuario dentro del listado de usuarios del 
+      sistema</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="apps.roles.views-pysrc.html#buscar_rol">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="crear_rol"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">crear_rol</span>(<span class="sig-arg">request</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="apps.roles.views-pysrc.html#crear_rol">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+Vista de creacion de nuevo rol
+Recibe como parametro un request y retorna la pagina web crear_rol.html donde se debe completar
+los datos del rol y luego crear_rol_exito.html si se completo debidamente el formulario
+* Variables
+    -usuario_actor: es el usuario que realiza la accion
+    -formulario: es el fomrulario que debe completar el usuario_actor
+    -roles: es la lista de roles existentes en el sistema
+@type request: django.http.HttpRequest
+@param request: Contiene informacion sobre la solic. web actual que llamo a esta vista  
+@rtype: django.http.HttpResponse
+@return: rolcreado.html, mensaje de exito
+@author: Isaac Veron
+
+</pre>
+  <dl class="fields">
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@login_required(login_url= '/')</code></li>
+        <li><code>@permission_required('auth.add_group', login_url= '/index/')</code></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="administrar_roles"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">administrar_roles</span>(<span class="sig-arg">request</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="apps.roles.views-pysrc.html#administrar_roles">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Recibe un request, obtiene la lista de todos los Roles del sistema y 
+  luego retorna el html renderizado con la lista de usuarios</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>request</code></strong> (django.http.HttpRequest) - Contiene informacion sobre la solic. web actual que llamo a esta 
+          vista</li>
+    </ul></dd>
+    <dt>Returns: django.http.HttpResponse</dt>
+        <dd>administrar_rol.html, donde se listan los Roles</dd>
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@login_required(login_url= '/')</code></li>
+    </ul></dd>
+  </dl>
+<div class="fields">      <p><strong>Author:</strong>
+        Isaac Veron
+      </p>
+</div></td></tr></table>
+</div>
+<a name="detalle_rol"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">detalle_rol</span>(<span class="sig-arg">request</span>,
+        <span class="sig-arg">idRol</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="apps.roles.views-pysrc.html#detalle_rol">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Busca en la base de datos al Rol cuyos datos se quieren consultar y 
+  los presenta en un vista html</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>request</code></strong> (django.http.HttpRequest) - Contiene informacion sobre la solic. web actual que llamo a esta 
+          vista</li>
+        <li><strong class="pname"><code>idRol</code></strong> (integer) - es el id del Rol cuyos datos se quieren consultar</li>
+    </ul></dd>
+    <dt>Returns: django.HttpResponse</dt>
+        <dd>detalle_rol.html, donde se le despliega al usuario los datos</dd>
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@login_required(login_url= '/')</code></li>
+    </ul></dd>
+  </dl>
+<div class="fields">      <p><strong>Author:</strong>
+        Isaac Veron
+      </p>
+</div></td></tr></table>
+</div>
+<a name="modificar_rol"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">modificar_rol</span>(<span class="sig-arg">request</span>,
+        <span class="sig-arg">idRol</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="apps.roles.views-pysrc.html#modificar_rol">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Busca en la base de datos el Rol cuyos datos se quieren modificar. 
+  Presenta esos datos en un formulario y luego se guardan los cambios 
+  realizados.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>request</code></strong> (django.http.HttpRequest) - Contiene informacion sobre la solic. web actual que llamo a esta 
+          vista</li>
+        <li><strong class="pname"><code>idRol</code></strong> (integer) - es el id del rol cuyos datos se quieren modificar</li>
+    </ul></dd>
+    <dt>Returns: django.HttpResponse</dt>
+        <dd>modificar_rol.html,un formulario donde se despliegan los datos 
+          que el usuario puede modificar, una vez modificado renderiza a la
+          pagina donde se listan todos los roles</dd>
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@login_required(login_url= '/')</code></li>
+        <li><code>@permission_required('auth.change_group', login_url= '/index/')</code></li>
+    </ul></dd>
+  </dl>
+<div class="fields">      <p><strong>Author:</strong>
+        Isaac Veron
+      </p>
+</div></td></tr></table>
+</div>
+<a name="vista_eliminar_rol"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">vista_eliminar_rol</span>(<span class="sig-arg">request</span>,
+        <span class="sig-arg">idRol</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="apps.roles.views-pysrc.html#vista_eliminar_rol">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Esta vista obtiene el rol que quiere ser eliminado, pregunta si quiere
+  ser eliminado y llama a la funcion eliminar_usuario</p>
+  <p>:param request: :param idRol: :return:</p>
+  <dl class="fields">
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@login_required(login_url= '/')</code></li>
+        <li><code>@permission_required('auth.delete_group', login_url= '/index/')</code></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="eliminar_rol"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">eliminar_rol</span>(<span class="sig-arg">request</span>,
+        <span class="sig-arg">idRol</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="apps.roles.views-pysrc.html#eliminar_rol">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Eliminar de manera logica los registros del rol.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>request</code></strong> (django.http.HttpRequest) - Contiene informacion sobre la solicitud web actual que llamo a 
+          esta vista</li>
+        <li><strong class="pname"><code>idRol</code></strong> (integer) - Contiene el id del rol a ser eliminado.</li>
+    </ul></dd>
+    <dt>Returns: django.shortcuts.render_to_response</dt>
+        <dd>Se retorna a la a la pagina de notificacion de exito</dd>
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@login_required(login_url= '/')</code></li>
+        <li><code>@permission_required('auth.delete_group', login_url= '/index/')</code></li>
+    </ul></dd>
+  </dl>
+<div class="fields">      <p><strong>Author:</strong>
+        Isaac Veron
+      </p>
+</div></td></tr></table>
+</div>
+<a name="buscar_rol"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">buscar_rol</span>(<span class="sig-arg">request</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="apps.roles.views-pysrc.html#buscar_rol">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Vista para buscar un usuario dentro del listado de usuarios del 
+  sistema</p>
+  <dl class="fields">
+    <dt>Returns:</dt>
+        <dd>Se retorna a la a la pagina de vista de roles con el rol que 
+          coinciden con el query o vacio</dd>
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@login_required(login_url= '/')</code></li>
+    </ul></dd>
+  </dl>
+<div class="fields">      <p><strong>Author:</strong>
+        Isaac Veron
+      </p>
+</div></td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="apps-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Apr 10 13:46:34 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
