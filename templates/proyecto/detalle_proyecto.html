@@ -14,11 +14,17 @@
                             <div class="message"><p><strong>Fecha de Creacion: </strong>{{ proyecto.Fecha_creacion }}</p></div>
                             <div class="message">
                                 <p>
-                                    <a href="{% url 'apps.roles.views.modificar_rol' rol.id %}">Modificar</a>
-                                    <strong> | </strong>
-                                    <a href="{% url 'apps.roles.views.vista_eliminar_rol' rol.id %}">Eliminar</a>
-                                    <strong> | </strong>
-                                    <a href="{% url 'apps.roles.views.administrar_roles' %}">Volver</a>
+                                    {% if usuario_actor.can_change_proyecto %}
+                                        <a href="{% url 'apps.proyectos.views.modificar_proyecto' proyecto.id %}">Modificar</a>
+                                        <strong> | </strong>
+                                    {% endif %}
+
+                                    {% if usuario_actor.can_delete_proyecto %}
+                                        <a href="{% url 'apps.proyectos.views.vista_eliminar_proyecto' proyecto.id %}">Eliminar</a>
+                                        <strong> | </strong>
+                                    {% endif %}
+                                    
+                                    <a href="{% url 'apps.proyectos.views.gestion_de_proyectos' %}">Volver</a>
                                 </p>
                             </div>                            
                         </div>

@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from .views import crear_rol, administrar_roles, detalle_rol, modificar_rol, vista_eliminar_rol, eliminar_rol
+from .views import crear_rol, administrar_roles, detalle_rol, modificar_rol, vista_eliminar_rol, eliminar_rol, buscar_rol
 
 urlpatterns = patterns('',
      
@@ -9,4 +9,5 @@ urlpatterns = patterns('',
 	url(r'^modificar_rol/(?P<idRol>\d+)/$', modificar_rol),
     url(r'^vista_eliminar_rol/(?P<idRol>\d+)/$', vista_eliminar_rol),
     url(r'^rol_eliminado/(?P<idRol>\d+)/$', eliminar_rol),	
+    url(r'^search_rol/$', buscar_rol),
 )
