@@ -57,11 +57,11 @@ class TestCrearModelo(TestCase):
         Fecha_finalizacion = datetime.now()
 
         try:
-            proyecto = Proyecto(Nombre=nombre_proyecto,Lider=usuario,Descripcion=Descripcion,
+            proyecto = Proyecto(Nombre=nombre_proyecto,Scrum_Master=usuario,Descripcion=Descripcion,
                                 Fecha_inicio=Fecha_inicio,Fecha_finalizacion=Fecha_finalizacion)
             proyecto.save()
         except:
-            print("Prueba fallida, no se pudo crear el proyecto")
+            print("Prueba fallida, no se pudo crear el proyecto2")
             return
         if len(Proyecto.objects.all()) == 1:
             print("Prueba exitosa, el proyecto fue creado correctamente")
