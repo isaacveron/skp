@@ -21,9 +21,9 @@
 										<p><input type="text"  name="telefono" placeholder="Telefono" title="Ingrese su numero telefonico" required></p>
 										<p><input type="text"  name="direccion" placeholder="Direccion"></p>
 										<p><input type="text"  name="observacion" placeholder="Observacion">
-										<div class="submit_link">	
-											<input type="submit" value="Registrar">
-										</div>
+										
+										<input type="submit" value="Registrar">
+										<a href="{% url 'apps.usuario.views.administrar_usuario' %}">Cancelar</ins></a>
 									</form>
 								</fieldset>
 							</div>
