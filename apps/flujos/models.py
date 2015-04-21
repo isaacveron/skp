@@ -17,7 +17,7 @@ class Flujo(models.Model):
 	Estado = models.CharField( max_length=15, default='Activo', unique=False)
 	Descripcion = models.TextField(null=True, blank=True)
 	Fecha_creacion = models.DateTimeField(auto_now=True, null=True)
-	Actividades = models.ManyToManyField(Actividad, null=True)
+	Actividades = models.ManyToManyField(Actividad, blank=True)
 
 
 

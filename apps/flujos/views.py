@@ -176,44 +176,40 @@ def eliminar_flujo(request, idFlujo):
 
 
 
+#########################################################################################
+
+
 @login_required(login_url = '/')
 @user_passes_test( User.can_add_flujo , login_url="/index/")
 def crear_actividad(request):
-
+    """
+     Vista de creacion de una nueva Actividad
+    Recibe como parametro un request y retorna la pagina web crear_actividad.html donde se debe completar
+    los datos de la actividad y luego operacion_actividad_exito.html si se completo debidamente el formulario
+    * Variables
+        -usuario_actor: es el usuario que realiza la accion
+        -formulario: es el fomrulario que debe completar el usuario_actor
+        -Actividad: es la lista de las actividades existentes en el sistema
+    @type request: django.http.HttpRequest
+    @param request: Contiene informacion sobre la solic. web actual que llamo a esta vista  
+    @rtype: django.http.HttpResponse
+    @return: operacion_actividad_exito.html, mensaje de exito
+    @author: Cesar Recalde
+    """
+    mensaje="Actividad creada con exito"
     usuario_actor = request.user
     actividad = Actividad()
     if request.method == 'POST':
         formulario = ActividadForm(request.POST, instance=actividad)
         if formulario.is_valid():
             formulario.save()
-            #return render_to_response('flujo/operacion_actividad_exito.html',
-            #                          {'mensaje': mensaje, 'usuario_actor': usuario_actor, 'actividades': actividades},
-            #                          context_instance=RequestContext(request))
-            return HttpResponse('<script type="text/javascript">window.close()</script>')
+            actividades = Actividad.objects.all()
+            return render_to_response('flujo/operacion_actividad_exito.html',
+                                      {'mensaje': mensaje, 'usuario_actor': usuario_actor, 'actividades': actividad},
+                                      context_instance=RequestContext(request))
     else:
         formulario = ActividadForm()
     return render_to_response('flujo/crear_actividad.html',
-                              {'formulario': formulario, 'operacion': 'Crear Actividad',
+                              {'formulario': formulario, 'operacion': 'Crear Flujo',
                                'usuario_actor': usuario_actor},
-                              context_instance=RequestContext(request))
-
-
-@login_required(login_url = '/')
-def vista_eliminar_flujo(request):
-
-    usuario_actor = request.user
-    actividades = Actividad.objects.all()
-    return render_to_response('flujo/eliminar_actividad.html', {'usuario_actor': usuario_actor, 'actividades': actividades},
-                              context_instance=RequestContext(request))
-
-
-
-@login_required(login_url = '/')
-def eliminar_actividad(request, idActividad):
-
-    usuario_actor = request.user
-    actividad = Actividad.objects.get(pk=idActividad)
-    actividad.delete()
-    actividades = Actividad.objects.all()
-    return render_to_response('flujo/vista_eliminar_actividad.html', {'usuario_actor': usuario_actor, 'actividades': actividades},
                               context_instance=RequestContext(request))

@@ -12,6 +12,8 @@
                                 <form id="formulario" method="post" action="">
                                     {% csrf_token %}
                                     <table class="table">
+                                        <a href="{% url 'apps.flujos.views.administrar_flujos' %}"><input type="submit" value="Crear Actividad"></ins></a>
+                                        
                                         <p>{{ formulario }}</p>
                                     </table>
                                     <p>

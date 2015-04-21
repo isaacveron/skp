@@ -13,8 +13,10 @@ class FlujoForm(ModelForm):
     class Meta:
         model = Flujo
         exclude = ['Usuario' , 'Estado' , 'Usuario_creador' , 'Fecha_creacion']
+        widgets = {'Actividades': forms.RadioSelect}
 
 
 class ActividadForm(ModelForm):
 	class Meta:
 		model = Actividad
+
