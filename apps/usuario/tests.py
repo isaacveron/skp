@@ -3,7 +3,9 @@ from django.contrib.auth import SESSION_KEY
 from django.test import Client
 from django.test import TestCase
 from django.contrib.auth.models import User
-from django.db.models import auth.Gropu, auth.User, admin.LogEntry
+#from django.db.models import admin.LogEntry
+from apps.roles.models import Group
+from apps.usuario.models import User
 
 class SGPTestCase(TestCase):
 
