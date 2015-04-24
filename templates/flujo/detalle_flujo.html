@@ -13,6 +13,14 @@
                             <div class="message"><p><strong>Fecha de Creacion: </strong>{{ flujo.Fecha_creacion }}</p></div>
                             <div class="message">
                                 <p>
+                                    <strong>Actividades: </strong>
+                                    {% for actividad in flujo.Actividades.all %}
+                                        <p> Actividad {{actividad.Orden}} : {{actividad.Nombre}} </p>
+                                    {% endfor %}
+                                </p>
+                            </div>
+                            <div class="message">
+                                <p>
                                     {% if usuario_actor.can_change_flujo %}
                                         <a href="{% url 'apps.flujos.views.modificar_flujo' flujo.id %}">Modificar</a>
                                         <strong> | </strong>

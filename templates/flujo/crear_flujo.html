@@ -11,13 +11,22 @@
                             <div class="module_content">
                                 <form id="formulario" method="post" action="">
                                     {% csrf_token %}
+
+                                    <script src="{{ STATIC_URL }}flujo/js/addInput.js" language="Javascript" type="text/javascript"></script>
+
+                                    <input type="button" value="Agregar otra actividad" onClick="addInput('formulario');">
+                                    
                                     <table class="table">
                                         <p>{{ formulario }}</p>
                                     </table>
+
+                                    
+
                                     <p>
                                         <input  type="submit" value="Confirmar">
                                         <a href="{% url 'apps.flujos.views.administrar_flujos' %}"><input type="submit" value=" Cancelar"></ins></a>
                                     </p>
+
                                 </form>
                             </div>
                         </table>
