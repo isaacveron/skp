@@ -3,20 +3,18 @@ from django import forms
 from apps.roles.models import User, Group
 from apps.proyectos.models import Proyecto
 from .models import Flujo, Actividad
+from django.forms.formsets import formset_factory
+from django.contrib.admin.widgets import FilteredSelectMultiple
 
+class ActividadForm(ModelForm):
+	Nombre = forms.CharField()
 
-
-
+ActividadFormSet = formset_factory(ActividadForm)
 
 class FlujoForm(ModelForm):
 
     class Meta:
         model = Flujo
-        exclude = ['Usuario' , 'Estado' , 'Usuario_creador' , 'Fecha_creacion']
-        widgets = {'Actividades': forms.RadioSelect}
-
-
-class ActividadForm(ModelForm):
-	class Meta:
-		model = Actividad
+        exclude = ['Usuario' , 'Estado' , 'Usuario_creador' , 'Fecha_creacion', 'Actividades']
+        #widgets = {'Actividades': forms.SelectMultiple}
 

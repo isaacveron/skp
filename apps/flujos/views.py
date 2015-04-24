@@ -3,10 +3,11 @@ from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from apps.roles.models import User, Group
 from apps.flujos.models import Flujo, Actividad
-from apps.flujos.forms import FlujoForm, ActividadForm
+from apps.flujos.forms import FlujoForm, ActividadForm, ActividadFormSet
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.decorators import user_passes_test
 from django.db.models import Q
+from django import forms
 
 # Create your views here.
 
@@ -51,10 +52,25 @@ def crear_flujo(request):
     mensaje="Flujo creado con exito"
     usuario_actor = request.user
     flujo = Flujo( Usuario_creador=usuario_actor)
+
     if request.method == 'POST':
         formulario = FlujoForm(request.POST, instance=flujo)
+
         if formulario.is_valid():
-            formulario.save()
+
+            flujo_creado = formulario.save()
+
+            nombresActividades = request.POST.getlist('nombreActividad')
+
+            i=1
+            
+            for nombre in nombresActividades:
+            	actividad = Actividad(Nombre=nombre, Orden=i, idTabla=flujo_creado.id)
+            	actividad.save()
+            	flujo_creado.Actividades.add(actividad)
+            	flujo_creado.save()
+            	i = i + 1
+            	
             flujos = Flujo.objects.all()
             return render_to_response('flujo/operacion_flujo_exito.html',
                                       {'mensaje': mensaje, 'usuario_actor': usuario_actor, 'flujos': flujos},
