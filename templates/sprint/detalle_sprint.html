@@ -1,0 +1,33 @@
+
+{% extends 'index.html' %}
+
+{% block cuerpo %}
+    <section id="main" class="column">
+        <article class="module width_full">
+            <header><h3>Detalles del Sprint</h3></header>
+            <div class="module_content">
+                <div class="tab_container">
+                    <div id="tab1" class="tab_content">
+                        <table class="tablesorter" cellspacing="0"> 
+                            <div class="message"><p><strong>Nombre: </strong>{{ sprint.Nombre }}</p></div>
+                            <div class="message"><p><strong>Creado por: </strong>{{ sprint.Usuario_creador }}</p></div>
+                            <div class="message"><p><strong>Fecha de Creacion: </strong>{{ sprint.Fecha_creacion }}</p></div>
+                            <div class="message">
+                                <p>
+                                    {% if usuario_actor.can_change_proyecto %}
+                                        <a href="{% url 'apps.sprint.views.modificar_sprint' sprint.id%}">Modificar</a>
+                                        <strong> | </strong>
+                                    {% endif %}
+                                    
+                                    <a href="javascript:history.go(-1)">Volver</a>
+                                </p>
+                            </div>                            
+                        </div>
+                        </table>
+                        
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+{% endblock cuerpo %}

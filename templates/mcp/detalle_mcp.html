@@ -1,0 +1,83 @@
+
+{% extends 'index.html' %}
+
+{% block cuerpo %}
+    
+        <article class="module width_full">
+            <header><h3>Detalles del Proyecto</h3></header>
+            <div class="module_content">
+                <div class="tab_container">
+                    <div id="tab1" class="tab_content">
+                        <table class="tablesorter" cellspacing="0"> 
+                            <div class="message"><p><strong>Nombre: </strong>{{ proyecto.Nombre }}</p></div>
+                            <div class="message"><p><strong>Creado por: </strong>{{ proyecto.Usuario_creador }}</p></div>
+                            <div class="message"><p><strong>Fecha de Creacion: </strong>{{ proyecto.Fecha_creacion }}</p></div>
+                        </table>                        
+                    </div>
+                </div>
+            </div>
+        </article>
+   
+    <article class="module width_full">
+            <header>
+                <h3>User Storys del Proyecto</h3>
+                {% if usuario_actor.can_add_proyecto %}
+                    <a href="{% url 'apps.userstory.views.crear_userstory' proyecto.id %}"><th align="right"><input type="image" src="{{ STATIC_URL }}pagina_principal/images/mas.png" title="Crear"></th></a>
+                {% endif %}
+            </header>
+            <div class="module_content">
+                <div class="tab_container">
+                    <div id="tab1" class="tab_content">
+                        <table class="tablesorter" cellspacing="0"> 
+                            <thead> 
+                                {% if userstorys|length > 0 %}
+                                    {% for userstory in userstorys %}
+                                        {% if userstory.pk > 0 %}
+                                            {% if userstory.Proyecto_asignado == proyecto %}
+                                                <tr class="clickableRow" href='{% url "apps.userstory.views.detalle_userstory" userstory.id %}'>
+                                                <th>{{ userstory.Nombre }}</th>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    <tr><td class="warning">No hay userstory de usuario registrados aun</td>
+                                {% endif %}
+                            </thead>                        
+                        </table>
+                    </div>
+                </div>
+            </div>  
+    </article>
+
+    <article class="module width_full">
+            <header>
+                <h3>Sprints del proyecto </h3>
+
+                {% if usuario_actor.can_add_proyecto %}
+                    <a href="{% url 'apps.sprint.views.crear_sprint' proyecto.id %}"><th align="right"><input type="image" src="{{ STATIC_URL }}pagina_principal/images/mas.png" title="Crear"></th></a>
+                {% endif %}
+            </header>
+            <div class="module_content">
+                <div class="tab_container">
+                    <div id="tab1" class="tab_content">
+                        <table class="tablesorter" cellspacing="0"> 
+                            <thead> 
+                                {% if sprints|length > 0 %}
+                                    {% for sprint in sprints %}
+                                        {% if sprint.pk > 0 %}
+                                            {% if sprint.Proyecto_asignado == proyecto %}
+                                                <tr class="clickableRow" href='{% url "apps.sprint.views.detalle_sprint" sprint.id%}'>
+                                                <th>{{ sprint.Nombre }}</th>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    <tr><td class="warning">No hay sprint de usuario registrados aun</td>
+                                {% endif %}
+                            </thead>                        
+                        </table>
+                    </div>
+                </div>
+            </div>  
+        </article>
+{% endblock cuerpo %}

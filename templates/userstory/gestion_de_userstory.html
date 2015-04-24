@@ -1,0 +1,40 @@
+{% extends 'index.html' %}
+
+{% block buscador %}
+    <form class="quick_search" action='{% url "apps.userstory.views.buscar_userstory" %}'>
+            <input type="text" value="Quick Search" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;" name="q" value="{{ query|escape }}" required>
+    </form>
+{% endblock buscador %}
+
+{% block cuerpo %}
+   
+        <article class="module width_full">
+            <header>
+                <h3>Gestion de User Story </h3>
+                {% if usuario_actor.can_add_proyecto %}
+                    <a href="{% url 'apps.userstory.views.crear_userstory' %}"><th align="right"><input type="image" src="{{ STATIC_URL }}pagina_principal/images/mas.png" title="Crear"></th></a>
+                {% endif %}
+            </header>
+            <div class="module_content">
+                <div class="tab_container">
+                    <div id="tab1" class="tab_content">
+                        <table class="tablesorter" cellspacing="0"> 
+                            <thead> 
+                                {% if userstorys|length > 0 %}
+                                    {% for userstory in userstorys %}
+                                        {% if userstory.pk > 0 %}
+                                            <tr class="clickableRow" href='{% url "apps.userstory.views.detalle_userstory" userstory.id %}' id="tablaproyecto" rel="tabla">
+                                            <th>{{ userstory.Nombre }}</th>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    <tr><td class="warning">No hay userstory de usuario registrados aun</td>
+                                {% endif %}
+                            </thead>                        
+                        </table>
+                    </div>
+                </div>
+            </div>  
+        </article>
+    
+{% endblock %}

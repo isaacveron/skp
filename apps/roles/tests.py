@@ -2,10 +2,11 @@ from django.test import TestCase
 import unittest, time
 from datetime import datetime
 from django.test.client import RequestFactory
-from django.contrib.auth.models import User, Group, Permission
+from django.contrib.auth.models import Permission
 from apps.proyectos.models import Proyecto
 from django.core.urlresolvers import reverse
-
+from apps.usuario.models import User
+from apps.roles.models import Group
 # Create your tests here.
 class TestCrearModelo(TestCase):
     fixtures = ['usuario.json']

@@ -12,11 +12,10 @@
                             	{% csrf_token %}
         						<table class="table">
         							<p>{{ formulario }}</p>
-                                    <p>{{formulario.Descripcion.value}}</p>
         						</table>
         						<p>
                                     <input class="btn btn-default" type="submit" value="Confirmar">
-                                    <a href="{% url 'apps.proyectos.views.gestion_de_proyectos' %}">Cancelar</a>
+                                    <a href="{% url 'apps.sprint.views.gestion_de_sprint' %}">Cancelar</a>
                                 </p>
 
     						</form>

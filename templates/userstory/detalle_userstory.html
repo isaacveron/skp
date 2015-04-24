@@ -4,27 +4,27 @@
 {% block cuerpo %}
     <section id="main" class="column">
         <article class="module width_full">
-            <header><h3>Detalles del Proyecto</h3></header>
+            <header><h3>Detalles del Userstory</h3></header>
             <div class="module_content">
                 <div class="tab_container">
                     <div id="tab1" class="tab_content">
                         <table class="tablesorter" cellspacing="0"> 
-                            <div class="message"><p><strong>Nombre: </strong>{{ proyecto.Nombre }}</p></div>
-                            <div class="message"><p><strong>Creado por: </strong>{{ proyecto.Usuario_creador }}</p></div>
-                            <div class="message"><p><strong>Fecha de Creacion: </strong>{{ proyecto.Fecha_creacion }}</p></div>
+                            <div class="message"><p><strong>Nombre: </strong>{{ userstory.Nombre }}</p></div>
+                            <div class="message"><p><strong>Creado por: </strong>{{ userstory.Usuario_creador }}</p></div>
+                            <div class="message"><p><strong>Fecha de Creacion: </strong>{{ userstory.Fecha_creacion }}</p></div>
                             <div class="message">
                                 <p>
                                     {% if usuario_actor.can_change_proyecto %}
-                                        <a href="{% url 'apps.proyectos.views.modificar_proyecto' proyecto.id %}">Modificar</a>
+                                        <a href="{% url 'apps.userstory.views.modificar_userstory' userstory.id %}">Modificar</a>
                                         <strong> | </strong>
                                     {% endif %}
 
-                                    {% if usuario_actor.can_delete_proyecto %}
-                                        <a href="{% url 'apps.proyectos.views.vista_eliminar_proyecto' proyecto.id %}">Eliminar</a>
+                                    {% if usuario_actor.can_change_proyecto %}
+                                        <a href="{% url 'apps.userstory.views.vista_eliminar_userstory' userstory.id %}">Eliminar</a>
                                         <strong> | </strong>
                                     {% endif %}
                                     
-                                    <a href="{% url 'apps.proyectos.views.gestion_de_proyectos' %}">Volver</a>
+                                    <a href="javascript:history.go(-1)">Volver</a>
                                 </p>
                             </div>                            
                         </div>

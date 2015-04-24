@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+
+{% block cuerpo %}
+    <section id="main" class="column">
+        <article class="module width_full">
+            <header><h3>creacion de sprint para el proyecto "{{ proyecto.Nombre }}"</h3></header>
+            <div class="module_content">
+                <div class="tab_container">
+                    <div id="tab1" class="tab_content">
+                        <table class="tablesorter" cellspacing="0"> 
+                            <div class="module_content">
+                                <form id="formulario" method="post" action="">
+                                    {% csrf_token %}
+                                    <table class="table">
+                                        <p>{{ formulario }}</p>
+                                    </table>
+                                    <p>
+                                        <input  type="submit" value="Confirmar">
+                                        <a href="{% url 'apps.mcp.views.detalle_mcp' proyecto.id %}">Cancelar</a>
+                                    </p>
+                                </form>
+                            </div>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>   
+{% endblock %}

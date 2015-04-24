@@ -1,6 +1,8 @@
 from django.forms import ModelForm
 from django import forms
-from django.contrib.auth.models import Group, User
+#from django.contrib.auth.models import Group, User
+from apps.usuario.models import User
+from apps.roles.models import Group
 
 class RolForm(forms.ModelForm):
     """

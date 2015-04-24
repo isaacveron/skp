@@ -95,7 +95,7 @@
 		<hr>	
 		<h3>Acerca</h3>
 		<ul class="toggle">
-			<li class="icn_settings"><a href="#">Nosotros</a></li>
+			<li class="icn_settings"><a href="{% url 'apps.usuario.views.index' %}">Nosotros</a></li>
 		</ul>
 		<hr>
 	{% endblock aside %}
@@ -112,8 +112,36 @@
 	{% endblock mensaje %}
 
 	{% block cuerpo %}		
-			
-
+		<article class="module width_full">
+            <header>
+                <h3>tus proyectos </h3>
+            </header>
+			<div class="module_content">
+                <div class="tab_container">
+                    <div id="tab1" class="tab_content">
+                        <table class="tablesorter" cellspacing="0"> 
+                            <thead> 
+                                {% if proyectos|length > 0 %}
+                                    {% for proyecto in proyectos %}
+                                        {% if proyecto.pk > 0 %}
+                                            
+                                            {% for grupo in proyecto.Grupo_trabajo.all %}
+                                            	{% if grupo == usuario_actor%}
+                                            		<tr class="clickableRow" href='{% url "apps.mcp.views.detalle_mcp" proyecto.id %}'>
+                                            		<th>{{ proyecto.Nombre }}</th>
+                                            	{% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    <tr><td class="warning">No hay proyectos de usuario registrados aun</td>
+                                {% endif %}
+                            </thead>                        
+                        </table>
+                    </div>
+                </div>
+            </div>  
+        </article>
 	{% endblock cuerpo %}
 	</section>
 

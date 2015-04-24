@@ -1,0 +1,40 @@
+{% extends 'index.html' %}
+
+{% block buscador %}
+    <form class="quick_search" action='{% url "apps.sprint.views.buscar_sprint" %}'>
+            <input type="text" value="Quick Search" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;" name="q" value="{{ query|escape }}" required>
+    </form>
+{% endblock buscador %}
+
+{% block cuerpo %}
+   
+        <article class="module width_full">
+            <header>
+                <h3>Gestion de sprint </h3>
+                {% if usuario_actor.can_add_proyecto %}
+                    <a href="{% url 'apps.sprint.views.crear_sprint' %}"><th align="right"><input type="image" src="{{ STATIC_URL }}pagina_principal/images/mas.png" title="Crear"></th></a>
+                {% endif %}
+            </header>
+            <div class="module_content">
+                <div class="tab_container">
+                    <div id="tab1" class="tab_content">
+                        <table class="tablesorter" cellspacing="0"> 
+                            <thead> 
+                                {% if sprints|length > 0 %}
+                                    {% for sprint in sprints %}
+                                        {% if sprint.pk > 0 %}
+                                            <tr class="clickableRow" href='{% url "apps.sprint.views.detalle_sprint" sprint.id %}' id="tablaproyecto" rel="tabla">
+                                            <th>{{ sprint.Nombre }}</th>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    <tr><td class="warning">No hay sprint de usuario registrados aun</td>
+                                {% endif %}
+                            </thead>                        
+                        </table>
+                    </div>
+                </div>
+            </div>  
+        </article>
+    
+{% endblock %}

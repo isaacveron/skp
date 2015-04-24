@@ -1,9 +1,9 @@
 from django.db import models
-from apps.roles.models import Group
 from apps.usuario.models import User
+from apps.proyectos.models import Proyecto
 
 # Create your models here.
-class Proyecto(models.Model):
+class UserStory(models.Model):
     """
     Clase Proyecto:
         * Contiene los campos de la tabla proyecto en la base de datos
@@ -16,13 +16,17 @@ class Proyecto(models.Model):
             -   Fecha de finalizacion: es la fecha en la que el proyecto estara finalizado
             -   Fecha: es la fecha de creacion del proyecto
     """
-    Scrum_Master = models.ForeignKey(User, null=True, related_name='Scrum_Master')
-    Grupo_trabajo = models.ManyToManyField(User, null=True, related_name='Proyectos')
+    
+    Usuario_asignado = models.ForeignKey(User, null=True, related_name='Usuario_asignado')
     Nombre = models.CharField(max_length=30, unique=True)
-    Descripcion = models.TextField(null=True, blank=True)
-    Fecha_inicio = models.DateField('Fecha de inicio', blank=True, null=True)
-    Fecha_finalizacion = models.DateField('Fecha de finalizacion', blank=True, null=True)
-    Cliente = models.CharField( max_length=30 , blank=True, null=True)
+    Descripcion = models.TextField(null=True)
+    Valor_tecnico = models.PositiveIntegerField(null=True, blank=True)
+    Valor_de_negocio = models.PositiveIntegerField(null=True, blank=True)
+    Size = models.PositiveIntegerField(null=True, blank=True)
     Estado = models.CharField( max_length=15, default='Pendiente', unique=False)
     Usuario_creador = models.ForeignKey(User, null=True)
+    Proyecto_asignado = models.ForeignKey (Proyecto, null=True)
     Fecha_creacion = models.DateTimeField(auto_now=True, null=True)
+
+    def __str__(self):              
+        return self.Nombre

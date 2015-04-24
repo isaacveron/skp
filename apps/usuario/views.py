@@ -5,6 +5,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, auth
 from django.contrib.auth import	login, authenticate, logout 
 from apps.usuario.forms import UsuarioForm, UsuarioModForm
 from apps.roles.forms import AsignarRol
+from apps.proyectos.models import Proyecto
+from apps.userstory.models import UserStory
 from django.contrib.auth.models import User, Group, Permission
 from django.contrib.auth.decorators import login_required, permission_required
 from django.views.decorators.csrf import csrf_protect
@@ -59,8 +61,9 @@ def index(request):
     @rtype: django.http.HttpResponseRedirect
     @author: Isaac Veron
     """
-
-    return render_to_response('index.html', context_instance = RequestContext(request))
+    usuario_actor = request.user
+    proyectos = Proyecto.objects.all()
+    return render_to_response('index.html', {'usuario_actor':usuario_actor, 'proyectos':proyectos}, context_instance = RequestContext(request))
 
 
 @login_required(login_url = '/')

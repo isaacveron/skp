@@ -24,7 +24,7 @@
                                     {% endif %}
                                     
                                     
-                                    {% if perms.auth.delete_user %}
+                                    {% if perms.auth.delete_user and user.id != usuario_parametro.id %}
                                         <a href="{% url 'apps.usuario.views.vista_eliminar_usuario' usuario_parametro.id %}">Eliminar</a>
                                         <strong> | </strong>
                                     {% endif %}

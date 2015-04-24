@@ -40,7 +40,9 @@ INSTALLED_APPS = (
     'apps.roles',
     'apps.proyectos',
     'apps.flujos',
-
+    'apps.sprint',
+    'apps.userstory',
+    'apps.mcp',
 )
 
 MIDDLEWARE_CLASSES = (
