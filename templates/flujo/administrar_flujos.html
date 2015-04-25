@@ -21,7 +21,7 @@
                         <thead> 
                             {% if flujos|length > 0 %}
                                 {% for flujo in flujos %}
-                                    {% if flujo.pk > 1 %}
+                                    {% if flujo.pk > 0 %}
                                         <tr class="clickableRow" href='{% url "apps.flujos.views.detalle_flujo" flujo.id %}' id="tablaFlujo" rel="tabla">
                                         <th>{{ flujo.Nombre }}</th>
                                     {% endif %}
