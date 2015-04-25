@@ -57,46 +57,73 @@
 </table>
 <h1 class="epydoc">Source Code for <a href="apps.roles.forms-module.html">Module apps.roles.forms</a></h1>
 <pre class="py-src">
-<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">django</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Module apps.proyectos.forms=apps.proyectos.forms-module.html,Module apps.roles.forms=apps.roles.forms-module.html,Module apps.usuario.forms=apps.usuario.forms-module.html"><a title="apps.proyectos.forms
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">django</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Module apps.flujos.forms=apps.flujos.forms-module.html,Module apps.proyectos.forms=apps.proyectos.forms-module.html,Module apps.roles.forms=apps.roles.forms-module.html,Module apps.sprint.forms=apps.sprint.forms-module.html,Module apps.userstory.forms=apps.userstory.forms-module.html,Module apps.usuario.forms=apps.usuario.forms-module.html"><a title="apps.flujos.forms
+apps.proyectos.forms
 apps.roles.forms
+apps.sprint.forms
+apps.userstory.forms
 apps.usuario.forms" class="py-name" href="#" onclick="return doclink('link-0', 'forms', 'link-0');">forms</a></tt> <tt class="py-keyword">import</tt> <tt class="py-name">ModelForm</tt> </tt>
-<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">django</tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name"><a title="apps.proyectos.forms
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">django</tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name"><a title="apps.flujos.forms
+apps.proyectos.forms
 apps.roles.forms
+apps.sprint.forms
+apps.userstory.forms
 apps.usuario.forms" class="py-name" href="#" onclick="return doclink('link-1', 'forms', 'link-0');">forms</a></tt> </tt>
-<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">django</tt><tt class="py-op">.</tt><tt class="py-name">contrib</tt><tt class="py-op">.</tt><tt class="py-name">auth</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Module apps.proyectos.models=apps.proyectos.models-module.html,Module apps.roles.models=apps.roles.models-module.html,Module apps.usuario.models=apps.usuario.models-module.html"><a title="apps.proyectos.models
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-comment">#from django.contrib.auth.models import Group, User</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-2" class="py-name" targets="Package apps=apps-module.html"><a title="apps" class="py-name" href="#" onclick="return doclink('link-2', 'apps', 'link-2');">apps</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Package apps.usuario=apps.usuario-module.html"><a title="apps.usuario" class="py-name" href="#" onclick="return doclink('link-3', 'usuario', 'link-3');">usuario</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Module apps.flujos.models=apps.flujos.models-module.html,Module apps.mcp.models=apps.mcp.models-module.html,Module apps.proyectos.models=apps.proyectos.models-module.html,Module apps.roles.models=apps.roles.models-module.html,Module apps.sprint.models=apps.sprint.models-module.html,Module apps.userstory.models=apps.userstory.models-module.html,Module apps.usuario.models=apps.usuario.models-module.html"><a title="apps.flujos.models
+apps.mcp.models
+apps.proyectos.models
 apps.roles.models
-apps.usuario.models" class="py-name" href="#" onclick="return doclink('link-2', 'models', 'link-2');">models</a></tt> <tt class="py-keyword">import</tt> <tt class="py-name">Group</tt><tt class="py-op">,</tt> <tt class="py-name">User</tt> </tt>
-<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"> </tt>
-<a name="RolForm"></a><div id="RolForm-def"><a name="L5"></a><tt class="py-lineno"> 5</tt> <a class="py-toggle" href="#" id="RolForm-toggle" onclick="return toggle('RolForm');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="apps.roles.forms.RolForm-class.html">RolForm</a><tt class="py-op">(</tt><tt class="py-base-class">forms</tt><tt class="py-op">.</tt><tt class="py-base-class">ModelForm</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="RolForm-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="RolForm-expanded"><a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
-<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-docstring">    Formulario para el la creacion de roles</tt> </tt>
-<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-docstring">    Hereda de forms.ModelForm y utiliza la clase Group para</tt> </tt>
-<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
-<a name="RolForm.Meta"></a><div id="RolForm.Meta-def"><a name="L10"></a><tt class="py-lineno">10</tt> <a class="py-toggle" href="#" id="RolForm.Meta-toggle" onclick="return toggle('RolForm.Meta');">-</a><tt class="py-line">    <tt class="py-keyword">class</tt> <a class="py-def-name" href="apps.roles.forms.RolForm.Meta-class.html">Meta</a><tt class="py-op">:</tt> </tt>
-</div><div id="RolForm.Meta-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="RolForm.Meta-expanded"><a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">        <tt id="link-3" class="py-name" targets="Variable apps.proyectos.forms.ProyectoForm.Meta.model=apps.proyectos.forms.ProyectoForm.Meta-class.html#model,Variable apps.roles.forms.AsignarRol.Meta.model=apps.roles.forms.AsignarRol.Meta-class.html#model,Variable apps.roles.forms.RolForm.Meta.model=apps.roles.forms.RolForm.Meta-class.html#model,Variable apps.usuario.forms.UsuarioForm.Meta.model=apps.usuario.forms.UsuarioForm.Meta-class.html#model,Variable apps.usuario.forms.UsuarioModForm.Meta.model=apps.usuario.forms.UsuarioModForm.Meta-class.html#model"><a title="apps.proyectos.forms.ProyectoForm.Meta.model
+apps.sprint.models
+apps.userstory.models
+apps.usuario.models" class="py-name" href="#" onclick="return doclink('link-4', 'models', 'link-4');">models</a></tt> <tt class="py-keyword">import</tt> <tt class="py-name">User</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-5" class="py-name"><a title="apps" class="py-name" href="#" onclick="return doclink('link-5', 'apps', 'link-2');">apps</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Package apps.roles=apps.roles-module.html"><a title="apps.roles" class="py-name" href="#" onclick="return doclink('link-6', 'roles', 'link-6');">roles</a></tt><tt class="py-op">.</tt><tt id="link-7" class="py-name"><a title="apps.flujos.models
+apps.mcp.models
+apps.proyectos.models
+apps.roles.models
+apps.sprint.models
+apps.userstory.models
+apps.usuario.models" class="py-name" href="#" onclick="return doclink('link-7', 'models', 'link-4');">models</a></tt> <tt class="py-keyword">import</tt> <tt class="py-name">Group</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"> </tt>
+<a name="RolForm"></a><div id="RolForm-def"><a name="L7"></a><tt class="py-lineno"> 7</tt> <a class="py-toggle" href="#" id="RolForm-toggle" onclick="return toggle('RolForm');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="apps.roles.forms.RolForm-class.html">RolForm</a><tt class="py-op">(</tt><tt class="py-base-class">forms</tt><tt class="py-op">.</tt><tt class="py-base-class">ModelForm</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="RolForm-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="RolForm-expanded"><a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-docstring">    Formulario para el la creacion de roles</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-docstring">    Hereda de forms.ModelForm y utiliza la clase Group para</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="RolForm.Meta"></a><div id="RolForm.Meta-def"><a name="L12"></a><tt class="py-lineno">12</tt> <a class="py-toggle" href="#" id="RolForm.Meta-toggle" onclick="return toggle('RolForm.Meta');">-</a><tt class="py-line">    <tt class="py-keyword">class</tt> <a class="py-def-name" href="apps.roles.forms.RolForm.Meta-class.html">Meta</a><tt class="py-op">:</tt> </tt>
+</div><div id="RolForm.Meta-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="RolForm.Meta-expanded"><a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">        <tt id="link-8" class="py-name" targets="Variable apps.flujos.forms.FlujoForm.Meta.model=apps.flujos.forms.FlujoForm.Meta-class.html#model,Variable apps.proyectos.forms.ProyectoForm.Meta.model=apps.proyectos.forms.ProyectoForm.Meta-class.html#model,Variable apps.roles.forms.AsignarRol.Meta.model=apps.roles.forms.AsignarRol.Meta-class.html#model,Variable apps.roles.forms.RolForm.Meta.model=apps.roles.forms.RolForm.Meta-class.html#model,Variable apps.sprint.forms.SprintForm.Meta.model=apps.sprint.forms.SprintForm.Meta-class.html#model,Variable apps.userstory.forms.UserStoryForm.Meta.model=apps.userstory.forms.UserStoryForm.Meta-class.html#model,Variable apps.usuario.forms.UsuarioForm.Meta.model=apps.usuario.forms.UsuarioForm.Meta-class.html#model,Variable apps.usuario.forms.UsuarioModForm.Meta.model=apps.usuario.forms.UsuarioModForm.Meta-class.html#model"><a title="apps.flujos.forms.FlujoForm.Meta.model
+apps.proyectos.forms.ProyectoForm.Meta.model
 apps.roles.forms.AsignarRol.Meta.model
 apps.roles.forms.RolForm.Meta.model
+apps.sprint.forms.SprintForm.Meta.model
+apps.userstory.forms.UserStoryForm.Meta.model
 apps.usuario.forms.UsuarioForm.Meta.model
-apps.usuario.forms.UsuarioModForm.Meta.model" class="py-name" href="#" onclick="return doclink('link-3', 'model', 'link-3');">model</a></tt> <tt class="py-op">=</tt> <tt class="py-name">Group</tt> </tt>
-<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">        <tt id="link-4" class="py-name" targets="Variable apps.proyectos.forms.ProyectoForm.Meta.exclude=apps.proyectos.forms.ProyectoForm.Meta-class.html#exclude,Variable apps.roles.forms.RolForm.Meta.exclude=apps.roles.forms.RolForm.Meta-class.html#exclude"><a title="apps.proyectos.forms.ProyectoForm.Meta.exclude
-apps.roles.forms.RolForm.Meta.exclude" class="py-name" href="#" onclick="return doclink('link-4', 'exclude', 'link-4');">exclude</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">'Usuario'</tt><tt class="py-op">]</tt> </tt>
-</div></div><a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"> </tt>
-<a name="AsignarRol"></a><div id="AsignarRol-def"><a name="L14"></a><tt class="py-lineno">14</tt> <a class="py-toggle" href="#" id="AsignarRol-toggle" onclick="return toggle('AsignarRol');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="apps.roles.forms.AsignarRol-class.html">AsignarRol</a><tt class="py-op">(</tt><tt class="py-base-class">forms</tt><tt class="py-op">.</tt><tt class="py-base-class">ModelForm</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="AsignarRol-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="AsignarRol-expanded"><a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
-<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-docstring">    Formulario para la asignacion de roles a los usuarios</tt> </tt>
-<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-docstring">    Hereda del forms.ModelForm y utiliza la clase user</tt> </tt>
-<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-docstring">    para agregar ciertos campos de la clase a la hora de la asignacion</tt> </tt>
-<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
-<a name="AsignarRol.Meta"></a><div id="AsignarRol.Meta-def"><a name="L20"></a><tt class="py-lineno">20</tt> <a class="py-toggle" href="#" id="AsignarRol.Meta-toggle" onclick="return toggle('AsignarRol.Meta');">-</a><tt class="py-line">    <tt class="py-keyword">class</tt> <a class="py-def-name" href="apps.roles.forms.AsignarRol.Meta-class.html">Meta</a><tt class="py-op">:</tt> </tt>
-</div><div id="AsignarRol.Meta-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="AsignarRol.Meta-expanded"><a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">        <tt id="link-5" class="py-name"><a title="apps.proyectos.forms.ProyectoForm.Meta.model
+apps.usuario.forms.UsuarioModForm.Meta.model" class="py-name" href="#" onclick="return doclink('link-8', 'model', 'link-8');">model</a></tt> <tt class="py-op">=</tt> <tt class="py-name">Group</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">        <tt id="link-9" class="py-name" targets="Variable apps.flujos.forms.FlujoForm.Meta.exclude=apps.flujos.forms.FlujoForm.Meta-class.html#exclude,Variable apps.proyectos.forms.ProyectoForm.Meta.exclude=apps.proyectos.forms.ProyectoForm.Meta-class.html#exclude,Variable apps.roles.forms.RolForm.Meta.exclude=apps.roles.forms.RolForm.Meta-class.html#exclude,Variable apps.sprint.forms.SprintForm.Meta.exclude=apps.sprint.forms.SprintForm.Meta-class.html#exclude,Variable apps.userstory.forms.UserStoryForm.Meta.exclude=apps.userstory.forms.UserStoryForm.Meta-class.html#exclude"><a title="apps.flujos.forms.FlujoForm.Meta.exclude
+apps.proyectos.forms.ProyectoForm.Meta.exclude
+apps.roles.forms.RolForm.Meta.exclude
+apps.sprint.forms.SprintForm.Meta.exclude
+apps.userstory.forms.UserStoryForm.Meta.exclude" class="py-name" href="#" onclick="return doclink('link-9', 'exclude', 'link-9');">exclude</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">'Usuario'</tt><tt class="py-op">]</tt> </tt>
+</div></div><a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"> </tt>
+<a name="AsignarRol"></a><div id="AsignarRol-def"><a name="L16"></a><tt class="py-lineno">16</tt> <a class="py-toggle" href="#" id="AsignarRol-toggle" onclick="return toggle('AsignarRol');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="apps.roles.forms.AsignarRol-class.html">AsignarRol</a><tt class="py-op">(</tt><tt class="py-base-class">forms</tt><tt class="py-op">.</tt><tt class="py-base-class">ModelForm</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="AsignarRol-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="AsignarRol-expanded"><a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-docstring">    Formulario para la asignacion de roles a los usuarios</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-docstring">    Hereda del forms.ModelForm y utiliza la clase user</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-docstring">    para agregar ciertos campos de la clase a la hora de la asignacion</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="AsignarRol.Meta"></a><div id="AsignarRol.Meta-def"><a name="L22"></a><tt class="py-lineno">22</tt> <a class="py-toggle" href="#" id="AsignarRol.Meta-toggle" onclick="return toggle('AsignarRol.Meta');">-</a><tt class="py-line">    <tt class="py-keyword">class</tt> <a class="py-def-name" href="apps.roles.forms.AsignarRol.Meta-class.html">Meta</a><tt class="py-op">:</tt> </tt>
+</div><div id="AsignarRol.Meta-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="AsignarRol.Meta-expanded"><a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">        <tt id="link-10" class="py-name"><a title="apps.flujos.forms.FlujoForm.Meta.model
+apps.proyectos.forms.ProyectoForm.Meta.model
 apps.roles.forms.AsignarRol.Meta.model
 apps.roles.forms.RolForm.Meta.model
+apps.sprint.forms.SprintForm.Meta.model
+apps.userstory.forms.UserStoryForm.Meta.model
 apps.usuario.forms.UsuarioForm.Meta.model
-apps.usuario.forms.UsuarioModForm.Meta.model" class="py-name" href="#" onclick="return doclink('link-5', 'model', 'link-3');">model</a></tt> <tt class="py-op">=</tt> <tt class="py-name">User</tt> </tt>
-<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">        <tt id="link-6" class="py-name" targets="Variable apps.roles.forms.AsignarRol.Meta.fields=apps.roles.forms.AsignarRol.Meta-class.html#fields,Variable apps.usuario.forms.UsuarioForm.Meta.fields=apps.usuario.forms.UsuarioForm.Meta-class.html#fields,Variable apps.usuario.forms.UsuarioModForm.Meta.fields=apps.usuario.forms.UsuarioModForm.Meta-class.html#fields"><a title="apps.roles.forms.AsignarRol.Meta.fields
+apps.usuario.forms.UsuarioModForm.Meta.model" class="py-name" href="#" onclick="return doclink('link-10', 'model', 'link-8');">model</a></tt> <tt class="py-op">=</tt> <tt class="py-name">User</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">        <tt id="link-11" class="py-name" targets="Variable apps.roles.forms.AsignarRol.Meta.fields=apps.roles.forms.AsignarRol.Meta-class.html#fields,Variable apps.usuario.forms.UsuarioForm.Meta.fields=apps.usuario.forms.UsuarioForm.Meta-class.html#fields,Variable apps.usuario.forms.UsuarioModForm.Meta.fields=apps.usuario.forms.UsuarioModForm.Meta-class.html#fields"><a title="apps.roles.forms.AsignarRol.Meta.fields
 apps.usuario.forms.UsuarioForm.Meta.fields
-apps.usuario.forms.UsuarioModForm.Meta.fields" class="py-name" href="#" onclick="return doclink('link-6', 'fields', 'link-6');">fields</a></tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-string">'groups'</tt><tt class="py-op">,</tt><tt class="py-op">)</tt> </tt>
-</div></div><a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+apps.usuario.forms.UsuarioModForm.Meta.fields" class="py-name" href="#" onclick="return doclink('link-11', 'fields', 'link-11');">fields</a></tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-string">'groups'</tt><tt class="py-op">,</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"> </tt><script type="text/javascript">
 <!--
 expandto(location.href);
 // -->
@@ -129,7 +156,7 @@ expandto(location.href);
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Fri Apr 10 13:46:34 2015
+    Generated by Epydoc 3.0.1 on Fri Apr 24 20:11:41 2015
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
