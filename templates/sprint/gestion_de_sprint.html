@@ -11,9 +11,6 @@
         <article class="module width_full">
             <header>
                 <h3>Gestion de sprint </h3>
-                {% if usuario_actor.can_add_proyecto %}
-                    <a href="{% url 'apps.sprint.views.crear_sprint' %}"><th align="right"><input type="image" src="{{ STATIC_URL }}pagina_principal/images/mas.png" title="Crear"></th></a>
-                {% endif %}
             </header>
             <div class="module_content">
                 <div class="tab_container">
@@ -28,7 +25,7 @@
                                         {% endif %}
                                     {% endfor %}
                                 {% else %}
-                                    <tr><td class="warning">No hay sprint de usuario registrados aun</td>
+                                    <tr>No hay sprint de usuario con este nombre</tr>
                                 {% endif %}
                             </thead>                        
                         </table>

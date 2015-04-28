@@ -1,0 +1,28 @@
+{% extends 'index.html' %}
+
+{% block cuerpo %}
+    <section id="main" class="column">
+        <article class="module width_full">
+            <header><h3>Operacion Userstory</h3></header>
+            <div class="module_content">
+                <div class="tab_container">
+                    <div id="tab1" class="tab_content">
+                        <table class="tablesorter" cellspacing="0"> 
+                            <div class="module_content">
+                                {% for sprint in sprints  %}
+                                    {% for us in sprint.UserStorys.all %}
+                                        {% if us == userstory %}
+                                            <form action="{% url 'apps.userstory.views.restar_horas_sprint' sprint.id %}">
+                                                <input type="text" name="q" required>
+                                            </form>
+                                        {% endif %}                                        
+                                    {% endfor %}                                    
+                                {% endfor %}
+                            </div>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+{%endblock cuerpo%}

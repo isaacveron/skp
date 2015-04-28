@@ -25,4 +25,8 @@ class Proyecto(models.Model):
     Cliente = models.CharField( max_length=30 , blank=True, null=True)
     Estado = models.CharField( max_length=15, default='Pendiente', unique=False)
     Usuario_creador = models.ForeignKey(User, null=True)
+    
     Fecha_creacion = models.DateTimeField(auto_now=True, null=True)
+
+    def __str__(self):
+        return self.Nombre

@@ -3,17 +3,17 @@
 {% block cuerpo %}
     <section id="main" class="column">
         <article class="module width_full">
-            <header><h3>Eliminar proyecto</h3></header>
+            <header><h3>Eliminar sprint</h3></header>
             <div class="module_content">
                 <div class="tab_container">
                     <div id="tab1" class="tab_content">
-                        <table class="tablesorter" cellspacing="0"> 
-                           <p>Desea eliminar el proyecto {{ proyecto.Nombre }}?</p>
-   								<p>
-        							<a  class="btn btn-primary btn-lg" href="{% url 'apps.proyectos.views.eliminar_proyecto' proyecto.id %}">Si</a>
-        							<a class="btn btn-default btn-lg" href="{% url 'apps.proyectos.views.gestion_de_proyectos' %}">No</a>
-   								 </p>
-                        </table>
+                        <form id="formulario" method="post" action="">
+                            {% csrf_token %}
+                            <table class="table"> 
+                                <p>{{formulario}}</p>
+                            </table>
+                            <p> <input class="btn btn-default" type="submit" value="Confirmar"></p>
+                        </form>
                     </div>
                 </div>
             </div>

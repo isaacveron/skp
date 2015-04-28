@@ -60,26 +60,15 @@
 <a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">django</tt><tt class="py-op">.</tt><tt class="py-name">shortcuts</tt> <tt class="py-keyword">import</tt> <tt class="py-name">render</tt><tt class="py-op">,</tt> <tt class="py-name">render_to_response</tt> </tt>
 <a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">django</tt><tt class="py-op">.</tt><tt class="py-name">http</tt> <tt class="py-keyword">import</tt> <tt class="py-name">HttpResponseRedirect</tt> </tt>
 <a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">django</tt><tt class="py-op">.</tt><tt class="py-name">template</tt> <tt class="py-keyword">import</tt> <tt class="py-name">RequestContext</tt> </tt>
-<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package apps=apps-module.html"><a title="apps" class="py-name" href="#" onclick="return doclink('link-0', 'apps', 'link-0');">apps</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package apps.roles=apps.roles-module.html"><a title="apps.roles" class="py-name" href="#" onclick="return doclink('link-1', 'roles', 'link-1');">roles</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Module apps.flujos.forms=apps.flujos.forms-module.html,Module apps.proyectos.forms=apps.proyectos.forms-module.html,Module apps.roles.forms=apps.roles.forms-module.html,Module apps.sprint.forms=apps.sprint.forms-module.html,Module apps.userstory.forms=apps.userstory.forms-module.html,Module apps.usuario.forms=apps.usuario.forms-module.html"><a title="apps.flujos.forms
-apps.proyectos.forms
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package apps=apps-module.html"><a title="apps" class="py-name" href="#" onclick="return doclink('link-0', 'apps', 'link-0');">apps</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package apps.roles=apps.roles-module.html"><a title="apps.roles" class="py-name" href="#" onclick="return doclink('link-1', 'roles', 'link-1');">roles</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Module apps.proyectos.forms=apps.proyectos.forms-module.html,Module apps.roles.forms=apps.roles.forms-module.html,Module apps.usuario.forms=apps.usuario.forms-module.html"><a title="apps.proyectos.forms
 apps.roles.forms
-apps.sprint.forms
-apps.userstory.forms
 apps.usuario.forms" class="py-name" href="#" onclick="return doclink('link-2', 'forms', 'link-2');">forms</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Class apps.roles.forms.RolForm=apps.roles.forms.RolForm-class.html"><a title="apps.roles.forms.RolForm" class="py-name" href="#" onclick="return doclink('link-3', 'RolForm', 'link-3');">RolForm</a></tt><tt class="py-op">,</tt> <tt id="link-4" class="py-name" targets="Class apps.roles.forms.AsignarRol=apps.roles.forms.AsignarRol-class.html"><a title="apps.roles.forms.AsignarRol" class="py-name" href="#" onclick="return doclink('link-4', 'AsignarRol', 'link-4');">AsignarRol</a></tt> </tt>
-<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">django</tt><tt class="py-op">.</tt><tt class="py-name">contrib</tt><tt class="py-op">.</tt><tt class="py-name">auth</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Module apps.flujos.models=apps.flujos.models-module.html,Module apps.mcp.models=apps.mcp.models-module.html,Module apps.proyectos.models=apps.proyectos.models-module.html,Module apps.roles.models=apps.roles.models-module.html,Module apps.sprint.models=apps.sprint.models-module.html,Module apps.userstory.models=apps.userstory.models-module.html,Module apps.usuario.models=apps.usuario.models-module.html"><a title="apps.flujos.models
-apps.mcp.models
-apps.proyectos.models
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">django</tt><tt class="py-op">.</tt><tt class="py-name">contrib</tt><tt class="py-op">.</tt><tt class="py-name">auth</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Module apps.proyectos.models=apps.proyectos.models-module.html,Module apps.roles.models=apps.roles.models-module.html,Module apps.usuario.models=apps.usuario.models-module.html"><a title="apps.proyectos.models
 apps.roles.models
-apps.sprint.models
-apps.userstory.models
 apps.usuario.models" class="py-name" href="#" onclick="return doclink('link-5', 'models', 'link-5');">models</a></tt> <tt class="py-keyword">import</tt> <tt class="py-name">User</tt><tt class="py-op">,</tt> <tt class="py-name">Group</tt><tt class="py-op">,</tt> <tt class="py-name">Permission</tt> </tt>
 <a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">django</tt><tt class="py-op">.</tt><tt class="py-name">contrib</tt><tt class="py-op">.</tt><tt class="py-name">auth</tt><tt class="py-op">.</tt><tt class="py-name">decorators</tt> <tt class="py-keyword">import</tt> <tt class="py-name">login_required</tt><tt class="py-op">,</tt> <tt class="py-name">permission_required</tt> </tt>
-<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">django</tt><tt class="py-op">.</tt><tt class="py-name">db</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="apps.flujos.models
-apps.mcp.models
-apps.proyectos.models
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">django</tt><tt class="py-op">.</tt><tt class="py-name">db</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="apps.proyectos.models
 apps.roles.models
-apps.sprint.models
-apps.userstory.models
 apps.usuario.models" class="py-name" href="#" onclick="return doclink('link-6', 'models', 'link-5');">models</a></tt> <tt class="py-keyword">import</tt> <tt class="py-name">Q</tt> </tt>
 <a name="crear_rol"></a><div id="crear_rol-def"><a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"> </tt>
 <a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"> </tt>
@@ -126,7 +115,7 @@ apps.usuario.models" class="py-name" href="#" onclick="return doclink('link-6', 
 <a name="L50"></a><tt class="py-lineno"> 50</tt> <a class="py-toggle" href="#" id="administrar_roles-toggle" onclick="return toggle('administrar_roles');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="apps.roles.views-module.html#administrar_roles">administrar_roles</a><tt class="py-op">(</tt><tt class="py-param">request</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
 </div><div id="administrar_roles-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="administrar_roles-expanded"><a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
 <a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt class="py-docstring">    Recibe un request, obtiene la lista de todos los Roles del sistema y </tt> </tt>
-<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt class="py-docstring">    luego retorna el html renderizado con la lista de roles</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt class="py-docstring">    luego retorna el html renderizado con la lista de usuarios </tt> </tt>
 <a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
 <a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt class="py-docstring">    @type request: django.http.HttpRequest</tt> </tt>
 <a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt class="py-docstring">    @param request: Contiene informacion sobre la solic. web actual que llamo a esta vista</tt> </tt>
@@ -285,7 +274,7 @@ expandto(location.href);
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Fri Apr 24 20:11:41 2015
+    Generated by Epydoc 3.0.1 on Fri Apr 10 13:46:34 2015
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

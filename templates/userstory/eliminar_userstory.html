@@ -7,13 +7,13 @@
             <div class="module_content">
                 <div class="tab_container">
                     <div id="tab1" class="tab_content">
-                        <table class="tablesorter" cellspacing="0"> 
-                           <p>Desea eliminar el userstory {{ userstory.Nombre }}?</p>
-   								<p>
-        							<a  class="btn btn-primary btn-lg" href="{% url 'apps.userstory.views.eliminar_userstory' userstory.id %}">Si</a>
-        							 <a href="javascript:history.go(-2)">No</a>
-   								 </p>
-                        </table>
+                        <form id="formulario" method="post" action="">
+                            {% csrf_token %}
+                            <table class="table"> 
+                                <p>{{formulario}}</p>
+                            </table>
+                            <p> <input class="btn btn-default" type="submit" value="Confirmar"></p>
+                        </form>
                     </div>
                 </div>
             </div>

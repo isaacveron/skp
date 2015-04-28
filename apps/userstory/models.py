@@ -24,6 +24,7 @@ class UserStory(models.Model):
     Valor_de_negocio = models.PositiveIntegerField(null=True, blank=True)
     Size = models.PositiveIntegerField(null=True, blank=True)
     Estado = models.CharField( max_length=15, default='Pendiente', unique=False)
+    is_active = models.BooleanField(default=True)
     Usuario_creador = models.ForeignKey(User, null=True)
     Proyecto_asignado = models.ForeignKey (Proyecto, null=True)
     Fecha_creacion = models.DateTimeField(auto_now=True, null=True)
