@@ -5,7 +5,7 @@ from django.template import RequestContext
 from apps.usuario.models import User
 from apps.sprint.models import Sprint
 from apps.proyectos.models import Proyecto
-from apps.sprint.forms import SprintForm
+from apps.sprint.forms import SprintForm, SprintFormMod, SprintFormDelete
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.decorators import user_passes_test
 from django.db.models import Q
@@ -50,8 +50,9 @@ def crear_sprint(request, idProyecto):
     mensaje="Sprint creado con exito"
     usuario_actor = request.user
     sprint = Sprint( Usuario_creador=usuario_actor, Proyecto_asignado=proyecto)
+
     if request.method == 'POST':
-        formulario = SprintForm(request.POST, instance=sprint)
+        formulario = SprintFormMod(request.POST, instance=sprint)
         if formulario.is_valid():
             formulario.save()
             sprints = Sprint.objects.all()
@@ -59,7 +60,8 @@ def crear_sprint(request, idProyecto):
                                       {'mensaje': mensaje, 'usuario_actor': usuario_actor, 'sprints': sprint, 'proyecto':proyecto},
                                       context_instance=RequestContext(request))
     else:
-        formulario = SprintForm()
+        print sprint.Proyecto_asignado.id
+        formulario = SprintForm(idProyecto=idProyecto)
     return render_to_response('sprint/crear_sprint.html',
                               {'formulario': formulario, 'operacion': 'Crear Sprint',
                                'usuario_actor': usuario_actor, 'proyecto':proyecto},
@@ -122,14 +124,62 @@ def modificar_sprint(request, idSprint):
 
     usuario_actor = request.user
     sprint = Sprint.objects.get(pk=idSprint)
-    formulario = SprintForm(request.POST, instance=sprint)
+    formulario = SprintFormMod(request.POST,instance=sprint)
     if formulario.is_valid():
         formulario.save()
         return HttpResponseRedirect('/gestion_de_sprint/')
     else:
-        formulario = SprintForm( instance=sprint)
-    return render_to_response('sprint/modificar_sprint.html',
-                              {'usuario_actor': usuario_actor, 'sprint':sprint, 'formulario':formulario},
-                              context_instance=RequestContext(request))
+        formulario = SprintFormMod(instance=sprint)
+    return render_to_response('sprint/modificar_sprint.html',{'usuario_actor': usuario_actor, 'sprint':sprint, 'formulario':formulario},context_instance=RequestContext(request))
 
+
+@login_required(login_url = '/')
+def cambiar_estado_sprint(request, idSprint):
+    mensaje = "Cambio de estado de Sprint con exito"
+    sprint = Sprint.objects.get(pk=idSprint)
+    if request.method == 'POST':
+        formulario = SprintFormDelete(request.POST, instance=sprint)
+        if formulario.is_valid():
+           formulario.save()
+           return render_to_response('sprint/operacion_sprint_exito.html',{'mensaje': mensaje}, context_instance=RequestContext(request))
+    else:
+        formulario = SprintFormDelete(instance=sprint)
+    return render_to_response('sprint/eliminar_sprint.html',{'formulario': formulario},context_instance=RequestContext(request))
+
+@login_required(login_url = '/')
+@user_passes_test( User.can_delete_proyecto , login_url="/index/")
+def vista_eliminar_sprint(request, idSprint):
+    """
+    Esta vista obtiene el proyecto que quiere ser eliminado, pregunta si quiere ser eliminado y llama 
+    a la funcion eliminar_proyecto
+
+    @param request: django.http.HttpRequest
+    @param idProyecto: Contiene el identificador del proyecto a ser eliminado
+    @return: se retorna la pagina de eliminacion de proyectos
+    @author: Cesar Recalde
+    """
+    usuario_actor = request.user
+    sprint = Sprint.objects.get(pk=idSprint)
+    return render_to_response('sprint/eliminar_sprint.html', {'usuario_actor': usuario_actor, 'sprint': sprint}, context_instance=RequestContext(request))
+
+
+@login_required(login_url = '/')
+def eliminar_sprint(request, idSprint):
+    """
+    Eliminar de manera logica los registros del proyecto.
+        
+    @type request: django.http.HttpRequest
+    @param request: Contiene informacion sobre la solicitud web actual que llamo a esta vista  
+    @type idProyecto : integer
+    @param idProyecto : Contiene el id del proyecto a ser eliminado.
+    @rtype: django.shortcuts.render_to_response
+    @return: Se retorna a la a la pagina de notificacion de exito
+    @author: Cesar Recalde
+    """
+
+    mensaje = "Sprint eliminado con exito"
+    sprint = Sprint.objects.get(pk=idSprint)
+    sprint.delete()
+    usuario_actor = request.user
+    return render_to_response('sprint/operacion_sprint_exito.html',{'mensaje':mensaje, 'usuario_actor': usuario_actor}, context_instance=RequestContext(request))
 

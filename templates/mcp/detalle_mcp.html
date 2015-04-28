@@ -18,6 +18,10 @@
             </div>
         </article>
    
+     <form class="quick_search" action='{% url "apps.userstory.views.buscar_userstory" %}'>
+            <input type="text" value="Quick Search" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;" name="q" value="{{ query|escape }}" required>
+    </form>
+
     <article class="module width_full">
             <header>
                 <h3>User Storys del Proyecto</h3>
@@ -34,8 +38,16 @@
                                     {% for userstory in userstorys %}
                                         {% if userstory.pk > 0 %}
                                             {% if userstory.Proyecto_asignado == proyecto %}
-                                                <tr class="clickableRow" href='{% url "apps.userstory.views.detalle_userstory" userstory.id %}'>
-                                                <th>{{ userstory.Nombre }}</th>
+                                                {% if userstory.is_active %}
+                                                    <tr class="clickableRow" href='{% url "apps.userstory.views.detalle_userstory" userstory.id %}'>
+                                                    <th>{{ userstory.Nombre }}</th>
+                                                    <th align="right"><font color="#04A935">Activo</font></th>
+                                                {%else%}
+                                                    <tr class="clickableRow" href='{% url "apps.userstory.views.detalle_userstory" userstory.id %}'>
+                                                    <th>{{ userstory.Nombre }}</th>
+                                                    <th align="right"><font color="red">No Activo</font></th>
+                                                {% endif %}
+                                               
                                             {% endif %}
                                         {% endif %}
                                     {% endfor %}
@@ -49,6 +61,9 @@
             </div>  
     </article>
 
+    <form class="quick_search" action='{% url "apps.sprint.views.buscar_sprint" %}'>
+            <input type="text" value="Quick Search" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;" name="q" value="{{ query|escape }}" required>
+    </form>
     <article class="module width_full">
             <header>
                 <h3>Sprints del proyecto </h3>
@@ -66,8 +81,16 @@
                                     {% for sprint in sprints %}
                                         {% if sprint.pk > 0 %}
                                             {% if sprint.Proyecto_asignado == proyecto %}
-                                                <tr class="clickableRow" href='{% url "apps.sprint.views.detalle_sprint" sprint.id%}'>
-                                                <th>{{ sprint.Nombre }}</th>
+                                                    {% if sprint.is_active %}
+                                                        <tr class="clickableRow" href='{% url "apps.sprint.views.detalle_sprint" sprint.id%}'>
+                                                        <th>{{ sprint.Nombre }}</th>
+                                                        <th align="right"><font color="#04A935">Activo</font></th>
+                                                    {%else%}
+                                                        <tr class="clickableRow" href='{% url "apps.sprint.views.detalle_sprint" sprint.id%}'>
+                                                        <th>{{ sprint.Nombre }}</th>
+                                                        <th align="right"><font color="red">No Activo</font></th>
+                                                    {% endif %}
+                                                
                                             {% endif %}
                                         {% endif %}
                                     {% endfor %}

@@ -13,11 +13,17 @@
                             <div class="message"><p><strong>Creado por: </strong>{{ sprint.Usuario_creador }}</p></div>
                             <div class="message"><p><strong>Fecha de Creacion: </strong>{{ sprint.Fecha_creacion }}</p></div>
                             <div class="message">
+                            <div class="message"><p><strong>Duracion: </strong>{{ sprint.Duracion }}</p></div>
+                            <div class="message">
                                 <p>
                                     {% if usuario_actor.can_change_proyecto %}
                                         <a href="{% url 'apps.sprint.views.modificar_sprint' sprint.id%}">Modificar</a>
                                         <strong> | </strong>
                                     {% endif %}
+                                    
+                                        <a href="{% url 'apps.sprint.views.cambiar_estado_sprint' sprint.id%}">Cambiar Estado</a>
+                                        <strong> | </strong>
+                                   
                                     
                                     <a href="javascript:history.go(-1)">Volver</a>
                                 </p>

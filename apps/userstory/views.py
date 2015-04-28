@@ -5,7 +5,8 @@ from django.template import RequestContext
 from apps.usuario.models import User
 from apps.proyectos.models import Proyecto
 from apps.userstory.models import UserStory
-from apps.userstory.forms import UserStoryForm
+from apps.sprint.models import Sprint
+from apps.userstory.forms import UserStoryForm, UserStoryFormDelete, UserStoryFormMod
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.decorators import user_passes_test
 from django.db.models import Q
@@ -51,7 +52,7 @@ def crear_userstory(request, idProyecto):
     usuario_actor = request.user
     userstory = UserStory( Usuario_creador=usuario_actor, Proyecto_asignado=proyecto)
     if request.method == 'POST':
-        formulario = UserStoryForm(request.POST, instance=userstory)
+        formulario = UserStoryFormMod(request.POST, instance=userstory)
         if formulario.is_valid():
             formulario.save()
             userstorys = UserStory.objects.all()
@@ -59,7 +60,7 @@ def crear_userstory(request, idProyecto):
                                       {'mensaje': mensaje, 'usuario_actor': usuario_actor, 'userstorys': userstorys, 'proyecto':proyecto},
                                       context_instance=RequestContext(request))
     else:
-        formulario = UserStoryForm()
+        formulario = UserStoryForm(idProyecto)
     return render_to_response('userstory/crear_userstory.html',
                               {'formulario': formulario, 'operacion': 'Crear User Story',
                                'usuario_actor': usuario_actor, 'proyecto':proyecto},
@@ -122,15 +123,30 @@ def modificar_userstory(request, idUserStory):
 
     usuario_actor = request.user
     userstory = UserStory.objects.get(pk=idUserStory)
-    formulario = UserStoryForm(request.POST, instance=userstory)
+    formulario = UserStoryFormMod(request.POST, instance=userstory)
     if formulario.is_valid():
         formulario.save()
         return HttpResponseRedirect('/gestion_de_userstory/')
     else:
-        formulario = UserStoryForm(instance=userstory)
+        formulario = UserStoryFormMod(instance=userstory)
     return render_to_response('userstory/modificar_userstory.html',
                               {'usuario_actor': usuario_actor, 'userstory':userstory, 'formulario':formulario},
                               context_instance=RequestContext(request))
+
+@login_required(login_url = '/')
+def cambiar_estado_userstory(request, idUserStory):
+    mensaje = "Cambio de estado de UserStory con exito"
+    userstory = UserStory.objects.get(pk=idUserStory)
+    if request.method == 'POST':
+        formulario = UserStoryFormDelete(request.POST, instance=userstory)
+        if formulario.is_valid():
+           formulario.save()
+           return render_to_response('userstory/operacion_userstory_exito.html',{'mensaje': mensaje}, context_instance=RequestContext(request))
+    else:
+        formulario = UserStoryFormDelete(instance=userstory)
+    return render_to_response('userstory/eliminar_userstory.html',{'formulario': formulario},context_instance=RequestContext(request))
+
+
 
 @login_required(login_url = '/')
 @user_passes_test( User.can_delete_proyecto , login_url="/index/")
@@ -171,3 +187,20 @@ def eliminar_userstory(request, idUserStory):
     return render_to_response('userstory/operacion_userstory_exito.html',
                               {'mensaje':mensaje, 'usuario_actor': usuario_actor},
                               context_instance=RequestContext(request))
+
+def asignar_horas_us (request, idUserStory):
+    sprints = Sprint.objects.all()
+    userstory = UserStory.objects.get(pk=idUserStory)
+    return render_to_response('userstory/asignar_horas_us.html',{'sprints':sprints ,'userstory':userstory},context_instance=RequestContext(request))
+
+def restar_horas_sprint (request, idSprint):
+    mensaje = "Horas asiganadas correctamente"
+    sprint = Sprint.objects.get (pk=idSprint)
+    query = request.GET.get('q', '')
+    print query 
+    print sprint.Duracion
+    sprint.Duracion = sprint.Duracion - int(query)  
+    sprint.save() 
+    print sprint.Duracion 
+    #sprint.Duracion = sprint.Duracion - request
+    return render_to_response('userstory/operacion_userstory_exito.html',{'mensaje':mensaje},context_instance=RequestContext(request))
