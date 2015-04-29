@@ -8,11 +8,8 @@
                 <div class="tab_container">
                     <div id="tab1" class="tab_content">
                         <form id="formulario" method="post" action="">
-                            {% csrf_token %}
-                            <table class="table"> 
-                                <p>{{formulario}}</p>
-                            </table>
-                            <p> <input class="btn btn-default" type="submit" value="Confirmar"></p>
+                            <p>Eliminar sprint</p>
+                            <a href="{% url 'apps.sprint.views.eliminar_sprint' sprint.id%}">Eliminar</a>
                         </form>
                     </div>
                 </div>

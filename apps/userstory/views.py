@@ -144,7 +144,7 @@ def cambiar_estado_userstory(request, idUserStory):
            return render_to_response('userstory/operacion_userstory_exito.html',{'mensaje': mensaje}, context_instance=RequestContext(request))
     else:
         formulario = UserStoryFormDelete(instance=userstory)
-    return render_to_response('userstory/eliminar_userstory.html',{'formulario': formulario},context_instance=RequestContext(request))
+    return render_to_response('userstory/cambiar_estado_userstory.html',{'formulario': formulario},context_instance=RequestContext(request))
 
 
 
