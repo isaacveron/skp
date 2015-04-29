@@ -8,8 +8,11 @@
                 <div class="tab_container">
                     <div id="tab1" class="tab_content">
                         <form id="formulario" method="post" action="">
-                            <p>Eliminar us</p>
-                            <a href="{% url 'apps.userstory.views.eliminar_userstory' userstory.id%}">Eliminar</a>
+                            {% csrf_token %}
+                            <table class="table"> 
+                                <p>{{formulario}}</p>
+                            </table>
+                            <p> <input class="btn btn-default" type="submit" value="Confirmar"></p>
                         </form>
                     </div>
                 </div>

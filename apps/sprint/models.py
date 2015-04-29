@@ -5,8 +5,8 @@ from apps.proyectos.models import Proyecto
 # Create your models here.
 class Sprint(models.Model):
     """
-    Clase Proyecto:
-        * Contiene los campos de la tabla proyecto en la base de datos
+    Clase Sprint:
+        * Contiene los campos de la tabla sprint en la base de datos
 
         * Variales
             -   Scrum_Master: es el usuario lider del proyecto
@@ -16,7 +16,7 @@ class Sprint(models.Model):
             -   Fecha de finalizacion: es la fecha en la que el proyecto estara finalizado
             -   Fecha: es la fecha de creacion del proyecto
     """   
-   
+    
     Nombre = models.CharField(max_length=30, unique=True)
     Descripcion = models.TextField(null=True)
     Fecha_inicio = models.DateField('Fecha de inicio', blank=True, null=True)

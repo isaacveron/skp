@@ -56,11 +56,12 @@ def crear_sprint(request, idProyecto):
         if formulario.is_valid():
             formulario.save()
             sprints = Sprint.objects.all()
+            cambiar_estado_userstory("crear","","")
+
             return render_to_response('sprint/operacion_sprint_exito.html',
                                       {'mensaje': mensaje, 'usuario_actor': usuario_actor, 'sprints': sprint, 'proyecto':proyecto},
                                       context_instance=RequestContext(request))
     else:
-        print sprint.Proyecto_asignado.id
         formulario = SprintForm(idProyecto=idProyecto)
     return render_to_response('sprint/crear_sprint.html',
                               {'formulario': formulario, 'operacion': 'Crear Sprint',
@@ -127,6 +128,7 @@ def modificar_sprint(request, idSprint):
     formulario = SprintFormMod(request.POST,instance=sprint)
     if formulario.is_valid():
         formulario.save()
+        cambiar_estado_userstory("","asignar",idSprint)
         return HttpResponseRedirect('/gestion_de_sprint/')
     else:
         formulario = SprintFormMod(instance=sprint)
@@ -141,10 +143,12 @@ def cambiar_estado_sprint(request, idSprint):
         formulario = SprintFormDelete(request.POST, instance=sprint)
         if formulario.is_valid():
            formulario.save()
+           cambiar_estado_userstory("","desasignar",idSprint)
+
            return render_to_response('sprint/operacion_sprint_exito.html',{'mensaje': mensaje}, context_instance=RequestContext(request))
     else:
         formulario = SprintFormDelete(instance=sprint)
-    return render_to_response('sprint/eliminar_sprint.html',{'formulario': formulario},context_instance=RequestContext(request))
+    return render_to_response('sprint/cambiar_estado_sprint.html',{'formulario': formulario},context_instance=RequestContext(request))
 
 @login_required(login_url = '/')
 @user_passes_test( User.can_delete_proyecto , login_url="/index/")
@@ -183,3 +187,25 @@ def eliminar_sprint(request, idSprint):
     usuario_actor = request.user
     return render_to_response('sprint/operacion_sprint_exito.html',{'mensaje':mensaje, 'usuario_actor': usuario_actor}, context_instance=RequestContext(request))
 
+
+def cambiar_estado_userstory(funcion, accion, idSprint):
+    """
+    Esta funcion cambia el esdado de los us de un sprint
+    Ya sea a Pendiente o AsignadoSprint
+    """
+    if funcion=="crear":
+        sprints = Sprint.objects.all()
+        for sprint in sprints:
+            for us in sprint.UserStorys.all():
+                us.Estado="AsignadoSprint"
+                us.save()
+    else:
+        sprint = Sprint.objects.get(pk=idSprint)
+        if accion=="asignar":
+            for us in sprint.UserStorys.all():
+                us.Estado="AsignadoSprint"
+                us.save()
+        elif accion=="desasignar":
+            for us in sprint.UserStorys.all():
+                us.Estado="Pendiente"
+                us.save()

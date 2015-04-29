@@ -24,6 +24,8 @@
                                     {% endif %}
                                     <a href="{% url 'apps.userstory.views.cambiar_estado_userstory' userstory.id %}">Cambiar Estado</a>
                                      <strong> | </strong>
+                                    <a href="{% url 'apps.userstory.views.vista_eliminar_userstory' userstory.id %}">Eliminar</a>
+                                     <strong> | </strong>
                                     <a href="javascript:history.go(-1)">Volver</a>
                                 </p>
                             </div>                            

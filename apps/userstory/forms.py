@@ -4,6 +4,12 @@ from apps.roles.models import User, Group
 from apps.userstory.models import UserStory
 from apps.proyectos.models import Proyecto
 
+Estados_US = (
+    ('AsignadoSprint','AsignadoSprint'),
+    ('AsignadoFlujo','AsignadoFlujo'),
+    ('Resuelta','Resuelta'),
+    ('Cancelado','Cancelado'),
+)
 
 class UserStoryForm(ModelForm):
     """
