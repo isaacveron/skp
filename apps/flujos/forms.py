@@ -15,6 +15,6 @@ class FlujoForm(ModelForm):
 
     class Meta:
         model = Flujo
-        exclude = ['Usuario' , 'Estado' , 'Usuario_creador' , 'Fecha_creacion', 'Actividades', 'Copia']
+        exclude = ['Usuario' , 'Estado' , 'Usuario_creador' , 'Fecha_creacion', 'Actividades']
         #widgets = {'Actividades': forms.SelectMultiple}
 
