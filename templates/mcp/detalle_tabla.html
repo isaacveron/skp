@@ -1,0 +1,75 @@
+{% extends 'index.html' %}
+
+{% block cuerpo %}
+    <section id="main" class="column">
+        <article class="module width_full">
+            <header><h3>Detalles del Flujo</h3></header>
+            <div class="module_content">
+                <div class="tab_container">
+                    <div id="tab1" class="tab_content">
+                        <table class="tablesorter" cellspacing="0"> 
+                            <div class="message"><p><strong>Nombre: </strong>{{ tabla.Nombre }}</p></div>
+                            
+                            <div class="message"><p><strong>Fecha de Creacion: </strong>{{ tabla.Fecha_creacion }}</p></div>
+                            
+                            <div class="message">
+                                <p>
+                                    <a href="{% url 'apps.mcp.views.vista_tablas' proyecto.id %}">Volver</a>
+                                </p>
+                            </div>                            
+                        </div>
+                        </table>
+                        
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    {% for actividad in actividades.all %}
+        <section id="main" class="column">
+            <article class="module width_full">
+                <header><h3>Actividad {{actividad.Orden}} : {{ actividad.Nombre }}</h3></header>
+                <div class="module_content">
+                    <div class="tab_container">
+                        <div id="tab1" class="tab_content">
+                            <table class="tablesorter" cellspacing="0"> 
+
+                                <div class="message"><p><strong>Estado To Do: </strong></p>
+                                    <p>
+                                        {% for us in actividad.To_do.all %}
+                                            {% if us.Proyecto_asignado.id == proyecto.id %}
+                                                <a href="{% url 'apps.userstory.views.detalle_userstory' us.id %}">  <strong>{{ us.Nombre }} </strong>  </a> |
+                                            {% endif %}
+                                        {% endfor %}
+                                    </p>
+
+                                </div>
+                                <div class="message"><p><strong>Estado Doing: </strong></p>
+                                    <p>
+                                        {% for us in actividad.Doing.all %}
+                                            {% if us.Proyecto_asignado.id == proyecto.id %}
+                                                <a href="{% url 'apps.userstory.views.detalle_userstory' us.id %}">  <strong>{{ us.Nombre }} </strong>  </a> |
+                                            {% endif %}
+                                        {% endfor %}
+                                    </p>
+                                </div>
+                                <div class="message"><p><strong>Estado Done: </strong></p>
+                                    <p>
+                                        {% for us in actividad.Done.all %}
+                                            {% if us.Proyecto_asignado.id == proyecto.id %}
+                                                <a href="{% url 'apps.userstory.views.detalle_userstory' us.id %}">  <strong>{{ us.Nombre }} </strong>  </a> |
+                                            {% endif %}
+                                        {% endfor %}
+                                    </p>
+                                </div>                        
+                            </table>
+                            
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </section>
+    {% endfor %}
+    
+{% endblock cuerpo %}

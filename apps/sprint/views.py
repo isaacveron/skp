@@ -50,7 +50,7 @@ def crear_sprint(request, idProyecto):
     mensaje="Sprint creado con exito"
     usuario_actor = request.user
     sprint = Sprint( Usuario_creador=usuario_actor, Proyecto_asignado=proyecto)
-
+    
     if request.method == 'POST':
         formulario = SprintFormMod(request.POST, instance=sprint)
         if formulario.is_valid():
@@ -63,6 +63,7 @@ def crear_sprint(request, idProyecto):
                                       context_instance=RequestContext(request))
     else:
         formulario = SprintForm(idProyecto=idProyecto)
+
     return render_to_response('sprint/crear_sprint.html',
                               {'formulario': formulario, 'operacion': 'Crear Sprint',
                                'usuario_actor': usuario_actor, 'proyecto':proyecto},
@@ -82,7 +83,10 @@ def detalle_sprint(request, idSprint):
     """
     
     usuario_actor = request.user
+
     sprint = Sprint.objects.get(pk=idSprint)
+
+
     return render_to_response('sprint/detalle_sprint.html', {'usuario_actor': usuario_actor, 'sprint':sprint},
                               context_instance=RequestContext(request))
 
@@ -209,3 +213,48 @@ def cambiar_estado_userstory(funcion, accion, idSprint):
             for us in sprint.UserStorys.all():
                 us.Estado="Pendiente"
                 us.save()
+
+
+
+
+##############################################################################################################################
+
+def vista_iniciar_sprint(request, idSprint):
+
+    sprint = Sprint.objects.get(pk=idSprint)
+    usuario_actor = request.user
+
+    return render_to_response('sprint/iniciar_sprint.html',{'sprint':sprint, 'usuario_actor': usuario_actor}, 
+                            context_instance=RequestContext(request))
+
+
+
+def iniciar_sprint(request, idSprint):
+    usuario_actor = request.user
+    mensaje = 'Sprint iniciado'
+
+    sprint = Sprint.objects.get(pk=idSprint)
+    tabla = sprint.Tabla_asignada
+    actividad = tabla.Actividades.get(Orden = 1)
+
+    for us in sprint.UserStorys.all():
+
+        if not us.in_kanban :
+            us.in_kanban = True
+            us.Estado_de_actividad = 'to_do'
+            us.Actividad_asignada = actividad
+            actividad.To_do.add(us)
+            us.save()
+
+
+        us.Estado = 'AsignadoSprintActivo'
+        us.save()
+
+    actividad.save()
+    tabla.save()
+
+    sprint.Estado = 'En_curso'
+    sprint.save()
+
+    return render_to_response('sprint/operacion_sprint_exito.html',{'mensaje':mensaje, 'usuario_actor': usuario_actor}, 
+                            context_instance=RequestContext(request))

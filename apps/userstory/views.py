@@ -5,6 +5,7 @@ from django.template import RequestContext
 from apps.usuario.models import User
 from apps.proyectos.models import Proyecto
 from apps.userstory.models import UserStory
+from apps.flujos.models import Flujo, Actividad
 from apps.sprint.models import Sprint
 from apps.userstory.forms import UserStoryForm, UserStoryFormDelete, UserStoryFormMod
 from django.contrib.auth.decorators import login_required, permission_required
@@ -81,7 +82,8 @@ def detalle_userstory(request, idUserStory):
    
     usuario_actor = request.user
     userstory = UserStory.objects.get(pk=idUserStory)
-    return render_to_response('userstory/detalle_userstory.html', {'usuario_actor': usuario_actor, 'userstory': userstory},
+    tabla = Flujo.objects.get( pk = userstory.Actividad_asignada.idTabla )
+    return render_to_response('userstory/detalle_userstory.html', {'usuario_actor': usuario_actor, 'userstory': userstory, 'tabla':tabla},
                               context_instance=RequestContext(request))
 
 @login_required(login_url = '/')
@@ -204,3 +206,56 @@ def restar_horas_sprint (request, idSprint):
     print sprint.Duracion 
     #sprint.Duracion = sprint.Duracion - request
     return render_to_response('userstory/operacion_userstory_exito.html',{'mensaje':mensaje},context_instance=RequestContext(request))
+
+
+
+################################################################################################3
+
+
+def avanzar_us(request, idUs):
+
+    us = UserStory.objects.get(pk = idUs)
+
+    actividad = us.Actividad_asignada
+    tabla = Flujo.objects.get(pk=actividad.idTabla)
+
+
+
+    if( us.Estado_de_actividad == 'to_do' ):
+
+        actividad.To_do.remove( us )
+        us.Estado_de_actividad = 'doing'
+        actividad.Doing.add(us)
+        mensaje = "El user story a avanzado al estado 'doing' de la actividad " + actividad.Nombre
+
+        
+    elif( us.Estado_de_actividad == 'doing' ):
+
+        actividad.Doing.remove( us )
+        us.Estado_de_actividad = 'done'
+        actividad.Done.add(us)
+        mensaje = "El user story a avanzado al estado 'done' de la actividad " + actividad.Nombre
+
+    elif( us.Estado_de_actividad == 'done' ):
+
+        actividad.Done.remove( us )
+
+        if( actividad.Orden == len( tabla.Actividades.all() ) ):
+            us.Estado = 'Terminado'
+            us.Estado_de_actividad = 'none'
+            mensaje = "El user story a completado el flujo y pasa al estado 'Terminado' "
+
+        else:
+            nueva_actividad = tabla.Actividades.get( Orden= (actividad.Orden +1) )
+            nueva_actividad.To_do.add(us)
+            us.Estado_de_actividad = 'to_do'
+            us.Actividad_asignada = nueva_actividad
+            nueva_actividad.save()
+            mensaje = "El user story a avanzado al estado 'to_do' de la actividad " + nueva_actividad.Nombre
+
+    us.save()
+    actividad.save()
+    tabla.save()
+
+    return render_to_response('userstory/operacion_userstory_exito.html',{'mensaje':mensaje},context_instance=RequestContext(request))
+

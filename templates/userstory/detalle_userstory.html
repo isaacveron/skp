@@ -12,6 +12,17 @@
                             <div class="message"><p><strong>Nombre: </strong>{{ userstory.Nombre }}</p></div>
                             <div class="message"><p><strong>Creado por: </strong>{{ userstory.Usuario_creador }}</p></div>
                             <div class="message"><p><strong>Fecha de Creacion: </strong>{{ userstory.Fecha_creacion }}</p></div>
+                            <div class="message"><p><strong>Estado: </strong>{{ userstory.Estado }}</p></div>
+                            {% if userstory.Estado != 'Terminado' %}
+                                
+
+                                <div class="message"><p><strong>Tabla en la que se encuentra: </strong>{{ tabla.Nombre }}</p></div>
+                                
+                                <div class="message"><p><strong>Actividad: </strong>{{ userstory.Actividad_asignada }}</p></div>
+                                
+                                <div class="message"><p><strong>Estado en la actividad: </strong>{{ userstory.Estado_de_actividad }}</p></div>
+
+                            {% endif %}
                             <div class="message">
                                 <p>
                                     {% if usuario_actor.can_change_proyecto %}
@@ -23,7 +34,16 @@
                                         <strong> | </strong>
                                     {% endif %}
                                     <a href="{% url 'apps.userstory.views.cambiar_estado_userstory' userstory.id %}">Cambiar Estado</a>
-                                     <strong> | </strong>
+                                    <strong> | </strong>
+
+                                    {% if userstory.Estado != 'Terminado' %}
+
+                                        <a href="{% url 'apps.userstory.views.avanzar_us' userstory.id %}">Avanzar</a>
+                                        <strong> | </strong>
+
+                                    {% endif %}
+                                     
+                                     
                                     <a href="{% url 'apps.userstory.views.vista_eliminar_userstory' userstory.id %}">Eliminar</a>
                                      <strong> | </strong>
                                     <a href="javascript:history.go(-1)">Volver</a>

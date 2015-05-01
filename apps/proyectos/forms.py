@@ -15,6 +15,6 @@ class ProyectoForm(ModelForm):
     """
     class Meta:
         model = Proyecto
-        exclude = ['Usuario' , 'Estado' , 'Usuario_creador' , 'Fecha_creacion']
+        exclude = ['Usuario' , 'Estado' , 'Usuario_creador' , 'Fecha_creacion', 'Tablas']
     
     
