@@ -61,6 +61,8 @@ class UserStory(models.Model):
     Size = models.PositiveIntegerField(null=True, blank=True)
     Estado = models.CharField( max_length=30, choices=Estados_US, default='Pendiente', unique=False)
     is_active = models.BooleanField(default=True)
+    Version = models.PositiveIntegerField(null=True, blank=True, default=0)
+    Sub_version = models.PositiveIntegerField(null=True, blank=True, default=0)
     
     Usuario_creador = models.ForeignKey(User, null=True)
     Proyecto_asignado = models.ForeignKey (Proyecto, null=True)
@@ -75,4 +77,7 @@ class UserStory(models.Model):
         return self.Nombre
 
     
-    
+class CargarHoras(models.Model):
+    Horas = models.PositiveIntegerField(null=True, blank=True, default=0)
+    Descripcion = models.TextField(null=True)
+    US_asignado= models.ForeignKey(UserStory, null=True)

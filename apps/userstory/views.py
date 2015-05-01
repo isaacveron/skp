@@ -4,26 +4,27 @@ from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from apps.usuario.models import User
 from apps.proyectos.models import Proyecto
-from apps.userstory.models import UserStory
+from apps.userstory.models import UserStory, CargarHoras
 from apps.flujos.models import Flujo, Actividad
 from apps.sprint.models import Sprint
-from apps.userstory.forms import UserStoryForm, UserStoryFormDelete, UserStoryFormMod
+from apps.userstory.forms import UserStoryForm, UserStoryFormDelete, UserStoryFormMod, CargarHorasForm
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.decorators import user_passes_test
 from django.db.models import Q
+from unipath import Path
 
 # Create your views here.
 @login_required(login_url = '/')
 def gestion_de_userstory(request):
   """
-    Recibe un request, obtiene la lista de todos los proyectos del sistema y 
-    luego retorna el html renderizado con la lista de proyectos 
+    Recibe un request, obtiene la lista de todos los userstory del sistema y 
+    luego retorna el html renderizado con la lista de userstorys
 
     @type request: django.http.HttpRequest
     @param request: Contiene informacion sobre la solic. web actual que llamo a esta vista
     @rtype: django.http.HttpResponse
-    @return: gestion_de_proyectos.html, donde se listan los proyectos
-    @author: Cesar Recalde
+    @return: gestion_de_userstory.html, donde se listan los userstory
+    @author: Isaac Veron 
   """
   usuario_actor = request.user
   userstorys = UserStory.objects.all()
@@ -35,18 +36,17 @@ def gestion_de_userstory(request):
 @user_passes_test( User.can_add_proyecto , login_url="/index/")
 def crear_userstory(request, idProyecto):
     """
-     Vista de creacion de nuevo Proyecto
-    Recibe como parametro un request y retorna la pagina web crear_Proyecto.html donde se debe completar
-    los datos del Proyecto y luego operacion_proyecto_exito.html si se completo debidamente el formulario
+    Vista de creacion de nuevo userstory
+    Recibe como parametro un request y retorna la pagina web crear_userstory.html donde se debe completar
+    los datos del userstory y luego operacion_userstory_exito.html si se completo debidamente el formulario
     * Variables
         -usuario_actor: es el usuario que realiza la accion
         -formulario: es el fomrulario que debe completar el usuario_actor
-        -proyectos: es la lista de proyectos existentes en el sistema
     @type request: django.http.HttpRequest
     @param request: Contiene informacion sobre la solic. web actual que llamo a esta vista  
     @rtype: django.http.HttpResponse
-    @return: operacion_proyecto_exito.html, mensaje de exito
-    @author: Cesar Recalde
+    @return: operacion_userstory_exito.html, mensaje de exito
+    @author: Isaac Veron
     """
     proyecto = Proyecto.objects.get(pk=idProyecto)
     mensaje="User Story creado con exito"
@@ -56,9 +56,9 @@ def crear_userstory(request, idProyecto):
         formulario = UserStoryFormMod(request.POST, instance=userstory)
         if formulario.is_valid():
             formulario.save()
-            userstorys = UserStory.objects.all()
+            escribir_archivo("nueva_version",formulario.instance.pk,"")
             return render_to_response('userstory/operacion_userstory_exito.html',
-                                      {'mensaje': mensaje, 'usuario_actor': usuario_actor, 'userstorys': userstorys, 'proyecto':proyecto},
+                                      {'mensaje': mensaje, 'usuario_actor': usuario_actor},
                                       context_instance=RequestContext(request))
     else:
         formulario = UserStoryForm(idProyecto)
@@ -69,30 +69,29 @@ def crear_userstory(request, idProyecto):
 
 def detalle_userstory(request, idUserStory):
     """ 
-      Busca en la base de datos al proyecto cuyos datos se quieren consultar y los presenta en un vista html
+      Busca en la base de datos al userstory cuyos datos se quieren consultar y los presenta en un vista html
     
       @type request: django.http.HttpRequest
       @param request: Contiene informacion sobre la solic. web actual que llamo a esta vista
-      @type idProyecto: integer
-      @param idProyecto: es el id del proyecto cuyos datos se quieren consultar
+      @type idUserStory: integer
+      @param idUserStory: es el id del userstory cuyos datos se quieren consultar
       @rtype: django.HttpResponse
       @return: detalle_proyecto.html, donde se le despliega al usuario los datos
-      @author: Cesar Recalde
+      @author: Isaac Veron
     """
-   
     usuario_actor = request.user
     userstory = UserStory.objects.get(pk=idUserStory)
-    tabla = Flujo.objects.get( pk = userstory.Actividad_asignada.idTabla )
-    return render_to_response('userstory/detalle_userstory.html', {'usuario_actor': usuario_actor, 'userstory': userstory, 'tabla':tabla},
+    #tabla = Flujo.objects.get( pk = userstory.Actividad_asignada.idTabla ) , 'tabla':tabla
+    return render_to_response('userstory/detalle_userstory.html', {'usuario_actor': usuario_actor, 'userstory': userstory},
                               context_instance=RequestContext(request))
 
 @login_required(login_url = '/')
 def buscar_userstory(request):
     """
-    Vista para buscar un proyecto dentro del listado de proyectos del sistema
+    Vista para buscar un userstory dentro del listado de userstory del sistema
 
     @return: Se retorna a la pagina de vista de proyectos con el proyecto que coincida con el query o vacio
-    @author: Cesar Recalde
+    @author: Isaac Veron
     """
     usuario_actor = request.user
     query = request.GET.get('q', '')
@@ -110,17 +109,17 @@ def buscar_userstory(request):
 @user_passes_test( User.can_change_proyecto , login_url="/index/")
 def modificar_userstory(request, idUserStory):
     """
-    Busca en la base de datos el Proyecto cuyos datos se quieren modificar.
+    Busca en la base de datos el userstory cuyos datos se quieren modificar.
     Presenta esos datos en un formulario y luego se guardan los cambios realizados.
      
     @type request: django.http.HttpRequest
     @param request: Contiene informacion sobre la solic. web actual que llamo a esta vista
-    @type idProyecto: integer
-    @param idProyecto: es el id del Proyecto cuyos datos se quieren modificar
+    @type idUserStory: integer
+    @param idUserStory: es el id del userstory cuyos datos se quieren modificar
     @rtype: django.HttpResponse
-    @return: modificar_Proyecto.html,un formulario donde se despliegan los datos que el usuario puede modificar,
+    @return: modificar_userstory.html,un formulario donde se despliegan los datos que el usuario puede modificar,
     una vez modificado renderiza a la pagina donde se listan todos los proyectos
-    @author: Cesar Recalde
+    @author: Isaac Veron
     """
 
     usuario_actor = request.user
@@ -128,7 +127,10 @@ def modificar_userstory(request, idUserStory):
     formulario = UserStoryFormMod(request.POST, instance=userstory)
     if formulario.is_valid():
         formulario.save()
-        return HttpResponseRedirect('/gestion_de_userstory/')
+        userstory.Sub_version=0
+        userstory.save()
+        escribir_archivo("nueva_version",idUserStory,"")
+        return HttpResponseRedirect('/index/')
     else:
         formulario = UserStoryFormMod(instance=userstory)
     return render_to_response('userstory/modificar_userstory.html',
@@ -137,6 +139,18 @@ def modificar_userstory(request, idUserStory):
 
 @login_required(login_url = '/')
 def cambiar_estado_userstory(request, idUserStory):
+    """
+    Cambia el estado de activo a no activo
+
+
+    @type idUserStory: integer
+    @param idUserStory: es el id del userstory cuyos datos se quieren modificar
+    @rtype: django.HttpResponse
+    @return:cambiar_estado_userstory.html,un formulario donde se despliegan los datos que el usuario puede modificar
+    una vez modificado renderiza a la pagina de exito
+    @author: Isaac Veron
+    """
+
     mensaje = "Cambio de estado de UserStory con exito"
     userstory = UserStory.objects.get(pk=idUserStory)
     if request.method == 'POST':
@@ -154,13 +168,13 @@ def cambiar_estado_userstory(request, idUserStory):
 @user_passes_test( User.can_delete_proyecto , login_url="/index/")
 def vista_eliminar_userstory(request, idUserStory):
     """
-    Esta vista obtiene el proyecto que quiere ser eliminado, pregunta si quiere ser eliminado y llama 
-    a la funcion eliminar_proyecto
+    Esta vista obtiene el userstory que quiere ser eliminado, pregunta si quiere ser eliminado y llama 
+    a la funcion eliminar_userstory
 
     @param request: django.http.HttpRequest
-    @param idProyecto: Contiene el identificador del proyecto a ser eliminado
-    @return: se retorna la pagina de eliminacion de proyectos
-    @author: Cesar Recalde
+    @param idUserStory: Contiene el identificador del userstory a ser eliminado
+    @return: se retorna la pagina de eliminacion de userstory
+    @author: Isaac Veron
     """
     usuario_actor = request.user
     userstory = UserStory.objects.get(pk=idUserStory)
@@ -171,15 +185,15 @@ def vista_eliminar_userstory(request, idUserStory):
 @login_required(login_url = '/')
 def eliminar_userstory(request, idUserStory):
     """
-    Eliminar de manera logica los registros del proyecto.
+    Eliminar de manera fisica los registros del userstory
         
     @type request: django.http.HttpRequest
     @param request: Contiene informacion sobre la solicitud web actual que llamo a esta vista  
-    @type idProyecto : integer
-    @param idProyecto : Contiene el id del proyecto a ser eliminado.
+    @type idUserStory: integer
+    @param idUserStory: Contiene el id del userstory a ser eliminado.
     @rtype: django.shortcuts.render_to_response
     @return: Se retorna a la a la pagina de notificacion de exito
-    @author: Cesar Recalde
+    @author: Isaac Veron
     """
 
     mensaje = "UserStory eliminado con exito"
@@ -191,23 +205,65 @@ def eliminar_userstory(request, idUserStory):
                               context_instance=RequestContext(request))
 
 def asignar_horas_us (request, idUserStory):
+    userstory = UserStory.objects.get(pk=idUserStory)
     sprints = Sprint.objects.all()
+    for sprint in sprints:
+        for us in sprint.UserStorys.all():
+            if us == userstory:
+                idSprint=sprint.id
+    mensaje="Horas asiganadas correctamente"
+    usuario_actor = request.user
+    
+    cargar_horas_us = CargarHoras(US_asignado=userstory)
+    if request.method == 'POST':
+        formulario = CargarHorasForm(request.POST, instance=cargar_horas_us)
+        if formulario.is_valid():
+            formulario.save()
+            escribir_archivo("nueva_sub_version", idUserStory, formulario.instance.pk)
+            restar_horas_sprint(idSprint, formulario.instance.pk)
+            return render_to_response('userstory/operacion_userstory_exito.html',
+                                      {'mensaje': mensaje, 'usuario_actor': usuario_actor},
+                                      context_instance=RequestContext(request))
+    else:
+        formulario = CargarHorasForm()
+    return render_to_response('userstory/asignar_horas_us.html',
+                              {'formulario': formulario,'usuario_actor': usuario_actor},
+                              context_instance=RequestContext(request))
+
     userstory = UserStory.objects.get(pk=idUserStory)
     return render_to_response('userstory/asignar_horas_us.html',{'sprints':sprints ,'userstory':userstory},context_instance=RequestContext(request))
 
-def restar_horas_sprint (request, idSprint):
-    mensaje = "Horas asiganadas correctamente"
+def restar_horas_sprint (idSprint, idHorasUS):
     sprint = Sprint.objects.get (pk=idSprint)
-    query = request.GET.get('q', '')
-    print query 
+    horas_us = CargarHoras.objects.get(pk=idHorasUS)
     print sprint.Duracion
-    sprint.Duracion = sprint.Duracion - int(query)  
+    sprint.Duracion = sprint.Duracion - int(horas_us.Horas)  
     sprint.save() 
-    print sprint.Duracion 
-    #sprint.Duracion = sprint.Duracion - request
-    return render_to_response('userstory/operacion_userstory_exito.html',{'mensaje':mensaje},context_instance=RequestContext(request))
-
-
+    
+def escribir_archivo(accion, idUserStory, idHorasUS):
+    userstory = UserStory.objects.get(pk=idUserStory)
+    direccion= Path(__file__).ancestor(3)
+    if accion=="nueva_version":
+        userstory.Version = userstory.Version+1
+        userstory.save()
+        fo = open(direccion+"/log/"+userstory.Nombre+"_Version_"+str(userstory.Version), "a")
+        fo.write ("Nombre: "+userstory.Nombre+"\n")
+        fo.write ("Descripcion: "+userstory.Descripcion+"\n")
+        fo.write ("Proyecto asignado: "+ str(userstory.Proyecto_asignado)+"\n")
+        fo.write ("Usuario creador: "+ str(userstory.Usuario_creador)+"\n"+"\n")
+        fo.write ("Fecha creacion: "+ str(userstory.Fecha_creacion)+"\n")
+        fo.write ("-----------------------------------------------------------------\n")
+        fo.close()        
+    elif accion=="nueva_sub_version":
+        horas_us = CargarHoras.objects.get(pk=idHorasUS)
+        userstory.Sub_version = userstory.Sub_version+1
+        userstory.save()
+        fo = open(direccion+"/log/"+userstory.Nombre+"_Version_"+str(userstory.Version), "a")
+        fo.write ("Nombre: "+userstory.Nombre+"_Version_"+str(userstory.Version)+"."+str(userstory.Sub_version)+"\n")
+        fo.write ("Horas Cargadas: "+str(horas_us.Horas)+"\n")
+        fo.write ("Descripcion: "+horas_us.Descripcion+"\n")
+        fo.write ("-----------------------------------------------------------------\n")
+        fo.close()  
 
 ################################################################################################3
 
