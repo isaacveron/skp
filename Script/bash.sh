@@ -15,6 +15,7 @@ alerta ()
 	echo 'Opcion no valida, porfavor ingrese una opcion valida'
 }
 
+usuario='odso09'
 echo "#########Bienvenido al Sistema skp#########"
 while [ "$OPT" != 6 ]
 do
@@ -22,7 +23,7 @@ do
 	read OPT
 	case $OPT in
 		1 )	
-			sudo -u odso09 createdb skp
+			sudo -u "$usuario" createdb skp
 			if [ $? -ne 0 ]; then  
 				echo 'La BD ya existe'
 			else
@@ -30,7 +31,7 @@ do
 			fi
 			;;		
 		2 )
-			pg_restore -i -h localhost -p 5432 -U odso09 -d skp -v "/home/odso09/Escritorio/prueba_scrip/backup.sql"
+			pg_restore -i -h localhost -p 5432 -U "$usuario" -d skp -v "/home/"$usuario"/Escritorio/git/skp/Script/backup.sql"
 			if [ $? -ne 0 ]; then  
 				echo 'Error la BD no existe por favor creelo'
 			else
@@ -38,7 +39,7 @@ do
 			fi
 			;;
 		3 )
-			pg_dump -i -h localhost -p 5432 -U odso09 -F c -b -v -f "/home/odso09/Escritorio/prueba_scrip/backup.sql" skp
+			pg_dump -i -h localhost -p 5432 -U "$usuario" -F c -b -v -f "/home/"$usuario"/Escritorio/git/skp/Script/backup.sql" skp
 			if [ $? -ne 0 ]; then  
 				echo 'Error la BD no existe por favor creelo'
 			else
@@ -46,7 +47,7 @@ do
 			fi
 			;;
 		4 )
-			sudo -u odso09 dropdb skp
+			sudo -u "$usuario" dropdb skp
 			if [ $? -ne 0 ]; then  
 				echo 'Error la BD no existe por favor creelo'
 			else
@@ -57,7 +58,6 @@ do
 			cd /var/www
 			sudo rm -r -f skp
 			sudo wget https://github.com/isaacveron/skp/archive/master.zip
-			odso09
 			sudo unzip master.zip
 			sudo rm master.zip
 			sudo mv skp-master skp
