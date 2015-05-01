@@ -64,6 +64,7 @@ do
 			cd skp/Script
 			sudo cp skp.conf /etc/apache2/sites-available/skp.conf
 			sudo cp wsgi.load /etc/apache2/mods-available/wsgi.load
+			sudo a2ensite skp.conf
 			sudo /etc/init.d/apache2 restart
 			xdg-open http://skp.com
 			clear		
