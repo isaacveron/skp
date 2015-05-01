@@ -1,6 +1,7 @@
 from django.db import models
 from apps.usuario.models import User
 from apps.proyectos.models import Proyecto
+from apps.flujos.models import Flujo, Actividad
 
 # Create your models here.
 class UserStory(models.Model):
@@ -19,14 +20,18 @@ class UserStory(models.Model):
     Estados_US = (
         ('AsignadoSprint','AsignadoSprint'),
         ('AsignadoFlujo','AsignadoFlujo'),
+        ('AsignadoSprintActivo','AsignadoSprintActivo'),
         ('Resuelta','Resuelta'),
         ('Cancelado','Cancelado'),
+        ('Terminado','Terminado'),
     )
+
     Prioridad_US=(
         ('Baja', 'Baja'),
         ('Normal', 'Normal'),
         ('Alta', 'Alta'),
     )
+
     Porcentaje_Realizado_US=(
         ('0%', '0%'),
         ('10%', '10%'),
@@ -40,18 +45,34 @@ class UserStory(models.Model):
         ('90%', '90%'),
         ('100%', '100%'),
     )
+    
+    Estados_actividad = (
+        ('none', 'none'),
+        ('to_do', 'to_do'),
+        ('doing', 'doing'),
+        ('done', 'done'),
+    )
 
     Usuario_asignado = models.ForeignKey(User, null=True, related_name='Usuario_asignado')
-    Nombre = models.CharField(max_length=30, unique=True)
+    Nombre = models.CharField(max_length=30, unique=False)
     Descripcion = models.TextField(null=True)
     Valor_tecnico = models.PositiveIntegerField(null=True, blank=True)
     Valor_de_negocio = models.PositiveIntegerField(null=True, blank=True)
     Size = models.PositiveIntegerField(null=True, blank=True)
-    Estado = models.CharField( max_length=15, choices=Estados_US, default='Pendiente', unique=False)
+    Estado = models.CharField( max_length=30, choices=Estados_US, default='Pendiente', unique=False)
     is_active = models.BooleanField(default=True)
+    
     Usuario_creador = models.ForeignKey(User, null=True)
     Proyecto_asignado = models.ForeignKey (Proyecto, null=True)
     Fecha_creacion = models.DateTimeField(auto_now=True, null=True)
 
+    in_kanban = models.BooleanField(default=False)
+    Estado_de_actividad = models.CharField( max_length=30, choices=Estados_actividad, default='none', unique=False)
+    Actividad_asignada = models.ForeignKey( Actividad, null=True )
+
+
     def __str__(self):              
         return self.Nombre
+
+    
+    

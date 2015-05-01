@@ -12,12 +12,15 @@
                             <div class="message"><p><strong>Nombre: </strong>{{ proyecto.Nombre }}</p></div>
                             <div class="message"><p><strong>Creado por: </strong>{{ proyecto.Usuario_creador }}</p></div>
                             <div class="message"><p><strong>Fecha de Creacion: </strong>{{ proyecto.Fecha_creacion }}</p></div>
-                        </table>                        
+                        </table>
+
                     </div>
+
+                    
                 </div>
             </div>
         </article>
-   
+
      <form class="quick_search" action='{% url "apps.userstory.views.buscar_userstory" %}'>
             <input type="text" value="Quick Search" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;" name="q" value="{{ query|escape }}" required>
     </form>
@@ -105,4 +108,33 @@
                 </div>
             </div>  
         </article>
+    <article class="module width_full">
+            <header>
+                <h3>Administracion de Tablas </h3>
+
+                <a href="{% url 'apps.mcp.views.vista_agregar_tabla' proyecto.id %}"><th align="right"><input type="image" src="{{ STATIC_URL }}pagina_principal/images/mas.png" title="Crear"></th></a>
+            </header>
+
+            <div class="module_content">
+                <div class="tab_container">
+                    <div id="tab1" class="tab_content">
+                        <table class="tablesorter" cellspacing="0"> 
+                            <thead> 
+                                {% if tablas|length > 0 %}
+                                    {% for tabla in tablas %}
+                                        {% if tabla.id > 0 %}
+                                            <tr class="clickableRow" href='{% url "apps.mcp.views.detalle_tabla" proyecto.id tabla.id %}' id="tablaproyecto" rel="tabla">
+                                            <th>{{ tabla.Nombre }}</th>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    <tr><td class="warning">Aun no se han incluido Tablas Kanban</td>
+                                {% endif %}
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>  
+        </article>
+
 {% endblock cuerpo %}
