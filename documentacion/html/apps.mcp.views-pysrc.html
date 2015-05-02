@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>apps.mcp.views</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="apps-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="apps-module.html">Package&nbsp;apps</a> ::
+        <a href="apps.mcp-module.html">Package&nbsp;mcp</a> ::
+        Module&nbsp;views
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="apps.mcp.views-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="apps.mcp.views-module.html">Module apps.mcp.views</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">django</tt><tt class="py-op">.</tt><tt class="py-name">shortcuts</tt> <tt class="py-keyword">import</tt> <tt class="py-name">render</tt><tt class="py-op">,</tt> <tt class="py-name">render_to_response</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">django</tt><tt class="py-op">.</tt><tt class="py-name">template</tt> <tt class="py-keyword">import</tt> <tt class="py-name">RequestContext</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">django</tt><tt class="py-op">.</tt><tt class="py-name">contrib</tt><tt class="py-op">.</tt><tt class="py-name">auth</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Module apps.flujos.models=apps.flujos.models-module.html,Module apps.mcp.models=apps.mcp.models-module.html,Module apps.proyectos.models=apps.proyectos.models-module.html,Module apps.roles.models=apps.roles.models-module.html,Module apps.sprint.models=apps.sprint.models-module.html,Module apps.userstory.models=apps.userstory.models-module.html,Module apps.usuario.models=apps.usuario.models-module.html"><a title="apps.flujos.models
+apps.mcp.models
+apps.proyectos.models
+apps.roles.models
+apps.sprint.models
+apps.userstory.models
+apps.usuario.models" class="py-name" href="#" onclick="return doclink('link-0', 'models', 'link-0');">models</a></tt> <tt class="py-keyword">import</tt> <tt class="py-name">User</tt><tt class="py-op">,</tt> <tt class="py-name">Group</tt><tt class="py-op">,</tt> <tt class="py-name">Permission</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">django</tt><tt class="py-op">.</tt><tt class="py-name">contrib</tt><tt class="py-op">.</tt><tt class="py-name">auth</tt><tt class="py-op">.</tt><tt class="py-name">decorators</tt> <tt class="py-keyword">import</tt> <tt class="py-name">login_required</tt><tt class="py-op">,</tt> <tt class="py-name">permission_required</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-1" class="py-name" targets="Package apps=apps-module.html"><a title="apps" class="py-name" href="#" onclick="return doclink('link-1', 'apps', 'link-1');">apps</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Package apps.proyectos=apps.proyectos-module.html"><a title="apps.proyectos" class="py-name" href="#" onclick="return doclink('link-2', 'proyectos', 'link-2');">proyectos</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name"><a title="apps.flujos.models
+apps.mcp.models
+apps.proyectos.models
+apps.roles.models
+apps.sprint.models
+apps.userstory.models
+apps.usuario.models" class="py-name" href="#" onclick="return doclink('link-3', 'models', 'link-0');">models</a></tt> <tt class="py-keyword">import</tt> <tt id="link-4" class="py-name" targets="Class apps.proyectos.models.Proyecto=apps.proyectos.models.Proyecto-class.html"><a title="apps.proyectos.models.Proyecto" class="py-name" href="#" onclick="return doclink('link-4', 'Proyecto', 'link-4');">Proyecto</a></tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-5" class="py-name"><a title="apps" class="py-name" href="#" onclick="return doclink('link-5', 'apps', 'link-1');">apps</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Package apps.sprint=apps.sprint-module.html"><a title="apps.sprint" class="py-name" href="#" onclick="return doclink('link-6', 'sprint', 'link-6');">sprint</a></tt><tt class="py-op">.</tt><tt id="link-7" class="py-name"><a title="apps.flujos.models
+apps.mcp.models
+apps.proyectos.models
+apps.roles.models
+apps.sprint.models
+apps.userstory.models
+apps.usuario.models" class="py-name" href="#" onclick="return doclink('link-7', 'models', 'link-0');">models</a></tt> <tt class="py-keyword">import</tt> <tt id="link-8" class="py-name" targets="Class apps.sprint.models.Sprint=apps.sprint.models.Sprint-class.html"><a title="apps.sprint.models.Sprint" class="py-name" href="#" onclick="return doclink('link-8', 'Sprint', 'link-8');">Sprint</a></tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-9" class="py-name"><a title="apps" class="py-name" href="#" onclick="return doclink('link-9', 'apps', 'link-1');">apps</a></tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Package apps.userstory=apps.userstory-module.html"><a title="apps.userstory" class="py-name" href="#" onclick="return doclink('link-10', 'userstory', 'link-10');">userstory</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="apps.flujos.models
+apps.mcp.models
+apps.proyectos.models
+apps.roles.models
+apps.sprint.models
+apps.userstory.models
+apps.usuario.models" class="py-name" href="#" onclick="return doclink('link-11', 'models', 'link-0');">models</a></tt> <tt class="py-keyword">import</tt> <tt id="link-12" class="py-name" targets="Class apps.userstory.models.UserStory=apps.userstory.models.UserStory-class.html"><a title="apps.userstory.models.UserStory" class="py-name" href="#" onclick="return doclink('link-12', 'UserStory', 'link-12');">UserStory</a></tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-13" class="py-name"><a title="apps" class="py-name" href="#" onclick="return doclink('link-13', 'apps', 'link-1');">apps</a></tt><tt class="py-op">.</tt><tt id="link-14" class="py-name" targets="Package apps.flujos=apps.flujos-module.html"><a title="apps.flujos" class="py-name" href="#" onclick="return doclink('link-14', 'flujos', 'link-14');">flujos</a></tt><tt class="py-op">.</tt><tt id="link-15" class="py-name"><a title="apps.flujos.models
+apps.mcp.models
+apps.proyectos.models
+apps.roles.models
+apps.sprint.models
+apps.userstory.models
+apps.usuario.models" class="py-name" href="#" onclick="return doclink('link-15', 'models', 'link-0');">models</a></tt> <tt class="py-keyword">import</tt> <tt id="link-16" class="py-name" targets="Class apps.flujos.models.Flujo=apps.flujos.models.Flujo-class.html"><a title="apps.flujos.models.Flujo" class="py-name" href="#" onclick="return doclink('link-16', 'Flujo', 'link-16');">Flujo</a></tt><tt class="py-op">,</tt> <tt id="link-17" class="py-name" targets="Class apps.flujos.models.Actividad=apps.flujos.models.Actividad-class.html"><a title="apps.flujos.models.Actividad" class="py-name" href="#" onclick="return doclink('link-17', 'Actividad', 'link-17');">Actividad</a></tt> </tt>
+<a name="detalle_mcp"></a><div id="detalle_mcp-def"><a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">login_required</tt><tt class="py-op">(</tt><tt class="py-name">login_url</tt> <tt class="py-op">=</tt> <tt class="py-string">'/'</tt><tt class="py-op">)</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt> <a class="py-toggle" href="#" id="detalle_mcp-toggle" onclick="return toggle('detalle_mcp');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="apps.mcp.views-module.html#detalle_mcp">detalle_mcp</a><tt class="py-op">(</tt><tt class="py-param">request</tt><tt class="py-op">,</tt> <tt class="py-param">idProyecto</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="detalle_mcp-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="detalle_mcp-expanded"><a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring">        Recibe un request, obtiene la lista de todos los userstorys y sprints</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-docstring">        del sistema y luego retorna el html renderizado con los datos </tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-docstring">        @type request: django.http.HttpRequest</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-docstring">        @param request: Contiene informacion sobre la solic. web actual que llamo a esta vista</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-docstring">        @param idProyecto: identificador del proyecto cuyos datos desean verse </tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: django.http.HttpResponse</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring">        @return: detalle_mcp.html, donde se muestarn los datos del proyecto</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-docstring">        @author: Cesar Recalde</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">    <tt class="py-name">proyecto</tt> <tt class="py-op">=</tt> <tt id="link-18" class="py-name"><a title="apps.proyectos.models.Proyecto" class="py-name" href="#" onclick="return doclink('link-18', 'Proyecto', 'link-4');">Proyecto</a></tt><tt class="py-op">.</tt><tt class="py-name">objects</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-name">pk</tt><tt class="py-op">=</tt><tt class="py-name">idProyecto</tt><tt class="py-op">)</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">    <tt class="py-name">sprints</tt> <tt class="py-op">=</tt> <tt id="link-19" class="py-name"><a title="apps.sprint.models.Sprint" class="py-name" href="#" onclick="return doclink('link-19', 'Sprint', 'link-8');">Sprint</a></tt><tt class="py-op">.</tt><tt class="py-name">objects</tt><tt class="py-op">.</tt><tt class="py-name">all</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">    <tt class="py-name">usuario_actor</tt> <tt class="py-op">=</tt> <tt class="py-name">request</tt><tt class="py-op">.</tt><tt class="py-name">user</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">    <tt class="py-name">userstorys</tt> <tt class="py-op">=</tt> <tt id="link-20" class="py-name"><a title="apps.userstory.models.UserStory" class="py-name" href="#" onclick="return doclink('link-20', 'UserStory', 'link-12');">UserStory</a></tt><tt class="py-op">.</tt><tt class="py-name">objects</tt><tt class="py-op">.</tt><tt class="py-name">all</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">    <tt class="py-name">tablas</tt> <tt class="py-op">=</tt> <tt class="py-name">proyecto</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name" targets="Variable apps.proyectos.models.Proyecto.Tablas=apps.proyectos.models.Proyecto-class.html#Tablas"><a title="apps.proyectos.models.Proyecto.Tablas" class="py-name" href="#" onclick="return doclink('link-21', 'Tablas', 'link-21');">Tablas</a></tt><tt class="py-op">.</tt><tt class="py-name">all</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">         </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">render_to_response</tt><tt class="py-op">(</tt><tt class="py-string">'mcp/detalle_mcp.html'</tt><tt class="py-op">,</tt> <tt class="py-op">{</tt><tt class="py-string">'usuario_actor'</tt><tt class="py-op">:</tt> <tt class="py-name">usuario_actor</tt><tt class="py-op">,</tt> <tt class="py-string">'proyecto'</tt><tt class="py-op">:</tt><tt class="py-name">proyecto</tt><tt class="py-op">,</tt> <tt class="py-string">'userstorys'</tt><tt class="py-op">:</tt><tt class="py-name">userstorys</tt><tt class="py-op">,</tt> <tt class="py-string">'sprints'</tt><tt class="py-op">:</tt><tt class="py-name">sprints</tt><tt class="py-op">,</tt><tt class="py-string">'tablas'</tt><tt class="py-op">:</tt><tt class="py-name">tablas</tt><tt class="py-op">}</tt><tt class="py-op">,</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">                              <tt class="py-name">context_instance</tt><tt class="py-op">=</tt><tt class="py-name">RequestContext</tt><tt class="py-op">(</tt><tt class="py-name">request</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"> </tt>
+<a name="detalle_tabla"></a><div id="detalle_tabla-def"><a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">login_required</tt><tt class="py-op">(</tt><tt class="py-name">login_url</tt> <tt class="py-op">=</tt> <tt class="py-string">'/'</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt> <a class="py-toggle" href="#" id="detalle_tabla-toggle" onclick="return toggle('detalle_tabla');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="apps.mcp.views-module.html#detalle_tabla">detalle_tabla</a><tt class="py-op">(</tt><tt class="py-param">request</tt><tt class="py-op">,</tt> <tt class="py-param">idProyecto</tt><tt class="py-op">,</tt> <tt class="py-param">idTabla</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="detalle_tabla-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="detalle_tabla-expanded"><a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-docstring">        Recibe un request, obtiene los datos de la tabla solicitada y muestra sus actividades y</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-docstring">        userstorys en ellas</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-docstring">        @type request: django.http.HttpRequest</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt class="py-docstring">        @param request: Contiene informacion sobre la solic. web actual que llamo a esta vista</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring">        @param idProyecto: identificador del proyecto al que pertenece la tabla</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt class="py-docstring">        @param idTabla: identificador de la tabla  </tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: django.http.HttpResponse</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt class="py-docstring">        @return: detalle_tabla.html, donde se muestarn los datos de la tabla</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt class="py-docstring">        @author: Cesar Recalde</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">    <tt class="py-name">tabla</tt> <tt class="py-op">=</tt> <tt id="link-22" class="py-name"><a title="apps.flujos.models.Flujo" class="py-name" href="#" onclick="return doclink('link-22', 'Flujo', 'link-16');">Flujo</a></tt><tt class="py-op">.</tt><tt class="py-name">objects</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-name">pk</tt><tt class="py-op">=</tt><tt id="link-23" class="py-name" targets="Variable apps.flujos.models.Actividad.idTabla=apps.flujos.models.Actividad-class.html#idTabla"><a title="apps.flujos.models.Actividad.idTabla" class="py-name" href="#" onclick="return doclink('link-23', 'idTabla', 'link-23');">idTabla</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">    <tt class="py-name">actividades</tt> <tt class="py-op">=</tt> <tt class="py-name">tabla</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name" targets="Variable apps.flujos.models.Flujo.Actividades=apps.flujos.models.Flujo-class.html#Actividades"><a title="apps.flujos.models.Flujo.Actividades" class="py-name" href="#" onclick="return doclink('link-24', 'Actividades', 'link-24');">Actividades</a></tt><tt class="py-op">.</tt><tt class="py-name">all</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">    <tt class="py-name">usuario_actor</tt> <tt class="py-op">=</tt> <tt class="py-name">request</tt><tt class="py-op">.</tt><tt class="py-name">user</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">    <tt class="py-name">proyecto</tt> <tt class="py-op">=</tt> <tt id="link-25" class="py-name"><a title="apps.proyectos.models.Proyecto" class="py-name" href="#" onclick="return doclink('link-25', 'Proyecto', 'link-4');">Proyecto</a></tt><tt class="py-op">.</tt><tt class="py-name">objects</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-name">pk</tt><tt class="py-op">=</tt><tt class="py-name">idProyecto</tt><tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">render_to_response</tt><tt class="py-op">(</tt><tt class="py-string">'mcp/detalle_tabla.html'</tt><tt class="py-op">,</tt> <tt class="py-op">{</tt><tt class="py-string">'usuario_actor'</tt><tt class="py-op">:</tt> <tt class="py-name">usuario_actor</tt><tt class="py-op">,</tt> <tt class="py-string">'proyecto'</tt><tt class="py-op">:</tt><tt class="py-name">proyecto</tt><tt class="py-op">,</tt><tt class="py-string">'tabla'</tt><tt class="py-op">:</tt><tt class="py-name">tabla</tt><tt class="py-op">,</tt> <tt class="py-string">'actividades'</tt><tt class="py-op">:</tt><tt class="py-name">actividades</tt><tt class="py-op">}</tt><tt class="py-op">,</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">                              <tt class="py-name">context_instance</tt><tt class="py-op">=</tt><tt class="py-name">RequestContext</tt><tt class="py-op">(</tt><tt class="py-name">request</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"> </tt>
+<a name="vista_agregar_tabla"></a><div id="vista_agregar_tabla-def"><a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">login_required</tt><tt class="py-op">(</tt><tt class="py-name">login_url</tt> <tt class="py-op">=</tt> <tt class="py-string">'/'</tt><tt class="py-op">)</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt> <a class="py-toggle" href="#" id="vista_agregar_tabla-toggle" onclick="return toggle('vista_agregar_tabla');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="apps.mcp.views-module.html#vista_agregar_tabla">vista_agregar_tabla</a><tt class="py-op">(</tt><tt class="py-param">request</tt><tt class="py-op">,</tt> <tt class="py-param">idProyecto</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="vista_agregar_tabla-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="vista_agregar_tabla-expanded"><a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"><tt class="py-docstring">        Recibe un request, y el identificador del proyecto al que se desea agregar la tabla,</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"><tt class="py-docstring">        obtiene la lista de las tablas disponibles y las despliega para que el usuario pueda</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt class="py-docstring">        seleccionar una</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt class="py-docstring">        @type request: django.http.HttpRequest</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"><tt class="py-docstring">        @param request: Contiene informacion sobre la solic. web actual que llamo a esta vista</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt class="py-docstring">        @param idProyecto: identificador del proyecto al que se desea agregar la tabla </tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: django.http.HttpResponse</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt class="py-docstring">        @return: vista_agregar_tabla.html, donde se muestarn los flujos del sistema</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"><tt class="py-docstring">        @author: Cesar Recalde</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">    <tt class="py-name">usuario_actor</tt> <tt class="py-op">=</tt> <tt class="py-name">request</tt><tt class="py-op">.</tt><tt class="py-name">user</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">    <tt class="py-name">proyecto</tt> <tt class="py-op">=</tt> <tt id="link-26" class="py-name"><a title="apps.proyectos.models.Proyecto" class="py-name" href="#" onclick="return doclink('link-26', 'Proyecto', 'link-4');">Proyecto</a></tt><tt class="py-op">.</tt><tt class="py-name">objects</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-name">pk</tt><tt class="py-op">=</tt><tt class="py-name">idProyecto</tt><tt class="py-op">)</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">    <tt class="py-name">tablas</tt> <tt class="py-op">=</tt> <tt id="link-27" class="py-name"><a title="apps.flujos.models.Flujo" class="py-name" href="#" onclick="return doclink('link-27', 'Flujo', 'link-16');">Flujo</a></tt><tt class="py-op">.</tt><tt class="py-name">objects</tt><tt class="py-op">.</tt><tt class="py-name">filter</tt><tt class="py-op">(</tt><tt id="link-28" class="py-name" targets="Variable apps.flujos.models.Flujo.Copia=apps.flujos.models.Flujo-class.html#Copia"><a title="apps.flujos.models.Flujo.Copia" class="py-name" href="#" onclick="return doclink('link-28', 'Copia', 'link-28');">Copia</a></tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">aux</tt> <tt class="py-keyword">in</tt> <tt class="py-name">proyecto</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="apps.proyectos.models.Proyecto.Tablas" class="py-name" href="#" onclick="return doclink('link-29', 'Tablas', 'link-21');">Tablas</a></tt><tt class="py-op">.</tt><tt class="py-name">all</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt class="py-name">tablas</tt> <tt class="py-op">=</tt> <tt class="py-name">tablas</tt><tt class="py-op">.</tt><tt id="link-30" class="py-name" targets="Variable apps.flujos.forms.FlujoForm.Meta.exclude=apps.flujos.forms.FlujoForm.Meta-class.html#exclude,Variable apps.proyectos.forms.ProyectoForm.Meta.exclude=apps.proyectos.forms.ProyectoForm.Meta-class.html#exclude,Variable apps.roles.forms.RolForm.Meta.exclude=apps.roles.forms.RolForm.Meta-class.html#exclude,Variable apps.sprint.forms.SprintForm.Meta.exclude=apps.sprint.forms.SprintForm.Meta-class.html#exclude,Variable apps.sprint.forms.SprintFormMod.Meta.exclude=apps.sprint.forms.SprintFormMod.Meta-class.html#exclude,Variable apps.userstory.forms.UserStoryForm.Meta.exclude=apps.userstory.forms.UserStoryForm.Meta-class.html#exclude,Variable apps.userstory.forms.UserStoryFormMod.Meta.exclude=apps.userstory.forms.UserStoryFormMod.Meta-class.html#exclude"><a title="apps.flujos.forms.FlujoForm.Meta.exclude
+apps.proyectos.forms.ProyectoForm.Meta.exclude
+apps.roles.forms.RolForm.Meta.exclude
+apps.sprint.forms.SprintForm.Meta.exclude
+apps.sprint.forms.SprintFormMod.Meta.exclude
+apps.userstory.forms.UserStoryForm.Meta.exclude
+apps.userstory.forms.UserStoryFormMod.Meta.exclude" class="py-name" href="#" onclick="return doclink('link-30', 'exclude', 'link-30');">exclude</a></tt><tt class="py-op">(</tt><tt id="link-31" class="py-name" targets="Variable apps.flujos.forms.ActividadForm.Nombre=apps.flujos.forms.ActividadForm-class.html#Nombre,Variable apps.flujos.models.Actividad.Nombre=apps.flujos.models.Actividad-class.html#Nombre,Variable apps.flujos.models.Flujo.Nombre=apps.flujos.models.Flujo-class.html#Nombre,Variable apps.proyectos.models.Proyecto.Nombre=apps.proyectos.models.Proyecto-class.html#Nombre,Variable apps.sprint.models.Sprint.Nombre=apps.sprint.models.Sprint-class.html#Nombre,Variable apps.userstory.models.UserStory.Nombre=apps.userstory.models.UserStory-class.html#Nombre"><a title="apps.flujos.forms.ActividadForm.Nombre
+apps.flujos.models.Actividad.Nombre
+apps.flujos.models.Flujo.Nombre
+apps.proyectos.models.Proyecto.Nombre
+apps.sprint.models.Sprint.Nombre
+apps.userstory.models.UserStory.Nombre" class="py-name" href="#" onclick="return doclink('link-31', 'Nombre', 'link-31');">Nombre</a></tt> <tt class="py-op">=</tt> <tt class="py-name">aux</tt><tt class="py-op">.</tt><tt id="link-32" class="py-name"><a title="apps.flujos.forms.ActividadForm.Nombre
+apps.flujos.models.Actividad.Nombre
+apps.flujos.models.Flujo.Nombre
+apps.proyectos.models.Proyecto.Nombre
+apps.sprint.models.Sprint.Nombre
+apps.userstory.models.UserStory.Nombre" class="py-name" href="#" onclick="return doclink('link-32', 'Nombre', 'link-31');">Nombre</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">render_to_response</tt><tt class="py-op">(</tt><tt class="py-string">'mcp/vista_agregar_tabla.html'</tt><tt class="py-op">,</tt> <tt class="py-op">{</tt><tt class="py-string">'usuario_actor'</tt><tt class="py-op">:</tt> <tt class="py-name">usuario_actor</tt><tt class="py-op">,</tt> <tt class="py-string">'tablas'</tt><tt class="py-op">:</tt><tt class="py-name">tablas</tt><tt class="py-op">,</tt> <tt class="py-string">'proyecto'</tt><tt class="py-op">:</tt><tt class="py-name">proyecto</tt><tt class="py-op">}</tt><tt class="py-op">,</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">                              <tt class="py-name">context_instance</tt><tt class="py-op">=</tt><tt class="py-name">RequestContext</tt><tt class="py-op">(</tt><tt class="py-name">request</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"> </tt>
+<a name="agregar_tabla"></a><div id="agregar_tabla-def"><a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">login_required</tt><tt class="py-op">(</tt><tt class="py-name">login_url</tt> <tt class="py-op">=</tt> <tt class="py-string">'/'</tt><tt class="py-op">)</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt> <a class="py-toggle" href="#" id="agregar_tabla-toggle" onclick="return toggle('agregar_tabla');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="apps.mcp.views-module.html#agregar_tabla">agregar_tabla</a><tt class="py-op">(</tt><tt class="py-param">request</tt><tt class="py-op">,</tt> <tt class="py-param">idProyecto</tt><tt class="py-op">,</tt> <tt class="py-param">idTabla</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="agregar_tabla-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="agregar_tabla-expanded"><a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"><tt class="py-docstring">        Recibe un request,el identificador del proyecto y el identificador de la tabla </tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"><tt class="py-docstring">        que desea agregarse</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"><tt class="py-docstring">        @type request: django.http.HttpRequest</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"><tt class="py-docstring">        @param request: Contiene informacion sobre la solic. web actual que llamo a esta vista</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"><tt class="py-docstring">        @param idProyecto: identificador del proyecto al que se desea agregar la tabla </tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"><tt class="py-docstring">        @param idTabla: identificador de la tabla que se desea agregar  </tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: django.http.HttpResponse</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt class="py-docstring">        @return: agregar_tabla_exito.html, vista donde se muestra un mensaje dde exito de la operacion</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"><tt class="py-docstring">        @author: Cesar Recalde</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">    <tt class="py-name">usuario_actor</tt> <tt class="py-op">=</tt> <tt class="py-name">request</tt><tt class="py-op">.</tt><tt class="py-name">user</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">    <tt class="py-name">tabla</tt> <tt class="py-op">=</tt> <tt id="link-33" class="py-name"><a title="apps.flujos.models.Flujo" class="py-name" href="#" onclick="return doclink('link-33', 'Flujo', 'link-16');">Flujo</a></tt><tt class="py-op">.</tt><tt class="py-name">objects</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-name">pk</tt><tt class="py-op">=</tt><tt id="link-34" class="py-name"><a title="apps.flujos.models.Actividad.idTabla" class="py-name" href="#" onclick="return doclink('link-34', 'idTabla', 'link-23');">idTabla</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">    <tt class="py-name">proyecto</tt> <tt class="py-op">=</tt> <tt id="link-35" class="py-name"><a title="apps.proyectos.models.Proyecto" class="py-name" href="#" onclick="return doclink('link-35', 'Proyecto', 'link-4');">Proyecto</a></tt><tt class="py-op">.</tt><tt class="py-name">objects</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-name">pk</tt><tt class="py-op">=</tt><tt class="py-name">idProyecto</tt><tt class="py-op">)</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">    <tt class="py-name">mensaje</tt> <tt class="py-op">=</tt> <tt class="py-string">'Tabla agregada con exito'</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">    <tt class="py-name">proyecto</tt><tt class="py-op">.</tt><tt id="link-36" class="py-name"><a title="apps.proyectos.models.Proyecto.Tablas" class="py-name" href="#" onclick="return doclink('link-36', 'Tablas', 'link-21');">Tablas</a></tt><tt class="py-op">.</tt><tt class="py-name">add</tt><tt class="py-op">(</tt><tt class="py-name">tabla</tt><tt class="py-op">)</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">    <tt class="py-name">proyecto</tt><tt class="py-op">.</tt><tt class="py-name">save</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">render_to_response</tt><tt class="py-op">(</tt><tt class="py-string">'mcp/agregar_tabla_exito.html'</tt><tt class="py-op">,</tt> <tt class="py-op">{</tt><tt class="py-string">'mensaje'</tt><tt class="py-op">:</tt><tt class="py-name">mensaje</tt><tt class="py-op">,</tt><tt class="py-string">'usuario_actor'</tt><tt class="py-op">:</tt> <tt class="py-name">usuario_actor</tt><tt class="py-op">,</tt> <tt class="py-string">'tabla'</tt><tt class="py-op">:</tt><tt class="py-name">tabla</tt><tt class="py-op">,</tt> <tt class="py-string">'proyecto'</tt><tt class="py-op">:</tt><tt class="py-name">proyecto</tt><tt class="py-op">}</tt><tt class="py-op">,</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">                              <tt class="py-name">context_instance</tt><tt class="py-op">=</tt><tt class="py-name">RequestContext</tt><tt class="py-op">(</tt><tt class="py-name">request</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="apps-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri May  1 20:15:20 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
