@@ -60,7 +60,7 @@
 	<header id="header">
 	{% block header %}
 		<hgroup>
-			<a href="/index/"><h2 class="section_title">Scrum Kanban Project</h2></a>
+			<h2 class="section_title">Scrum Kanban Project</h2>
 			<div class="btn_view_site"><a href="{% url 'apps.usuario.views.cerrar_sesion' %}">Cerrar Sesion</a></div>
 		</hgroup>
 	{% endblock header %}
@@ -83,6 +83,14 @@
 			<li class="icn_folder"><a href="{% url 'apps.proyectos.views.gestion_de_proyectos' %}">Gestion de Proyectos</a></li>
 			<li class="icn_video"><a href="{% url 'apps.flujos.views.administrar_flujos' %}">Gestion de Tabla Kanban</a></li>
 			<li class="icn_jump_back"><a href="#">Enviar Mensaje</a></li>
+		</ul>
+		<hr>
+		<h3>Administrar Proyecto</h3>
+		<ul class="toggle">
+			<li class="icn_new_article"><a href="#">Administrar User Story</a></li>
+			<li class="icn_edit_article"><a href="#">Administrar Sprint</a></li>
+			<li class="icn_categories"><a href="#">Administrar Flujos</a></li>
+			<li class="icn_security"><a href="#">Opciones Avanzadas</a></li>
 		</ul>
 		<hr>	
 		<h3>Acerca</h3>

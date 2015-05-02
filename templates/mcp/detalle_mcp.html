@@ -15,8 +15,6 @@
                         </table>
 
                     </div>
-
-                    
                 </div>
             </div>
         </article>
@@ -44,7 +42,13 @@
                                                 {% if userstory.is_active %}
                                                     <tr class="clickableRow" href='{% url "apps.userstory.views.detalle_userstory" userstory.id %}'>
                                                     <th>{{ userstory.Nombre }}</th>
-                                                     <th align="center"><font color="#751395">{{userstory.Estado}}</font></th>
+                                                     <th align="center"><font color="#751395">{{userstory.Estado}}
+
+                                                        {% if userstory.in_kanban %}
+                                                           <strong>|</strong> {{userstory.get_tabla}}
+                                                        {% endif %}
+
+                                                     </font></th>
                                                     <th align="right"><font color="#04A935">Activo</font></th>
                                                 {%else%}
                                                     <tr class="clickableRow" href='{% url "apps.userstory.views.detalle_userstory" userstory.id %}'>

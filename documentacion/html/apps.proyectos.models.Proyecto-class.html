@@ -71,7 +71,7 @@ Clase Proyecto:
     * Contiene los campos de la tabla proyecto en la base de datos
 
     * Variales
-        -   Scrum_Master: es el usuario lider del proyecto
+        -   Lider: es el usuario lider del proyecto
         -   Nombre: es el nombre que posee el proyecto
         -   Descripcion: es la decripcion del proyecto
         -   Fecha de inicio: es la fecha en que el proyecto dara inicio
@@ -80,65 +80,6 @@ Clase Proyecto:
 
 </pre>
 
-<!-- ==================== NESTED CLASSES ==================== -->
-<a name="section-NestedClasses"></a>
-<table class="summary" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr bgcolor="#70b0f0" class="table-header">
-  <td colspan="2" class="table-header">
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-      <tr valign="top">
-        <td align="left"><span class="table-header">Nested Classes</span></td>
-        <td align="right" valign="top"
-         ><span class="options">[<a href="#section-NestedClasses"
-         class="privatelink" onclick="toggle_private();"
-         >hide private</a>]</span></td>
-      </tr>
-    </table>
-  </td>
-</tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a href="apps.proyectos.models.Proyecto.Meta-class.html" class="summary-name">Meta</a>
-    </td>
-  </tr>
-</table>
-<!-- ==================== INSTANCE METHODS ==================== -->
-<a name="section-InstanceMethods"></a>
-<table class="summary" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr bgcolor="#70b0f0" class="table-header">
-  <td colspan="2" class="table-header">
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-      <tr valign="top">
-        <td align="left"><span class="table-header">Instance Methods</span></td>
-        <td align="right" valign="top"
-         ><span class="options">[<a href="#section-InstanceMethods"
-         class="privatelink" onclick="toggle_private();"
-         >hide private</a>]</span></td>
-      </tr>
-    </table>
-  </td>
-</tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="__str__"></a><span class="summary-sig-name">__str__</span>(<span class="summary-sig-arg">self</span>)</span></td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="apps.proyectos.models-pysrc.html#Proyecto.__str__">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-</table>
 <!-- ==================== CLASS VARIABLES ==================== -->
 <a name="section-ClassVariables"></a>
 <table class="summary" border="1" cellpadding="3"
@@ -160,14 +101,14 @@ Clase Proyecto:
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="apps.proyectos.models.Proyecto-class.html#Scrum_Master" class="summary-name">Scrum_Master</a> = <code title="models.ForeignKey(User, null= True, related_name= 'Scrum_Master')">models.ForeignKey(User, null= True, related_nam<code class="variable-ellipsis">...</code></code>
+        <a href="apps.proyectos.models.Proyecto-class.html#Scrum_Master" class="summary-name">Scrum_Master</a> = <code title="models.ForeignKey(User, related_name= 'Scrum_Master')">models.ForeignKey(User, related_name= 'Scrum_Ma<code class="variable-ellipsis">...</code></code>
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="apps.proyectos.models.Proyecto-class.html#Grupo_trabajo" class="summary-name">Grupo_trabajo</a> = <code title="models.ManyToManyField(User, null= True, related_name= 'Proyectos')">models.ManyToManyField(User, null= True, relat<code class="variable-ellipsis">...</code></code>
+        <a href="apps.proyectos.models.Proyecto-class.html#Grupo_trabajo" class="summary-name">Grupo_trabajo</a> = <code title="models.ManyToManyField(User, related_name= 'Proyectos')">models.ManyToManyField(User, related_name= 'Pr<code class="variable-ellipsis">...</code></code>
     </td>
   </tr>
 <tr>
@@ -226,13 +167,6 @@ Clase Proyecto:
         <a name="Fecha_creacion"></a><span class="summary-name">Fecha_creacion</span> = <code title="models.DateTimeField(auto_now= True, null= True)">models.DateTimeField(auto_now= True, null= True)</code>
     </td>
   </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a name="Tablas"></a><span class="summary-name">Tablas</span> = <code title="models.ManyToManyField(Flujo, null= True)">models.ManyToManyField(Flujo, null= True)</code>
-    </td>
-  </tr>
 </table>
 <!-- ==================== CLASS VARIABLE DETAILS ==================== -->
 <a name="section-ClassVariableDetails"></a>
@@ -264,7 +198,7 @@ Clase Proyecto:
   <dl class="fields">
     <dt>Value:</dt>
       <dd><table><tr><td><pre class="variable">
-models.ForeignKey(User, null= True, related_name= 'Scrum_Master')
+models.ForeignKey(User, related_name= 'Scrum_Master')
 </pre></td></tr></table>
 </dd>
   </dl>
@@ -282,7 +216,7 @@ models.ForeignKey(User, null= True, related_name= 'Scrum_Master')
   <dl class="fields">
     <dt>Value:</dt>
       <dd><table><tr><td><pre class="variable">
-models.ManyToManyField(User, null= True, related_name= 'Proyectos')
+models.ManyToManyField(User, related_name= 'Proyectos')
 </pre></td></tr></table>
 </dd>
   </dl>
@@ -387,7 +321,7 @@ models.CharField(max_length= 15, default= 'Pendiente', unique= False)
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Fri May  1 20:15:19 2015
+    Generated by Epydoc 3.0.1 on Fri Apr 10 13:46:34 2015
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

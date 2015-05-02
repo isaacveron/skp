@@ -32,7 +32,8 @@ class Flujo(models.Model):
 	def __str__(self):
 		return self.Nombre
 
-
+	class Meta:
+		ordering = ['Nombre']
 
 	def agregar_us(self, us):
 		self.Actividades.get(Orden=1).To_do.add(us)

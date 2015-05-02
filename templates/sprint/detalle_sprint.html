@@ -20,15 +20,24 @@
                                 <p>
                                     {% if usuario_actor.can_change_proyecto %}
                                         {% if sprint.Estado == 'Pendiente' %}
+
                                             <a href="{% url 'apps.sprint.views.modificar_sprint' sprint.id%}">Modificar</a>
+                                            <strong> | </strong>
+
+                                            <a href="{% url 'apps.sprint.views.vista_iniciar_sprint' sprint.id%}"> Iniciar Sprint </a>
+                                            <strong> | </strong>
+
+                                        {% endif %}
+
+                                        {% if sprint.Estado == 'En_curso' %}
+                                            <a href="{% url 'apps.sprint.views.vista_detener_sprint' sprint.id%}"> Detener Sprint </a>
                                             <strong> | </strong>
                                         {% endif %}
                                     {% endif %}
                                     
                                         <a href="{% url 'apps.sprint.views.cambiar_estado_sprint' sprint.id%}">Cambiar Estado</a>
                                         <strong> | </strong>
-                                        <a href="{% url 'apps.sprint.views.vista_iniciar_sprint' sprint.id%}"> Iniciar Sprint </a>
-                                        <strong> | </strong>
+                                        
                                          <a href="{% url 'apps.sprint.views.vista_eliminar_sprint' sprint.id%}">Eliminar</a>
                                         <strong> | </strong>
                                     

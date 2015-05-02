@@ -9,13 +9,15 @@
                     <div id="tab1" class="tab_content">
                         <table class="tablesorter" cellspacing="0"> 
                             <div class="module_content">
-                                <form id="formulario" method="post">
-                                    {% csrf_token %}
-                                    <table class="table">
-                                        <p>{{ formulario }}</p>
-                                    </table>
-                                    <p><input  type="submit" value="Confirmar"></p>
-                                </form>
+                                {% for sprint in sprints  %}
+                                    {% for us in sprint.UserStorys.all %}
+                                        {% if us == userstory %}
+                                            <form action="{% url 'apps.userstory.views.restar_horas_sprint' sprint.id %}">
+                                                <input type="text" name="q" required>
+                                            </form>
+                                        {% endif %}                                        
+                                    {% endfor %}                                    
+                                {% endfor %}
                             </div>
                         </table>
                     </div>

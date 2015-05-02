@@ -15,8 +15,7 @@ alerta ()
 	echo 'Opcion no valida, porfavor ingrese una opcion valida'
 }
 
-usuario_BD='root'
-usuario='isaac'
+usuario='odso09'
 echo "#########Bienvenido al Sistema skp#########"
 while [ "$OPT" != 6 ]
 do
@@ -24,7 +23,7 @@ do
 	read OPT
 	case $OPT in
 		1 )	
-			sudo -u "$usuario_BD" createdb skp
+			sudo -u "$usuario" createdb skp
 			if [ $? -ne 0 ]; then  
 				echo 'La BD ya existe'
 			else
@@ -32,7 +31,7 @@ do
 			fi
 			;;		
 		2 )
-			pg_restore -i -h localhost -p 5432 -U "$usuario_BD" -d skp -v "/home/"$usuario"/Escritorio/git/skp/Script/backup.sql"
+			pg_restore -i -h localhost -p 5432 -U "$usuario" -d skp -v "/home/"$usuario"/Escritorio/git/skp/Script/backup.sql"
 			if [ $? -ne 0 ]; then  
 				echo 'Error la BD no existe por favor creelo'
 			else
@@ -40,7 +39,7 @@ do
 			fi
 			;;
 		3 )
-			pg_dump -i -h localhost -p 5432 -U "$usuario_BD" -F c -b -v -f "/home/"$usuario"/Escritorio/git/skp/Script/backup.sql" skp
+			pg_dump -i -h localhost -p 5432 -U "$usuario" -F c -b -v -f "/home/"$usuario"/Escritorio/git/skp/Script/backup.sql" skp
 			if [ $? -ne 0 ]; then  
 				echo 'Error la BD no existe por favor creelo'
 			else
@@ -48,7 +47,7 @@ do
 			fi
 			;;
 		4 )
-			sudo -u "$usuario_BD" dropdb skp
+			sudo -u "$usuario" dropdb skp
 			if [ $? -ne 0 ]; then  
 				echo 'Error la BD no existe por favor creelo'
 			else

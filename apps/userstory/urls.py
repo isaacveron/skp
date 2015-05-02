@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
-from .views import crear_userstory, gestion_de_userstory, detalle_userstory, buscar_userstory, modificar_userstory, avanzar_us
+from .views import crear_userstory, gestion_de_userstory, detalle_userstory, buscar_userstory, modificar_userstory
 from .views import vista_eliminar_userstory, eliminar_userstory, asignar_horas_us, restar_horas_sprint, cambiar_estado_userstory
+from .views import retroceder_us, avanzar_us
 
 urlpatterns = patterns('',
     url(r'^crear_userstory/(?P<idProyecto>\d+)/$', crear_userstory, name = 'crear_userstory'),
@@ -14,5 +15,6 @@ urlpatterns = patterns('',
     url(r'^asignar_hora/(?P<idUserStory>\d+)/$', asignar_horas_us),
     url(r'^hora_asignada/(?P<idSprint>\d+)/$', restar_horas_sprint),
     url(r'^avanzar_us/(?P<idUs>\d+)/$', avanzar_us),
+    url(r'^retoceder_us/(?P<idUs>\d+)/$', retroceder_us),
 )	
  
