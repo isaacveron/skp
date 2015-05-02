@@ -7,10 +7,14 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('userstory', '0013_auto_20150501_1242'),
+        ('userstory', '0015_auto_20150501_2251'),
     ]
 
     operations = [
+        migrations.AlterModelOptions(
+            name='userstory',
+            options={'ordering': ['Nombre']},
+        ),
         migrations.AlterField(
             model_name='userstory',
             name='Estado',

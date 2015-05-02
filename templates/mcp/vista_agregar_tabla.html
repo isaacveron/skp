@@ -1,0 +1,33 @@
+{% extends 'index.html' %}
+
+{% block cuerpo %}
+   
+        <article class="module width_full">
+            <header>
+                <h3>Agregar tabla a proyecto </h3>
+            </header>
+
+            <div class="module_content">
+                <div class="tab_container">
+                    <div id="tab1" class="tab_content">
+                        <table class="tablesorter" cellspacing="0"> 
+                            <thead> 
+                                {% if tablas|length > 0 %}
+                                    {% for tabla in tablas.all %}
+                                        {% if tabla.id > 0 %}
+                                            <tr class="clickableRow" href='{% url "apps.mcp.views.agregar_tabla" proyecto.id tabla.id %}' id="tablaproyecto" rel="tabla">
+                                            <th>{{ tabla.Nombre }}</th>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                   <p>No existen tablas para agregar</p>
+                                {% endif %}
+                            </thead>
+
+                        </table>
+                    </div>
+                </div>
+            </div>  
+        </article>
+    
+{% endblock %}

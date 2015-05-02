@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from .views import crear_userstory, gestion_de_userstory, detalle_userstory, buscar_userstory, modificar_userstory
+from .views import crear_userstory, gestion_de_userstory, detalle_userstory, buscar_userstory, modificar_userstory, avanzar_us
 from .views import vista_eliminar_userstory, eliminar_userstory, asignar_horas_us, restar_horas_sprint, cambiar_estado_userstory
 from .views import retroceder_us, avanzar_us
 

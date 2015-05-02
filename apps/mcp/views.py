@@ -14,7 +14,6 @@ def detalle_mcp(request, idProyecto):
         del sistema y luego retorna el html renderizado con los datos 
 
         @type request: django.http.HttpRequest
-        @type idProyecto: Integer
         @param request: Contiene informacion sobre la solic. web actual que llamo a esta vista
         @param idProyecto: identificador del proyecto cuyos datos desean verse 
         @rtype: django.http.HttpResponse
@@ -39,8 +38,6 @@ def detalle_tabla(request, idProyecto, idTabla):
         userstorys en ellas
 
         @type request: django.http.HttpRequest
-        @type idProyecto: Integer
-        @type idTabla; Integer
         @param request: Contiene informacion sobre la solic. web actual que llamo a esta vista
         @param idProyecto: identificador del proyecto al que pertenece la tabla
         @param idTabla: identificador de la tabla  
@@ -64,7 +61,6 @@ def vista_agregar_tabla(request, idProyecto):
         seleccionar una
 
         @type request: django.http.HttpRequest
-        @type idProyecto: Integer
         @param request: Contiene informacion sobre la solic. web actual que llamo a esta vista
         @param idProyecto: identificador del proyecto al que se desea agregar la tabla 
         @rtype: django.http.HttpResponse
@@ -88,12 +84,10 @@ def vista_agregar_tabla(request, idProyecto):
 def agregar_tabla(request, idProyecto, idTabla):
 
     """
-        Vista que despliega la lista de las tablas para ser agregadas al proyecto, recibe un request,
-        el identificador del proyecto y el identificador de la tabla que desea agregarse
+        Recibe un request,el identificador del proyecto y el identificador de la tabla 
+        que desea agregarse
 
         @type request: django.http.HttpRequest
-        @type idProyecto: Integer
-        @type idTabla; Integer
         @param request: Contiene informacion sobre la solic. web actual que llamo a esta vista
         @param idProyecto: identificador del proyecto al que se desea agregar la tabla 
         @param idTabla: identificador de la tabla que se desea agregar  

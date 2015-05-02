@@ -2,6 +2,7 @@ from django.db import models
 from apps.usuario.models import User
 from apps.userstory.models import UserStory
 from apps.proyectos.models import Proyecto
+from apps.flujos.models import Flujo, Actividad
 # Create your models here.
 class Sprint(models.Model):
     """
@@ -16,7 +17,13 @@ class Sprint(models.Model):
             -   Fecha de finalizacion: es la fecha en la que el proyecto estara finalizado
             -   Fecha: es la fecha de creacion del proyecto
     """   
-    
+    Estados_sprint = (
+        ('Pendiente','Pendiente'),
+        ('En_curso','En_curso'),
+        ('Terminado','Terminado'),
+        ('Cancelado','Cancelado'),        
+    )
+
     Nombre = models.CharField(max_length=30, unique=True)
     Descripcion = models.TextField(null=True)
     Fecha_inicio = models.DateField('Fecha de inicio', blank=True, null=True)
@@ -24,11 +31,12 @@ class Sprint(models.Model):
     Duracion = models.PositiveIntegerField(null=True, blank=True)
     Cliente = models.CharField( max_length=30 , blank=True, null=True)
     is_active = models.BooleanField(default=True)
-    Estado = models.CharField( max_length=15, default='Pendiente', unique=False)
+    Estado = models.CharField( max_length=30, choices=Estados_sprint, default='Pendiente', unique=False)
     UserStorys = models.ManyToManyField(UserStory, null=True, related_name='UserStorys')
     Usuario_creador = models.ForeignKey(User, null=True)
     Proyecto_asignado = models.ForeignKey (Proyecto, null=True)
     Fecha_creacion = models.DateTimeField(auto_now=True, null=True)
+    Tabla_asignada = models.ForeignKey(Flujo, null=True)
 
     def __str__(self):              
         return self.Nombre
