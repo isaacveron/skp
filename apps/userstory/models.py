@@ -18,6 +18,7 @@ class UserStory(models.Model):
             -   Fecha: es la fecha de creacion del proyecto
     """
     Estados_US = (
+        ('Pendiente', 'Pendiente'),
         ('AsignadoSprint','AsignadoSprint'),
         ('AsignadoFlujo','AsignadoFlujo'),
         ('AsignadoSprintActivo','AsignadoSprintActivo'),
@@ -61,8 +62,6 @@ class UserStory(models.Model):
     Size = models.PositiveIntegerField(null=True, blank=True)
     Estado = models.CharField( max_length=30, choices=Estados_US, default='Pendiente', unique=False)
     is_active = models.BooleanField(default=True)
-    Version = models.PositiveIntegerField(null=True, blank=True, default=0)
-    Sub_version = models.PositiveIntegerField(null=True, blank=True, default=0)
     
     Usuario_creador = models.ForeignKey(User, null=True)
     Proyecto_asignado = models.ForeignKey (Proyecto, null=True)
@@ -72,12 +71,16 @@ class UserStory(models.Model):
     Estado_de_actividad = models.CharField( max_length=30, choices=Estados_actividad, default='none', unique=False)
     Actividad_asignada = models.ForeignKey( Actividad, null=True )
 
+    class Meta:
+        ordering = ['Nombre']
 
     def __str__(self):              
         return self.Nombre
 
+    def get_tabla(self):
+
+        if (self.in_kanban):
+            return Flujo.objects.get( pk=self.Actividad_asignada.idTabla ).Nombre
+        else:
+            return 'none'    
     
-class CargarHoras(models.Model):
-    Horas = models.PositiveIntegerField(null=True, blank=True, default=0)
-    Descripcion = models.TextField(null=True)
-    US_asignado= models.ForeignKey(UserStory, null=True)

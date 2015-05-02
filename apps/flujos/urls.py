@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from .views import crear_flujo, administrar_flujos, detalle_flujo, buscar_flujo, modificar_flujo
-from .views import vista_eliminar_flujo, eliminar_flujo
+from .views import vista_eliminar_flujo, eliminar_flujo, crear_actividad
 
 urlpatterns = patterns('',
     url(r'^crear_flujo/$', crear_flujo, name = 'crear_flujo'),
