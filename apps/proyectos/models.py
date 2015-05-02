@@ -1,7 +1,6 @@
 from django.db import models
 from apps.roles.models import Group
 from apps.usuario.models import User
-from apps.flujos.models import Flujo
 
 # Create your models here.
 class Proyecto(models.Model):
@@ -26,11 +25,8 @@ class Proyecto(models.Model):
     Cliente = models.CharField( max_length=30 , blank=True, null=True)
     Estado = models.CharField( max_length=15, default='Pendiente', unique=False)
     Usuario_creador = models.ForeignKey(User, null=True)
+    
     Fecha_creacion = models.DateTimeField(auto_now=True, null=True)
-    Tablas = models.ManyToManyField(Flujo, null=True)
 
     def __str__(self):
         return self.Nombre
-
-    class Meta:
-        ordering = ['Nombre']
