@@ -2,6 +2,7 @@
 {% extends 'index.html' %}
 
 {% block cuerpo %}
+    <section id="main" class="column">
         <article class="module width_full">
             <header><h3>Detalles del Sprint</h3></header>
             <div class="module_content">
@@ -16,41 +17,38 @@
                             <div class="message"><p><strong>Estado: </strong>{{ sprint.Estado }}</p></div>
                             <div class="message"><p><strong>Tabla Asignada: </strong>{{ sprint.Tabla_asignada.Nombre }}</p></div>
                             <div class="message">
-                            <p>
-                                {% if sprint.Estado == 'Pendiente' %}
+                                <p>
+                                    {% if usuario_actor.can_change_proyecto %}
+                                        {% if sprint.Estado == 'Pendiente' %}
 
-                                    {% if perms.sprint.change_sprint %}
-                                        <a href="{% url 'apps.sprint.views.modificar_sprint' sprint.id%}">Modificar</a>
-                                        <strong> | </strong>
+                                            <a href="{% url 'apps.sprint.views.modificar_sprint' sprint.id%}">Modificar</a>
+                                            <strong> | </strong>
+
+                                            <a href="{% url 'apps.sprint.views.vista_iniciar_sprint' sprint.id%}"> Iniciar Sprint </a>
+                                            <strong> | </strong>
+
+                                            <a href="{% url 'apps.sprint.views.vista_eliminar_sprint' sprint.id%}">Eliminar</a>
+                                            <strong> | </strong>
+
+                                            <a href="{% url 'apps.sprint.views.cambiar_estado_sprint' sprint.id%}">Cambiar Estado</a>
+                                            <strong> | </strong>
+                                        {% endif %}
+
+                                        {% if sprint.Estado == 'En_curso' %}
+                                            <a href="{% url 'apps.sprint.views.vista_detener_sprint' sprint.id%}"> Detener Sprint </a>
+                                            <strong> | </strong>
+                                        {% endif %}
                                     {% endif %}
-
-                                    {% if perms.sprint.iniciar_sprint %}
-                                        <a href="{% url 'apps.sprint.views.vista_iniciar_sprint' sprint.id%}"> Iniciar Sprint </a>
-                                        <strong> | </strong>
-                                    {% endif %}
-
-                                    {% if  perms.sprint.cambiar_estado_sprint %}
-                                        <a href="{% url 'apps.sprint.views.cambiar_estado_sprint' sprint.id%}">Cambiar Estado</a>
-                                        <strong> | </strong>
-                                    {% endif %}
-
-                                    {% if perms.sprint.delete_sprint %}
-                                        <a href="{% url 'apps.sprint.views.vista_eliminar_sprint' sprint.id%}">Eliminar</a>
-                                        <strong> | </strong>
-                                    {% endif %}
-
-                                {% endif %}
-
-                                    {% if sprint.Estado == 'En_curso' and perms.sprint.detener_sprint %}
-                                        <a href="{% url 'apps.sprint.views.vista_detener_sprint' sprint.id%}"> Detener Sprint </a>
-                                        <strong> | </strong>
-                                    {% endif %}
-                                        
+                                    
                                     <a href="javascript:history.go(-1)">Volver</a>
                                 </p>
-                        </table>                       
+                            </div>                            
+                        </div>
+                        </table>
+                        
                     </div>
                 </div>
             </div>
         </article>
+    </section>
 {% endblock cuerpo %}

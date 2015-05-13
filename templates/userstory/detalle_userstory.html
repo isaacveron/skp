@@ -2,6 +2,7 @@
 {% extends 'index.html' %}
 
 {% block cuerpo %}
+    <section id="main" class="column">
         <article class="module width_full">
             <header><h3>Detalles del Userstory</h3></header>
             <div class="module_content">
@@ -9,82 +10,82 @@
                     <div id="tab1" class="tab_content">
                         <table class="tablesorter" cellspacing="0"> 
                             <div class="message"><p><strong>Nombre: </strong>{{ userstory.Nombre }}</p></div>
+                            <div class="message"><p><strong>Creado por: </strong>{{ userstory.Usuario_creador }}</p></div>
+                            <div class="message"><p><strong>Fecha de Creacion: </strong>{{ userstory.Fecha_creacion }}</p></div>
                             <div class="message"><p><strong>Estado: </strong>{{ userstory.Estado }}</p></div>
                             {% if userstory.in_kanban %}
                                 
+
                                 <div class="message"><p><strong>Tabla en la que se encuentra: </strong>{{ tabla.Nombre }}</p></div>
                                 
                                 <div class="message"><p><strong>Actividad: </strong>{{ userstory.Actividad_asignada }}</p></div>
                                 
                                 <div class="message"><p><strong>Estado en la actividad: </strong>{{ userstory.Estado_de_actividad }}</p></div>
+
                             {% endif %}
-                            
-                            <div class="message"><p><strong>Creado por: </strong>{{ userstory.Usuario_creador }}</p></div>
-                            <div class="message"><p><strong>Fecha de Creacion: </strong>{{ userstory.Fecha_creacion }}</p></div>
                             <div class="message">
-                            <p>
-                                {% if userstory.Estado == 'AsignadoSprintActivo' %}
-
-                                    {% if  perms.userstory.asignar_horas_us %}
-                                        <a href="{% url 'apps.userstory.views.asignar_horas_us' userstory.id %}">Asignar Horas</a>
+                                <p>
+                                    {% if usuario_actor.can_change_proyecto %}
+                                        <a href="{% url 'apps.userstory.views.modificar_userstory' userstory.id %}">Modificar</a>
                                         <strong> | </strong>
                                     {% endif %}
 
-                                    {% if perms.userstory.avanzar_us %}
-                                        <a href="{% url 'apps.userstory.views.avanzar_us' userstory.id %}">Avanzar</a>
-                                        <strong> | </strong>
+                                    {% if usuario_actor.can_change_proyecto %}
+
+                                        {% if userstory.Estado == 'AsignadoSprintActivo' %}
+
+                                            <a href="{% url 'apps.userstory.views.asignar_horas_us' userstory.id %}">Asignar Horas</a>
+                                            <strong> | </strong>
+
+                                            {% if userstory.Estado_de_actividad == 'doing' %}
+
+                                                <a href="{% url 'apps.userstory.views.avanzar_us' userstory.id %}">Concluir Actividad</a>
+                                                <strong> | </strong>
+                                                
+                                            {% endif %}
+
+                                            {% if userstory.Estado_de_actividad == 'done' %}
+                                                {% if actividad.Orden == numero %}
+
+                                                    <a href="{% url 'apps.userstory.views.avanzar_us' userstory.id %}">Terminar User Story</a>
+                                                    <strong> | </strong>
+
+                                                {% else %}
+
+                                                    <a href="{% url 'apps.userstory.views.avanzar_us' userstory.id %}">Avanzar a la Siguiente Actividad</a>
+                                                    <strong> | </strong>
+
+                                                    <a href="{% url 'apps.userstory.views.retroceder_us' userstory.id %}">Recomenzar Actividad</a>
+                                                    <strong> | </strong>
+
+                                                {% endif %}
+                                                
+                                            {% endif %}
+                                            
+                                            <a href="{% url 'apps.userstory.views.avanzar_us' userstory.id %}">Avanzar</a>
+                                            <strong> | </strong>
+
+                                            
+
+                                        {% endif %}
+
                                     {% endif %}
-                                    
-                                    {% if  perms.userstory.retroceder_us %}
-                                        <a href="{% url 'apps.userstory.views.retroceder_us' userstory.id %}">Retroceder</a>
+
+                                        <a href="{% url 'apps.userstory.views.cambiar_estado_userstory' userstory.id %}">Cambiar Estado</a>
                                         <strong> | </strong>
-                                    {% endif %}
-
-                                {% endif %}
-                                
-                                {% if perms.userstory.change_userstory %}
-                                    <a href="{% url 'apps.userstory.views.modificar_userstory' userstory.id %}">Modificar</a>
-                                    <strong> | </strong>
-                                {% endif %}
-
-                                {% if  perms.userstory.cambiar_estado_us %}
-                                    <a href="{% url 'apps.userstory.views.cambiar_estado_userstory' userstory.id %}">Cambiar Estado</a>
-                                    <strong> | </strong>
-                                {% endif %}
-
-                                {% if userstory.Estado != 'Terminado' %}
-                                    <a href="{% url 'apps.userstory.views.avanzar_us' userstory.id %}">Avanzar</a>
-                                    <strong> | </strong>
-                                {% endif %}
                                      
-                                {% if perms.userstory.delete_userstory %}
-                                    <a href="{% url 'apps.userstory.views.vista_eliminar_userstory' userstory.id %}">Eliminar</a>
-                                    <strong> | </strong>
-                                {% endif %}  
-                                <a href="javascript:history.go(-1)">Volver</a>
-                            </p>
+                                        <a href="{% url 'apps.userstory.views.vista_eliminar_userstory' userstory.id %}">Eliminar</a>
+                                        <strong> | </strong>
+                                    
+                                    <a href="javascript:history.go(-1)">Volver</a>
+                                </p>
                             </div>                            
-                            </div>
+                        </div>
                         </table>
+                        
                     </div>
                 </div>
             </div>
         </article>
-
-
-        {% for us in  horas_us %}
-            <article class="module width_full">
-                <header><h3>Detalles de su actividad</h3></header>
-                    <div class="module_content">
-                        <div class="tab_container">
-                            <div id="tab1" class="tab_content">
-                                <table class="tablesorter" cellspacing="0"> 
-                                    <div class="message"><p><strong>Horas: </strong>{{ us.Horas }}</p></div>
-                                    <div class="message"><p><strong>Descripcion de Actividad: </strong>{{ us.Descripcion }}</p></div>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-            </article> 
-        {% endfor %}
+    </section>
 {% endblock cuerpo %}

@@ -1,6 +1,7 @@
 {% extends 'index.html' %}
 
 {% block cuerpo %}
+    <section id="main" class="column">
         <article class="module width_full">
             <header><h3>Detalles del Flujo</h3></header>
             <div class="module_content">
@@ -23,8 +24,10 @@
                 </div>
             </div>
         </article>
+    </section>
 
     {% for actividad in actividades.all %}
+        <section id="main" class="column">
             <article class="module width_full">
                 <header><h3>Actividad {{actividad.Orden}} : {{ actividad.Nombre }}</h3></header>
                 <div class="module_content">
@@ -66,6 +69,7 @@
                     </div>
                 </div>
             </article>
+        </section>
     {% endfor %}
     
 {% endblock cuerpo %}

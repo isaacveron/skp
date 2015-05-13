@@ -15,5 +15,4 @@ urlpatterns = patterns('',
     url(r'^', include('apps.sprint.urls')),
     url(r'^', include('apps.userstory.urls')),
     url(r'^', include('apps.mcp.urls')),
-    url(r'^', include('apps.mensaje.urls')),
 )

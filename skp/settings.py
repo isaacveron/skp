@@ -26,12 +26,6 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'is2skp@gmail.com'
-EMAIL_HOST_PASSWORD = 'politecnica'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-
 
 # Application definition
 
@@ -49,7 +43,6 @@ INSTALLED_APPS = (
     'apps.sprint',
     'apps.userstory',
     'apps.mcp',
-    'apps.mensaje'
 )
 
 MIDDLEWARE_CLASSES = (
