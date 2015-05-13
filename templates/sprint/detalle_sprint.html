@@ -27,6 +27,11 @@
                                             <a href="{% url 'apps.sprint.views.vista_iniciar_sprint' sprint.id%}"> Iniciar Sprint </a>
                                             <strong> | </strong>
 
+                                            <a href="{% url 'apps.sprint.views.vista_eliminar_sprint' sprint.id%}">Eliminar</a>
+                                            <strong> | </strong>
+
+                                            <a href="{% url 'apps.sprint.views.cambiar_estado_sprint' sprint.id%}">Cambiar Estado</a>
+                                            <strong> | </strong>
                                         {% endif %}
 
                                         {% if sprint.Estado == 'En_curso' %}
@@ -34,13 +39,6 @@
                                             <strong> | </strong>
                                         {% endif %}
                                     {% endif %}
-                                    
-                                        <a href="{% url 'apps.sprint.views.cambiar_estado_sprint' sprint.id%}">Cambiar Estado</a>
-                                        <strong> | </strong>
-                                        <a href="{% url 'apps.sprint.views.vista_iniciar_sprint' sprint.id%}"> Iniciar Sprint </a>
-                                        <strong> | </strong>
-                                         <a href="{% url 'apps.sprint.views.vista_eliminar_sprint' sprint.id%}">Eliminar</a>
-                                        <strong> | </strong>
                                     
                                     <a href="javascript:history.go(-1)">Volver</a>
                                 </p>

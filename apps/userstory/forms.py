@@ -13,10 +13,7 @@ Estados_US = (
 )
 
 class UserStoryForm(ModelForm):
-    """
-    Formulario para el la creacion de roles
-    Hereda de forms.ModelForm y utiliza la clase Group para
-    """
+    
     
     def __init__(self, idProyecto, *args, **kwargs):
         super(UserStoryForm, self).__init__(*args, **kwargs)

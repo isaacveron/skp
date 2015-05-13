@@ -9,6 +9,7 @@ from apps.sprint.forms import SprintForm, SprintFormMod, SprintFormDelete
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.decorators import user_passes_test
 from django.db.models import Q
+from apps.userstory.models import UserStory
 
 # Create your views here.
 @login_required(login_url = '/')
@@ -50,12 +51,38 @@ def crear_sprint(request, idProyecto):
     usuario_actor = request.user
     sprint = Sprint( Usuario_creador=usuario_actor, Proyecto_asignado=proyecto)
     
+
     if request.method == 'POST':
         formulario = SprintFormMod(request.POST, instance=sprint)
         if formulario.is_valid():
-            formulario.save()
+
+            sprint = formulario.save()
+
+            for us in sprint.UserStorys.all():
+                sprint.Duracion += us.Duracion
+
             cambiar_estado_userstory("asignar",formulario.instance.pk)
 
+            userstorys = UserStory.objects.filter( Proyecto_asignado=proyecto )
+
+            for us in userstorys:
+
+                if( us.in_kanban ):
+
+                    us.in_kanban = False
+                    actividad = us.Actividad_asignada
+                    us.Estado_de_actividad = 'none'
+                    us.Estado = 'AsignadoSprint'
+
+                    actividad.To_do.remove(us)
+                    actividad.Doing.remove(us)
+                    actividad.Done.remove(us)
+                    actividad.save()
+                    us.save()
+
+                    sprint.UserStorys.add(us)
+
+            sprint.save()
             return render_to_response('sprint/operacion_sprint_exito.html',
                                       {'mensaje': mensaje, 'usuario_actor': usuario_actor, 'proyecto':proyecto},
                                       context_instance=RequestContext(request))
@@ -277,12 +304,10 @@ def iniciar_sprint(request, idSprint):
 
     for us in sprint.UserStorys.all():
 
-        if not us.in_kanban :
-            us.in_kanban = True
-            us.Estado_de_actividad = 'to_do'
-            us.Actividad_asignada = actividad
-            actividad.To_do.add(us)
-
+        us.in_kanban = True
+        us.Estado_de_actividad = 'to_do'
+        us.Actividad_asignada = actividad
+        actividad.To_do.add(us)
 
         us.Estado = 'AsignadoSprintActivo'
         us.save()
