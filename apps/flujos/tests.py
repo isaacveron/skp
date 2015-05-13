@@ -1,14 +1,12 @@
 from django.test import TestCase
+import unittest, time
 from apps.flujos.models import Flujo, Actividad
 from django.test.client import RequestFactory
+from django.core.urlresolvers import reverse
+from datetime import datetime
 from apps.roles.models import Group
 from apps.usuario.models import User
 from apps.proyectos.models import Proyecto
-from django.test import Client
-import unittest, time
-from datetime import datetime
-from django.core.urlresolvers import reverse
-from django.contrib.auth import SESSION_KEY
 
 
 
@@ -80,10 +78,12 @@ class TestFlujos(TestCase):
 		self.assertTrue( tabla.Nombre == 'nombre_modificado' )
 
 
-	
 
 
 
+
+
+		
 
 		
 
