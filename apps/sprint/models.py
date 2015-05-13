@@ -28,7 +28,7 @@ class Sprint(models.Model):
     Descripcion = models.TextField(null=True)
     Fecha_inicio = models.DateField('Fecha de inicio', blank=True, null=True)
     Fecha_finalizacion = models.DateField('Fecha de finalizacion', blank=True, null=True)
-    Duracion = models.PositiveIntegerField(null=True, blank=True)
+    Duracion = models.PositiveIntegerField(default = 0)
     Cliente = models.CharField( max_length=30 , blank=True, null=True)
     is_active = models.BooleanField(default=True)
     Estado = models.CharField( max_length=30, choices=Estados_sprint, default='Pendiente', unique=False)
@@ -40,10 +40,3 @@ class Sprint(models.Model):
 
     def __str__(self):              
         return self.Nombre
-
-    class Meta:
-        permissions = (
-                      ("iniciar_sprint", "puede iniciar el sprint"),
-                      ("detener_sprint", "puede detener el sprint"),
-                      ("cambiar_estado_sprint", "puede cambiar el estado del sprint"),
-        )

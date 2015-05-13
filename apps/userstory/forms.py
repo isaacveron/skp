@@ -13,17 +13,14 @@ Estados_US = (
 )
 
 class UserStoryForm(ModelForm):
-    """
-    Formulario para el la creacion de roles
-    Hereda de forms.ModelForm y utiliza la clase Group para
-    """
+    
     
     def __init__(self, idProyecto, *args, **kwargs):
         super(UserStoryForm, self).__init__(*args, **kwargs)
         self.fields['Usuario_asignado'].queryset = User.objects.filter(Proyectos__id=idProyecto)
     class Meta:
         model = UserStory 
-        exclude = ['Version','Sub_version','in_kanban','Actividad_asignada','Estado_de_actividad','actividad_asignada','estado_actividad','is_active', 'Proyecto_asignado', 'Usuario_creador','Estado' , 'Usuario_creador' ]
+        exclude = ['Version','Sub_version','in_kanban','Actividad_asignada','Estado_de_actividad','actividad_asignada','estado_actividad','is_active', 'Proyecto_asignado', 'Usuario_creador','Estado' , 'Usuario_creador' , 'Fecha_creacion']
 
 class UserStoryFormMod(ModelForm):
     """
@@ -36,7 +33,7 @@ class UserStoryFormMod(ModelForm):
         self.fields['Usuario_asignado'].queryset = User.objects.filter(Proyectos__id=self.instance.Proyecto_asignado.id)
     class Meta:
         model = UserStory 
-        exclude = ['Version','Sub_version','in_kanban','Actividad_asignada','Estado_de_actividad','actividad_asignada','estado_actividad','is_active', 'Proyecto_asignado', 'Usuario_creador','Estado' , 'Usuario_creador' ]
+        exclude = ['Version','Sub_version','in_kanban','Actividad_asignada','Estado_de_actividad','actividad_asignada','estado_actividad','is_active', 'Proyecto_asignado', 'Usuario_creador','Estado' , 'Usuario_creador' , 'Fecha_creacion']
 
 
 class UserStoryFormDelete(ModelForm):    
