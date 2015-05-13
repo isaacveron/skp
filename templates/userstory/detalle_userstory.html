@@ -40,8 +40,28 @@
                                         <strong> | </strong>
                                     {% endif %}
 
+                                    {% if userstory.Estado_de_actividad == 'done' %}
+                                        {% if actividad.Orden == numero %}
+                                            <a href="{% url 'apps.userstory.views.avanzar_us' userstory.id %}">Terminar User Story</a>
+                                            <strong> | </strong>
+                                        {% else %}
+                                            <a href="{% url 'apps.userstory.views.avanzar_us' userstory.id %}">Avanzar a la Siguiente Actividad</a>
+                                            <strong> | </strong>
+
+                                            <a href="{% url 'apps.userstory.views.retroceder_us' userstory.id %}">Recomenzar Actividad</a>
+                                            <strong> | </strong>
+
+                                        {% endif %}
+                                                
+                                    {% endif %}
+
+                                    {% if userstory.Estado_de_actividad == 'doing' %}
+                                        <a href="{% url 'apps.userstory.views.avanzar_us' userstory.id %}">Concluir Actividad</a>
+                                        <strong> | </strong>            
+                                    {% endif %}
                                 {% endif %}
-                                
+
+
                                 {% if perms.userstory.change_userstory %}
                                     <a href="{% url 'apps.userstory.views.modificar_userstory' userstory.id %}">Modificar</a>
                                     <strong> | </strong>
@@ -49,11 +69,6 @@
 
                                 {% if  perms.userstory.cambiar_estado_us %}
                                     <a href="{% url 'apps.userstory.views.cambiar_estado_userstory' userstory.id %}">Cambiar Estado</a>
-                                    <strong> | </strong>
-                                {% endif %}
-
-                                {% if userstory.Estado != 'Terminado' %}
-                                    <a href="{% url 'apps.userstory.views.avanzar_us' userstory.id %}">Avanzar</a>
                                     <strong> | </strong>
                                 {% endif %}
                                      
@@ -70,6 +85,8 @@
                 </div>
             </div>
         </article>
+
+      
 
 
         {% for us in  horas_us %}

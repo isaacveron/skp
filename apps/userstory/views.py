@@ -80,12 +80,17 @@ def detalle_userstory(request, idUserStory):
       @return: detalle_proyecto.html, donde se le despliega al usuario los datos
       @author: Isaac Veron
     """
+    
     usuario_actor = request.user
     userstory = UserStory.objects.get(pk=idUserStory)
-    tabla = Flujo.objects.get( pk = userstory.Actividad_asignada.idTabla )
+    horas_us = CargarHoras.objects.filter(US_asignado=idUserStory)
+    if userstory.in_kanban:
+        tabla = Flujo.objects.get(pk = userstory.Actividad_asignada.idTabla)
+    else:
+        tabla = Flujo.objects.get(pk=2)
     numero = len( tabla.Actividades.all() )
 
-    return render_to_response('userstory/detalle_userstory.html', {'numero':numero,'actividad':userstory.Actividad_asignada,'tabla':tabla,'usuario_actor': usuario_actor, 'userstory': userstory},
+    return render_to_response('userstory/detalle_userstory.html', {'numero':numero,'actividad':userstory.Actividad_asignada,'tabla':tabla,'usuario_actor': usuario_actor, 'userstory': userstory, 'horas_us':horas_us},
                               context_instance=RequestContext(request))
 
 @login_required(login_url = '/')
@@ -340,7 +345,7 @@ def avanzar_us(request, idUs):
 
     actividad = us.Actividad_asignada
     tabla = Flujo.objects.get(pk=actividad.idTabla)
-    retorno = "{% url 'apps.userstory.views.detalle_userstory' userstory.id %}"
+    mensaje = ''
 
 
     if( us.Estado_de_actividad == 'to_do' ):
@@ -380,7 +385,7 @@ def avanzar_us(request, idUs):
     actividad.save()
     tabla.save()
 
-    return render_to_response('operacion_exito.html',{'userstory':us,'retorno':retorno,'mensaje':mensaje},context_instance=RequestContext(request))
+    return render_to_response('userstory/operacion_userstory_exito.html',{'userstory':us,'mensaje':mensaje},context_instance=RequestContext(request))
 
 def retroceder_us(request, idUs):
 
