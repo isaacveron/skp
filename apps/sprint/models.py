@@ -28,7 +28,7 @@ class Sprint(models.Model):
     Descripcion = models.TextField(null=True)
     Fecha_inicio = models.DateField('Fecha de inicio', blank=True, null=True)
     Fecha_finalizacion = models.DateField('Fecha de finalizacion', blank=True, null=True)
-    Duracion = models.PositiveIntegerField(null=True, blank=True)
+    Duracion = models.PositiveIntegerField(default = 0)
     Cliente = models.CharField( max_length=30 , blank=True, null=True)
     is_active = models.BooleanField(default=True)
     Estado = models.CharField( max_length=30, choices=Estados_sprint, default='Pendiente', unique=False)
