@@ -82,10 +82,9 @@ def detalle_userstory(request, idUserStory):
     """
     usuario_actor = request.user
     userstory = UserStory.objects.get(pk=idUserStory)
+    horas_us = CargarHoras.objects.filter(US_asignado=idUserStory)
     tabla = Flujo.objects.get( pk = userstory.Actividad_asignada.idTabla )
-    numero = len( tabla.Actividades.all() )
-
-    return render_to_response('userstory/detalle_userstory.html', {'numero':numero,'actividad':userstory.Actividad_asignada,'tabla':tabla,'usuario_actor': usuario_actor, 'userstory': userstory},
+    return render_to_response('userstory/detalle_userstory.html', {'usuario_actor': usuario_actor, 'userstory': userstory, 'horas_us':horas_us , 'tabla':tabla},
                               context_instance=RequestContext(request))
 
 @login_required(login_url = '/')
@@ -221,14 +220,9 @@ def asignar_horas_us (request, idUserStory):
     if request.method == 'POST':
         formulario = CargarHorasForm(request.POST, instance=cargar_horas_us)
         if formulario.is_valid():
-
             formulario.save()
             escribir_archivo("nueva_sub_version", idUserStory, formulario.instance.pk)
             restar_horas_sprint(idSprint, formulario.instance.pk)
-
-            if (userstory.Estado_de_actividad == 'to_do'):
-                avanzar(idUserStory)
-
             return render_to_response('userstory/operacion_userstory_exito.html',
                                       {'mensaje': mensaje, 'usuario_actor': usuario_actor},
                                       context_instance=RequestContext(request))
@@ -266,7 +260,7 @@ def escribir_archivo(accion, idUserStory, idHorasUS):
         fo.write ("Nombre: "+userstory.Nombre+"\n")
         fo.write ("Descripcion: "+userstory.Descripcion+"\n")
         fo.write ("Proyecto asignado: "+ str(userstory.Proyecto_asignado)+"\n")
-        fo.write ("Usuario creador: "+ str(userstory.Usuario_creador)+"\n"+"\n")
+        fo.write ("Usuario creador: "+ str(userstory.Usuario_creador)+"\n")
         fo.write ("Fecha creacion: "+ str(userstory.Fecha_creacion)+"\n")
         fo.write ("-----------------------------------------------------------------\n")
         fo.close()        
@@ -283,46 +277,6 @@ def escribir_archivo(accion, idUserStory, idHorasUS):
 
 ################################################################################################3
 
-def avanzar(idUs):
-
-    us = UserStory.objects.get(pk = idUs)
-
-    actividad = us.Actividad_asignada
-    tabla = Flujo.objects.get(pk=actividad.idTabla)
-
-
-
-    if( us.Estado_de_actividad == 'to_do' ):
-
-        actividad.To_do.remove( us )
-        us.Estado_de_actividad = 'doing'
-        actividad.Doing.add(us)
-
-    elif( us.Estado_de_actividad == 'doing' ):
-
-        actividad.Doing.remove( us )
-        us.Estado_de_actividad = 'done'
-        actividad.Done.add(us)
-
-    elif( us.Estado_de_actividad == 'done' ):
-
-        actividad.Done.remove( us )
-
-        if( actividad.Orden == len( tabla.Actividades.all() ) ):
-            us.Estado = 'Terminado'
-            us.Estado_de_actividad = 'none'
-            us.in_kanban = False
-
-        else:
-            nueva_actividad = tabla.Actividades.get( Orden= (actividad.Orden +1) )
-            nueva_actividad.To_do.add(us)
-            us.Estado_de_actividad = 'to_do'
-            us.Actividad_asignada = nueva_actividad
-            nueva_actividad.save()
-
-    us.save()
-    actividad.save()
-    tabla.save()
 
 def avanzar_us(request, idUs):
     """
@@ -340,7 +294,7 @@ def avanzar_us(request, idUs):
 
     actividad = us.Actividad_asignada
     tabla = Flujo.objects.get(pk=actividad.idTabla)
-    retorno = "{% url 'apps.userstory.views.detalle_userstory' userstory.id %}"
+
 
 
     if( us.Estado_de_actividad == 'to_do' ):
@@ -380,7 +334,7 @@ def avanzar_us(request, idUs):
     actividad.save()
     tabla.save()
 
-    return render_to_response('operacion_exito.html',{'userstory':us,'retorno':retorno,'mensaje':mensaje},context_instance=RequestContext(request))
+    return render_to_response('userstory/operacion_userstory_exito.html',{'mensaje':mensaje},context_instance=RequestContext(request))
 
 def retroceder_us(request, idUs):
 
@@ -423,21 +377,3 @@ def retroceder_us(request, idUs):
         mensaje = " Se retrocedio el us al estado 'to_do' de la actividad" + nueva_actividad.Nombre
 
     return render_to_response('userstory/operacion_userstory_exito.html',{'mensaje':mensaje},context_instance=RequestContext(request))
-
-def recomenzar_us(request, idUs):
-    us = UserStory.objects.get(pk = idUs)
-    actividad = us.Actividad_asignada
-    tabla = Flujo.objects.get(pk=actividad.idTabla)
-
-    us.Estado_de_actividad = 'to_do'
-
-    actividad.Done.remove(us)
-    actividad.TO_do.add(us)
-
-    us.save()
-    actividad.save()
-    tabla.save()
-
-    mensaje = " Se retrocedio el us al estado 'to_do' de la actividad" + nueva_actividad.Nombre
-    return render_to_response('userstory/operacion_userstory_exito.html',{'mensaje':mensaje},context_instance=RequestContext(request))
-
