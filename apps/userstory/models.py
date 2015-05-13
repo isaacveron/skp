@@ -76,6 +76,13 @@ class UserStory(models.Model):
 
     class Meta:
         ordering = ['Nombre']
+        permissions = (
+                      ("avanzar_us", "puede avanzar el userstory"),
+                      ("retroceder_us", "puede retroceder el userstory"),
+                      ("asignar_horas_us", "puede asignar horas al userstory"),
+                      ("cambiar_estado_us","cambiar estado del userstory"),
+                      ("finalizar_us", "puede finalizar un userstory"),
+        )
 
     def __str__(self):
         return self.Nombre

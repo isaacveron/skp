@@ -21,7 +21,7 @@
                         <thead> 
                             {% if roles|length > 0 %}
                                 {% for rol in roles %}
-                                    {% if rol.pk > 2 %}
+                                    {% if rol.pk > 0 %}
                                         <tr class="clickableRow" href='{% url "apps.roles.views.detalle_rol" rol.id %}' id="tablaRol" rel="tabla">
                                         <th>{{ rol }}</th>
                                     {% endif %}
