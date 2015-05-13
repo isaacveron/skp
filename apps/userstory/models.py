@@ -64,8 +64,6 @@ class UserStory(models.Model):
     is_active = models.BooleanField(default=True)
     Version = models.PositiveIntegerField(null=True, blank=True, default=0)
     Sub_version = models.PositiveIntegerField(null=True, blank=True, default=0)
-
-    Duracion = models.PositiveIntegerField(default=0)
     
     Usuario_creador = models.ForeignKey(User, null=True)
     Proyecto_asignado = models.ForeignKey (Proyecto, null=True)
@@ -78,9 +76,16 @@ class UserStory(models.Model):
 
     class Meta:
         ordering = ['Nombre']
+        permissions = (
+                      ("avanzar_us", "puede avanzar el userstory"),
+                      ("retroceder_us", "puede retroceder el userstory"),
+                      ("asignar_horas_us", "puede asignar horas al userstory"),
+                      ("cambiar_estado_us","cambiar estado del userstory"),
+                      ("finalizar_us", "puede finalizar un userstory"),
+        )
 
     def __str__(self):
-        return self.Nombre 
+        return self.Nombre
 
     def get_tabla(self):
 
@@ -89,7 +94,7 @@ class UserStory(models.Model):
         else:
             return 'none'
 
-
+    
 class CargarHoras(models.Model):
     Horas = models.PositiveIntegerField(null=True, blank=True, default=0)
     Descripcion = models.TextField(null=True)
