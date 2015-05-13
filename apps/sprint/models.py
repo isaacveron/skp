@@ -40,3 +40,10 @@ class Sprint(models.Model):
 
     def __str__(self):              
         return self.Nombre
+
+    class Meta:
+        permissions = (
+                      ("iniciar_sprint", "puede iniciar el sprint"),
+                      ("detener_sprint", "puede detener el sprint"),
+                      ("cambiar_estado_sprint", "puede cambiar el estado del sprint"),
+        )

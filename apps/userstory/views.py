@@ -82,8 +82,9 @@ def detalle_userstory(request, idUserStory):
     """
     usuario_actor = request.user
     userstory = UserStory.objects.get(pk=idUserStory)
-    #tabla = Flujo.objects.get( pk = userstory.Actividad_asignada.idTabla ) , 'tabla':tabla
-    return render_to_response('userstory/detalle_userstory.html', {'usuario_actor': usuario_actor, 'userstory': userstory},
+    horas_us = CargarHoras.objects.filter(US_asignado=idUserStory)
+    tabla = Flujo.objects.get( pk = userstory.Actividad_asignada.idTabla )
+    return render_to_response('userstory/detalle_userstory.html', {'usuario_actor': usuario_actor, 'userstory': userstory, 'horas_us':horas_us , 'tabla':tabla},
                               context_instance=RequestContext(request))
 
 @login_required(login_url = '/')
@@ -259,7 +260,7 @@ def escribir_archivo(accion, idUserStory, idHorasUS):
         fo.write ("Nombre: "+userstory.Nombre+"\n")
         fo.write ("Descripcion: "+userstory.Descripcion+"\n")
         fo.write ("Proyecto asignado: "+ str(userstory.Proyecto_asignado)+"\n")
-        fo.write ("Usuario creador: "+ str(userstory.Usuario_creador)+"\n"+"\n")
+        fo.write ("Usuario creador: "+ str(userstory.Usuario_creador)+"\n")
         fo.write ("Fecha creacion: "+ str(userstory.Fecha_creacion)+"\n")
         fo.write ("-----------------------------------------------------------------\n")
         fo.close()        

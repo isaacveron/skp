@@ -1,7 +1,6 @@
 {% extends 'index.html' %}
 
 {% block cuerpo %}
-	<section id="main" class="column">
 		<article class="module width_full">
 			<header><h3>Modificar Usuario</h3></header>
 			<div class="module_content">
@@ -30,23 +29,4 @@
 				</div>
 			</div>
 		</article>
-	</section>
 {%endblock cuerpo%}
-
-   <!-- <form id="formulario" method="post" action="">{% csrf_token %}
-        <table class="table"><p>
-			<label>Username:</label><input id="id_username" maxlength="30" name="username" type="text" value="{{ formulario.username.value }}" /><br/>
-}
-<tr><th><label for="id_password">Password:</label></th><td><div id="id_password"><strong>algorithm</strong>: pbkdf2_sha256 <strong>iterations</strong>: 15000 <strong>salt</strong>: 6jYJGe****** <strong>hash</strong>: rGoZyG************************************** </div><br /><span class="helptext">Raw passwords are not stored, so there is no way to see this user's password, but you can change the password using <a href= "password/">this form</a>.</span></td></tr>
-		<label>Email address:</label><input id="id_email" maxlength="75" name="email" type="email" value="{{ formulario.email.value }}" /><br/>
-		<label>First name:</label><input title="Se necesita un nombre" id="id_first_name" maxlength="30" name="first_name" type="text" value="{{ formulario.first_name.value }}"required/><br/>
-		<label>Last name:</label><input id="id_last_name" maxlength="30" name="last_name" type="text" value="{{ formulario.last_name.value }}" /><br/>
-		<label>Telefono:</label><input id="id_telefono" min="0" name="telefono" type="number" value="{{ formulario.telefono.value }}" /><br/>
-		<label>Direccion:</label><br><textarea cols="40" id="id_direccion" name="direccion" rows="5">{{ formulario.direccion.value }}</textarea><br/>
-		<label>Observacion:</label><br><textarea cols="40" id="id_observacion" name="observacion" rows="5">{{ formulario.observacion.value }}</textarea>
-
-		</p></table>
-        <p><input class="btn btn-default" type="submit" value="Confirmar"></p>
-    </form>
-    <br>
-    -->

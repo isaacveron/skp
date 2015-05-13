@@ -9,6 +9,7 @@ from apps.sprint.forms import SprintForm, SprintFormMod, SprintFormDelete
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.decorators import user_passes_test
 from django.db.models import Q
+from django.core.mail import send_mail
 
 # Create your views here.
 @login_required(login_url = '/')
@@ -79,7 +80,8 @@ def detalle_sprint(request, idSprint):
       @return: detalle_sprint.html, donde se le despliega al usuario los datos
       @author: Isaac Veron
     """
-    
+    #msj = "Esto es una prueba del mail"
+    #send_mail('test email', msj, 'is2skp@gmail.com', ['isaacveron@gmail.com'])
     usuario_actor = request.user
     sprint = Sprint.objects.get(pk=idSprint)
 
