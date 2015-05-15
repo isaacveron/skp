@@ -10,6 +10,7 @@
                         <table class="tablesorter" cellspacing="0"> 
                             <div class="message"><p><strong>Nombre: </strong>{{ userstory.Nombre }}</p></div>
                             <div class="message"><p><strong>Estado: </strong>{{ userstory.Estado }}</p></div>
+                            <div class="message"><p><strong>Usuario Encargado: </strong>{{ userstory.Usuario_asignado }}</p></div>
                             {% if userstory.in_kanban %}
                                 
                                 <div class="message"><p><strong>Tabla en la que se encuentra: </strong>{{ tabla.Nombre }}</p></div>
@@ -26,8 +27,10 @@
                                 {% if userstory.Estado == 'AsignadoSprintActivo' %}
 
                                     {% if  perms.userstory.asignar_horas_us %}
-                                        <a href="{% url 'apps.userstory.views.asignar_horas_us' userstory.id %}">Asignar Horas</a>
-                                        <strong> | </strong>
+                                        {% if userstory.Estado_de_actividad != 'done'  %}
+                                            <a href="{% url 'apps.userstory.views.asignar_horas_us' userstory.id %}">Asignar Horas</a>
+                                            <strong> | </strong>
+                                        {% endif %}
                                     {% endif %}
 
                                     {% if perms.userstory.avanzar_us %}
@@ -41,23 +44,32 @@
                                     {% endif %}
 
                                     {% if userstory.Estado_de_actividad == 'done' %}
+
                                         {% if actividad.Orden == numero %}
-                                            <a href="{% url 'apps.userstory.views.avanzar_us' userstory.id %}">Terminar User Story</a>
-                                            <strong> | </strong>
+                                            {% if usuario_actor == proyecto.Scrum_Master %}
+                                                <a href="{% url 'apps.userstory.views.avanzar_us' userstory.id %}">Terminar User Story</a>
+                                                <strong> | </strong>
+                                            {% endif %}
+
                                         {% else %}
-                                            <a href="{% url 'apps.userstory.views.avanzar_us' userstory.id %}">Avanzar a la Siguiente Actividad</a>
-                                            <strong> | </strong>
 
-                                            <a href="{% url 'apps.userstory.views.retroceder_us' userstory.id %}">Recomenzar Actividad</a>
-                                            <strong> | </strong>
+                                            {% if perms.userstory.avanzar_us %}
+                                                <a href="{% url 'apps.userstory.views.avanzar_us' userstory.id %}">Avanzar a la Siguiente Actividad</a>
+                                                <strong> | </strong>
 
+                                                <a href="{% url 'apps.userstory.views.retroceder_us' userstory.id %}">Recomenzar Actividad</a>
+                                                <strong> | </strong>
+                                            {% endif %}
                                         {% endif %}
                                                 
                                     {% endif %}
 
                                     {% if userstory.Estado_de_actividad == 'doing' %}
-                                        <a href="{% url 'apps.userstory.views.avanzar_us' userstory.id %}">Concluir Actividad</a>
-                                        <strong> | </strong>            
+
+                                        {% if perms.userstory.avanzar_us %}
+                                            <a href="{% url 'apps.userstory.views.avanzar_us' userstory.id %}">Concluir Actividad</a>
+                                            <strong> | </strong>
+                                        {% endif %}      
                                     {% endif %}
                                 {% endif %}
 
@@ -76,6 +88,7 @@
                                     <a href="{% url 'apps.userstory.views.vista_eliminar_userstory' userstory.id %}">Eliminar</a>
                                     <strong> | </strong>
                                 {% endif %}  
+
                                 <a href="javascript:history.go(-1)">Volver</a>
                             </p>
                             </div>                            

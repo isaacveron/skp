@@ -79,7 +79,7 @@
             <header>
                 <h3>Sprints del proyecto </h3>
 
-                {% if usuario_actor.can_add_proyecto %}
+                {% if usuario_actor == proyecto.Scrum_Master %}
                     <a href="{% url 'apps.sprint.views.crear_sprint' proyecto.id %}"><th align="right"><input type="image" src="{{ STATIC_URL }}pagina_principal/images/mas.png" title="Crear"></th></a>
                 {% endif %}
             </header>
