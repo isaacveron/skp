@@ -260,60 +260,65 @@ def ver_burdownchart(request, idSprint):
         if( nombre == 'Sprint' ):
             reg_s = registro
 
-    total = reg_s[-1][1]
-    suma = 0
+    total_h = reg_s[-1][1]
+    
 
     puntos = []
-    sumas = []
-    datos = []
+     
 
-    def get_key(item):
-        return item[0]
+    suma = 0
 
-    datos = sorted(reg_s, key = get_key)
-    h = (total / float(len(dias)) )
-    paso = total
     for d in reg_s:
+
         if( d[0] != 'Duracion' and d[0] != 'Restante'):
+
             nombre = d[0]
             valor = d[1]
-            suma = suma + valor
-            puntos.append( total - suma )
-            if( paso - h < 0):
-            	sumas.append( 0 )
-            	paso = 0
 
+            suma = suma + valor
+
+            if( total_h - suma < 0 ):
+                puntos.append(0)
             else:
-            	paso = paso - h
-            	sumas.append( paso )
-            
+                puntos.append( total_h - suma )
+
+    promedio = []
+    ideal = []
+
+    suma = 0
+    c = 0
+
+    for p in puntos:
+
+        suma += p
+        c += 1
+
+        promedio.append( suma / c )
+
+        if( total_h - (24*c) >= 0 ):
+            ideal.append( total_h - (24*c) )
+        else:
+            ideal.append(0)
 
     dias_s = ""
-    for d in dias:
-        if( dias_s == "" ):
-            dias_s = d + ','
-        else:
-            dias_s += d + ','
-
     puntos_s = ""
-    for p in puntos:
-        if( puntos_s == "" ):
-            puntos_s = `p` + ','
+    promedio_s = ""
+    ideal_s = ""
+    for i in range( 0 , len( dias ) ):
+        if(dias_s == ""):
+            dias_s = dias[i] + ','
+            puntos_s = `puntos[i]` + ','
+            promedio_s = `promedio[i]` + ','
+            ideal_s = `ideal[i]` + ','
+
         else:
-            puntos_s += `p` + ',' 
-
-    sumas_s = ""
-    for s in sumas:
-        if( sumas_s == "" ):
-            sumas_s = `s` + ','
-        else:
-            sumas_s += `s` + ',' 
+            dias_s += dias[i] + ','
+            puntos_s += `puntos[i]` + ','
+            promedio_s += `promedio[i]` + ','
+            ideal_s += `ideal[i]` + ','
 
 
-    print dias_s.rstrip(',')
-    print puntos_s.rstrip(',')
-    print sumas_s.rstrip(',')
-    return render_to_response('burdownchart/index.html', {'dias':dias_s.rstrip(','), 'puntos':puntos_s.rstrip(','), 'sumas':sumas_s.rstrip(',')},context_instance=RequestContext(request))
+    return render_to_response('burdownchart/index.html', {'dias':dias_s.rstrip(','), 'puntos':puntos_s.rstrip(','), 'promedio':promedio_s.rstrip(','), 'ideal':ideal_s.rstrip(',')},context_instance=RequestContext(request))
 
 
 ##############################################################################################################################
@@ -386,11 +391,6 @@ def iniciar_sprint(request, idSprint):
             sprint.UserStorys.add(us)
 
     sprint.Prioridad_mas_alta = sprint.get_prioridad()
-
-    dias = sprint.Duracion // 24 + 1
-
-    if( sprint.Duracion % 24 > 0):
-        dias += 1
 
     for us in sprint.UserStorys.all():
 
@@ -523,17 +523,21 @@ def avanzar_dia(request, idProyecto):
     userstorys = UserStory.objects.filter(Proyecto_asignado = proyecto)
     tablas = proyecto.Tablas.all()
 
+    flag = 0
     for s in sprints:
         if( s.Estado == 'En_curso' ):
             sprint = s
+            flag = 1
             break
 
-    proyecto.Dia_actual += timedelta( days = 1)
+    if( flag == 1):
+        proyecto.Dia_actual += timedelta( days = 1)
 
-    for nombre, registro in sprint.Registro:
-        registro.insert( -2, [ (proyecto.Dia_actual - sprint.Fecha_inicio).days + 1 , 0] ) 
+        for nombre, registro in sprint.Registro:
+            registro.insert( -2, [ (proyecto.Dia_actual - sprint.Fecha_inicio).days + 1 , 0] ) 
 
-    sprint.save()
-    proyecto.save()
+        sprint.save()
+        proyecto.save()
+        
     return render_to_response('mcp/detalle_mcp.html', {'usuario_actor': usuario_actor, 'proyecto':proyecto, 'userstorys':userstorys, 'sprints':sprints,'tablas':tablas},
                               context_instance=RequestContext(request))
