@@ -2,6 +2,7 @@ from django.db import models
 from apps.roles.models import Group
 from apps.usuario.models import User
 from apps.flujos.models import Flujo
+from datetime import datetime, timedelta
 
 # Create your models here.
 class Proyecto(models.Model):
@@ -28,6 +29,8 @@ class Proyecto(models.Model):
     Usuario_creador = models.ForeignKey(User, null=True)
     Fecha_creacion = models.DateTimeField(auto_now=True, null=True)
     Tablas = models.ManyToManyField(Flujo, null=True)
+
+    Dia_actual = models.DateTimeField(default = datetime.now())
 
     def __str__(self):
         return self.Nombre

@@ -16,5 +16,6 @@ urlpatterns = patterns('',
     url(r'^hora_asignada/(?P<idSprint>\d+)/$', restar_horas_sprint),
     url(r'^avanzar_us/(?P<idUs>\d+)/$', avanzar_us),
     url(r'^retoceder_us/(?P<idUs>\d+)/$', retroceder_us),
+
 )	
  

@@ -10,6 +10,10 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.decorators import user_passes_test
 from django.db.models import Q
 from apps.userstory.models import UserStory
+import math
+from datetime import datetime, timedelta
+
+
 
 # Create your views here.
 @login_required(login_url = '/')
@@ -51,7 +55,6 @@ def crear_sprint(request, idProyecto):
     usuario_actor = request.user
     sprint = Sprint( Usuario_creador=usuario_actor, Proyecto_asignado=proyecto)
     
-
     if request.method == 'POST':
         formulario = SprintFormMod(request.POST, instance=sprint)
         if formulario.is_valid():
@@ -63,24 +66,6 @@ def crear_sprint(request, idProyecto):
 
             cambiar_estado_userstory("asignar",formulario.instance.pk)
 
-            userstorys = UserStory.objects.filter( Proyecto_asignado=proyecto )
-
-            for us in userstorys:
-
-                if( us.in_kanban ):
-
-                    us.in_kanban = False
-                    actividad = us.Actividad_asignada
-                    us.Estado_de_actividad = 'none'
-                    us.Estado = 'AsignadoSprint'
-
-                    actividad.To_do.remove(us)
-                    actividad.Doing.remove(us)
-                    actividad.Done.remove(us)
-                    actividad.save()
-                    us.save()
-
-                    sprint.UserStorys.add(us)
 
             sprint.save()
             return render_to_response('sprint/operacion_sprint_exito.html',
@@ -255,6 +240,75 @@ def cambiar_estado_userstory(accion, idSprint):
             us.save()
 
 
+def ver_burdownchart(request, idSprint):
+
+    sprint = Sprint.objects.get(pk=idSprint)
+
+    dias = []
+    
+
+    nombre, registro = sprint.Registro[1]
+    cantidad = len(registro) - 2
+
+    for n in range( 0 , cantidad ):
+        dias.append('Dia ' + `n + 1` )
+
+    
+    reg_s = []
+
+    for nombre, registro in sprint.Registro:
+        if( nombre == 'Sprint' ):
+            reg_s = registro
+
+    total = reg_s[-1][1]
+    suma = 0
+
+    puntos = []
+    sumas = []
+    datos = []
+
+    def get_key(item):
+        return item[0]
+
+    datos = sorted(reg_s, key = get_key)
+    h = (total / float(len(dias)) )
+    paso = total
+    for d in reg_s:
+        if( d[0] != 'Duracion' and d[0] != 'Restante'):
+            nombre = d[0]
+            valor = d[1]
+            suma = suma + valor
+            puntos.append( total - suma )
+            paso = paso - h
+            sumas.append( paso )
+            
+
+    dias_s = ""
+    for d in dias:
+        if( dias_s == "" ):
+            dias_s = d + ','
+        else:
+            dias_s += d + ','
+
+    puntos_s = ""
+    for p in puntos:
+        if( puntos_s == "" ):
+            puntos_s = `p` + ','
+        else:
+            puntos_s += `p` + ',' 
+
+    sumas_s = ""
+    for s in sumas:
+        if( sumas_s == "" ):
+            sumas_s = `s` + ','
+        else:
+            sumas_s += `s` + ',' 
+
+
+    print dias_s.rstrip(',')
+    print puntos_s.rstrip(',')
+    print sumas_s.rstrip(',')
+    return render_to_response('burdownchart/index.html', {'dias':dias_s.rstrip(','), 'puntos':puntos_s.rstrip(','), 'sumas':sumas_s.rstrip(',')},context_instance=RequestContext(request))
 
 
 ##############################################################################################################################
@@ -299,10 +353,50 @@ def iniciar_sprint(request, idSprint):
     mensaje = 'Sprint iniciado'
 
     sprint = Sprint.objects.get(pk=idSprint)
+    proyecto = sprint.Proyecto_asignado
+    proyecto.Dia_actual = datetime.now()
+    proyecto.save()
+
     tabla = sprint.Tabla_asignada
     actividad = tabla.Actividades.get(Orden = 1)
 
+    userstorys = UserStory.objects.filter( Proyecto_asignado = sprint.Proyecto_asignado )
+    sprint.Fecha_inicio = datetime.now()
+
+    for us in userstorys:
+
+        if( us.in_kanban and us.Estado == 'Pendiente'):
+
+            actividad = us.Actividad_asignada
+            us.Estado_de_actividad = 'none'
+            us.Estado = 'AsignadoSprint'
+
+            sprint.Duracion = sprint.Duracion + us.Duracion
+            actividad.To_do.remove(us)
+            actividad.Doing.remove(us)
+            actividad.Done.remove(us)
+            actividad.save()
+            us.save()
+
+            sprint.UserStorys.add(us)
+
+    sprint.Prioridad_mas_alta = sprint.get_prioridad()
+
+    dias = sprint.Duracion // 24 + 1
+
+    if( sprint.Duracion % 24 > 0):
+        dias += 1
+
     for us in sprint.UserStorys.all():
+
+        dato_us = []
+
+        dato_us.append( [ 1 , 0 ] )
+        dato_us.append( [ 'Restante' , us.Duracion ] )
+        dato_us.append( [ 'Duracion' , us.Duracion ] ) 
+        
+
+        sprint.Registro.append( (us.Nombre , dato_us ) )
 
         us.in_kanban = True
         us.Estado_de_actividad = 'to_do'
@@ -310,11 +404,25 @@ def iniciar_sprint(request, idSprint):
         actividad.To_do.add(us)
 
         us.Estado = 'AsignadoSprintActivo'
+
+        if( us.Prioridad < sprint.Prioridad_mas_alta ):
+            us.Bloqueado = True
+        else:
+            us.Bloqueado = False
+
         us.save()
 
+    datos_s = []
+
+    datos_s.append( [ 1 , 0 ] )
+    datos_s.append( [ 'Restante' , sprint.Duracion ] )
+    datos_s.append( [ 'Duracion' , sprint.Duracion ] )
+    
+    sprint.Registro.append( [ 'Sprint' , datos_s ] )
     actividad.save()
     tabla.save()
 
+    sprint.Restante = sprint.Duracion
     sprint.Estado = 'En_curso'
     sprint.save()
 
@@ -360,8 +468,8 @@ def detener_sprint(request, idSprint):
     sprint = Sprint.objects.get(pk=idSprint)
     tabla = sprint.Tabla_asignada
 
-
-
+    sprint.Registro = []
+    sprint.Restante = sprint.Duracion
     for us in sprint.UserStorys.all():
 
         actividad = us.Actividad_asignada
@@ -384,3 +492,43 @@ def detener_sprint(request, idSprint):
 
     return render_to_response('sprint/operacion_sprint_exito.html',{'mensaje':mensaje, 'usuario_actor': usuario_actor}, 
                             context_instance=RequestContext(request))
+
+
+def ver_backlog(request,idSprint):
+
+    sprint = Sprint.objects.get(pk=idSprint)
+    proyecto = sprint.Proyecto_asignado
+    usuario_actor = request.user
+
+    dias = []
+    
+    nombre, registro = sprint.Registro[1]
+    cantidad = len(registro) - 2
+
+    for n in range( 0 , cantidad ):
+        dias.append('Dia ' + `n + 1` )
+    return render_to_response('sprint/sprint_backlog.html',{'dias':dias,'sprint':sprint, 'usuario_actor': usuario_actor}, 
+                            context_instance=RequestContext(request))
+
+
+def avanzar_dia(request, idProyecto):
+    proyecto = Proyecto.objects.get(pk=idProyecto)
+    sprints = Sprint.objects.filter( Proyecto_asignado = proyecto)
+    usuario_actor = request.user
+    userstorys = UserStory.objects.filter(Proyecto_asignado = proyecto)
+    tablas = proyecto.Tablas.all()
+
+    for s in sprints:
+        if( s.Estado == 'En_curso' ):
+            sprint = s
+            break
+
+    proyecto.Dia_actual += timedelta( days = 1)
+
+    for nombre, registro in sprint.Registro:
+        registro.insert( -2, [ (proyecto.Dia_actual - sprint.Fecha_inicio).days + 1 , 0] ) 
+
+    sprint.save()
+    proyecto.save()
+    return render_to_response('mcp/detalle_mcp.html', {'usuario_actor': usuario_actor, 'proyecto':proyecto, 'userstorys':userstorys, 'sprints':sprints,'tablas':tablas},
+                              context_instance=RequestContext(request))

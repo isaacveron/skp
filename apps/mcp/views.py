@@ -21,11 +21,11 @@ def detalle_mcp(request, idProyecto):
         @author: Cesar Recalde
     """
     proyecto = Proyecto.objects.get(pk=idProyecto)
-    sprints = Sprint.objects.all()
+    sprints = Sprint.objects.filter( Proyecto_asignado = proyecto)
     usuario_actor = request.user
-    userstorys = UserStory.objects.all()
+    userstorys = UserStory.objects.filter(Proyecto_asignado = proyecto)
     tablas = proyecto.Tablas.all()
-	
+
     return render_to_response('mcp/detalle_mcp.html', {'usuario_actor': usuario_actor, 'proyecto':proyecto, 'userstorys':userstorys, 'sprints':sprints,'tablas':tablas},
                               context_instance=RequestContext(request))
 

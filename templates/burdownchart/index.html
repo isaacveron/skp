@@ -1,0 +1,99 @@
+
+{% extends 'index.html' %}
+
+{% block cuerpo %}
+        <article class="module width_full">
+            <header><h3>Burdownchart</h3></header>
+            <div class="module_content">
+                <div class="tab_container">
+                    <div id="tab1" class="tab_content">
+                        <table class="tablesorter" cellspacing="0"> 
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Highcharts Example</title>
+
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<style type="text/css">
+${demo.css}
+		</style>
+		<script type="text/javascript">
+            $(function () {
+
+                var puntos_s = "{{puntos}}";
+                var dias_s = "{{dias}}";
+                var sumas_s = "{{sumas}}";
+
+                var dias = dias_s.split(',')
+
+                var puntos = puntos_s.split(',')
+
+                var i
+                for( i = 0 ; i<puntos.length ; i++){
+                    puntos[i] = parseInt(puntos[i])
+                }
+
+                var sumas = sumas_s.split(',')
+                for( i = 0 ; i<sumas.length ; i++){
+                    sumas[i] = parseInt(sumas[i])
+                }
+
+                
+
+
+                $('#container').highcharts({
+                    title: {
+                        text: 'Burdownchart',
+                        x: -20 //center
+                    },
+                    subtitle: {
+                        text: 'Scrum Kanban Project',
+                        x: -20
+                    },
+                    xAxis: {
+                        categories: dias
+                    },
+                    yAxis: {
+                        title: {
+                            text: ' Horas Restantes (Hs) '
+                        },
+                        plotLines: [{
+                            value: 0,
+                            width: 1,
+                            color: '#808080'
+                        }]
+                    },
+                    tooltip: {
+                        valueSuffix: 'Hs'
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle',
+                        borderWidth: 0
+                    },
+                    series: [{
+                        name: 'Pendiente',
+                        data: puntos
+                    }, {
+                        name: 'Ideal',
+                        data: sumas
+                    
+                    }]
+                });
+            });
+		</script>
+	</head>
+	<body>
+        <script src="{{ STATIC_URL }}burdownchart/js/highcharts.js"></script>
+        <script src="{{ STATIC_URL }}burdownchart/js/modules/exporting.js"></script>
+
+        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+	</body>
+</html>
+                        </table>                       
+                    </div>
+                </div>
+            </div>
+        </article>
+{% endblock cuerpo %}

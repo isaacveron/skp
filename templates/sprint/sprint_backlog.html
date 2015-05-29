@@ -1,0 +1,44 @@
+{% extends "index.html" %}
+
+{% block cuerpo %}
+
+        <article class="module width_full">
+            <header><h3>Sprint Backlog de {{ sprint.Nombre }}</h3></header>
+            <div class="module_content">
+                <div class="tab_container">
+                    <div id="tab1" class="tab_content">
+                        <table class="tablesorter" cellspacing="0"> 
+                           <table>
+                               <tr>
+                                   <th><strong>Nombre</strong></th>
+                                   {% for n in dias %}
+                                        <th><strong> {{n}} </strong></th>
+                                   {% endfor %}
+                                   <th><strong>Restantes</strong></th>
+                                   <th><strong>Total</strong></th>
+                               </tr>
+
+                               {% for nombre_us,horas in sprint.Registro %}
+                                    <tr>
+                                        <th><strong> {{nombre_us}} </strong></th>
+
+                                        {% for datos in horas %}
+
+                                            {% for dato in datos %}
+                                                {% if forloop.counter == 2 %}
+                                                    <th><strong> {{dato}} </strong></th>
+                                                {% endif %}
+                                            {% endfor %}
+
+                                        {% endfor %}
+                                    </tr>
+                               {% endfor %}
+
+                           </table>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+{% endblock cuerpo %}

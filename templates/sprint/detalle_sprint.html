@@ -13,8 +13,10 @@
                             <div class="message"><p><strong>Fecha de Creacion: </strong>{{ sprint.Fecha_creacion }}</p></div>
                             <div class="message">
                             <div class="message"><p><strong>Duracion: </strong>{{ sprint.Duracion }}</p></div>
+                            <div class="message"><p><strong>Tiempo Restante: </strong>{{ sprint.Restante }}</p></div>
                             <div class="message"><p><strong>Estado: </strong>{{ sprint.Estado }}</p></div>
                             <div class="message"><p><strong>Tabla Asignada: </strong>{{ sprint.Tabla_asignada.Nombre }}</p></div>
+                            <div class="message"><p><strong>Prioridad mas alta: </strong>{{ sprint.Prioridad_mas_alta }}</p></div>
                             <div class="message">
                             <p>
                                 {% if sprint.Estado == 'Pendiente' %}
@@ -41,13 +43,29 @@
 
                                 {% endif %}
 
-                                    {% if sprint.Estado == 'En_curso' and perms.sprint.detener_sprint %}
-                                        <a href="{% url 'apps.sprint.views.vista_detener_sprint' sprint.id%}"> Detener Sprint </a>
+                                {% if sprint.Estado == 'En_curso' and perms.sprint.detener_sprint %}
+                                    <a href="{% url 'apps.sprint.views.vista_detener_sprint' sprint.id%}">Detener Sprint </a>
+                                    <strong> | </strong>
+                                    <a href="{% url 'apps.sprint.views.ver_backlog' sprint.id%}"> Ver Sprint Backlog </a>
+                                    <strong> | </strong>
+                                    <a href="{% url 'apps.sprint.views.ver_burdownchart' sprint.id%}">Ver Burdownchart</a>
+                                    <strong> | </strong>
+                                
+                                {% else %}
+                                    {% if sprint.Estado == 'Terminado' %}
+                                        <a href="{% url 'apps.sprint.views.ver_backlog' sprint.id%}"> Ver Sprint Backlog </a>
                                         <strong> | </strong>
+                                        <a href="{% url 'apps.sprint.views.ver_burdownchart' sprint.id%}">Ver Burdownchart</a>
+                                        <strong> | </strong>
+                                        {% if perms.sprint.delete_sprint %}
+                                            <a href="{% url 'apps.sprint.views.vista_eliminar_sprint' sprint.id%}">Eliminar</a>
+                                            <strong> | </strong>
+                                        {% endif %}
                                     {% endif %}
-                                        
-                                    <a href="javascript:history.go(-1)">Volver</a>
-                                </p>
+                                {% endif %}
+                                    
+                                <a href="javascript:history.go(-1)">Volver</a>
+                            </p>
                         </table>                       
                     </div>
                 </div>

@@ -11,6 +11,8 @@
                             <div class="message"><p><strong>Nombre: </strong>{{ userstory.Nombre }}</p></div>
                             <div class="message"><p><strong>Estado: </strong>{{ userstory.Estado }}</p></div>
                             <div class="message"><p><strong>Usuario Encargado: </strong>{{ userstory.Usuario_asignado }}</p></div>
+                            <div class="message"><p><strong>Prioridad: </strong>{{ userstory.Prioridad }}</p></div>
+                            <div class="message"><p><strong>Duracion: </strong>{{ userstory.Duracion }}</p></div>
                             {% if userstory.in_kanban %}
                                 
                                 <div class="message"><p><strong>Tabla en la que se encuentra: </strong>{{ tabla.Nombre }}</p></div>
@@ -21,11 +23,12 @@
                             {% endif %}
                             
                             <div class="message"><p><strong>Creado por: </strong>{{ userstory.Usuario_creador }}</p></div>
-                            <div class="message"><p><strong>Fecha de Creacion: </strong>{{ userstory.Fecha_creacion }}</p></div>
+                            <div class="message"><p><strong>Bloqueo: </strong>{{ userstory.Bloqueado }}</p></div>
                             <div class="message">
                             <p>
-                                {% if userstory.Estado == 'AsignadoSprintActivo' %}
+                            {% if userstory.Estado == 'AsignadoSprintActivo' %}
 
+                                {% if not userstory.Bloqueado %}
                                     {% if  perms.userstory.asignar_horas_us %}
                                         {% if userstory.Estado_de_actividad != 'done'  %}
                                             <a href="{% url 'apps.userstory.views.asignar_horas_us' userstory.id %}">Asignar Horas</a>
@@ -33,14 +36,12 @@
                                         {% endif %}
                                     {% endif %}
 
-                                    {% if perms.userstory.avanzar_us %}
-                                        <a href="{% url 'apps.userstory.views.avanzar_us' userstory.id %}">Avanzar</a>
-                                        <strong> | </strong>
-                                    {% endif %}
-                                    
-                                    {% if  perms.userstory.retroceder_us %}
-                                        <a href="{% url 'apps.userstory.views.retroceder_us' userstory.id %}">Retroceder</a>
-                                        <strong> | </strong>
+                                    {% if userstory.Estado_de_actividad == 'doing' %}
+
+                                        {% if perms.userstory.avanzar_us %}
+                                            <a href="{% url 'apps.userstory.views.avanzar_us' userstory.id %}">Concluir Actividad</a>
+                                            <strong> | </strong>
+                                        {% endif %}      
                                     {% endif %}
 
                                     {% if userstory.Estado_de_actividad == 'done' %}
@@ -61,35 +62,27 @@
                                                 <strong> | </strong>
                                             {% endif %}
                                         {% endif %}
-                                                
-                                    {% endif %}
-
-                                    {% if userstory.Estado_de_actividad == 'doing' %}
-
-                                        {% if perms.userstory.avanzar_us %}
-                                            <a href="{% url 'apps.userstory.views.avanzar_us' userstory.id %}">Concluir Actividad</a>
-                                            <strong> | </strong>
-                                        {% endif %}      
                                     {% endif %}
                                 {% endif %}
+                            {% endif %}
 
 
-                                {% if perms.userstory.change_userstory %}
-                                    <a href="{% url 'apps.userstory.views.modificar_userstory' userstory.id %}">Modificar</a>
-                                    <strong> | </strong>
-                                {% endif %}
+                            {% if perms.userstory.change_userstory %}
+                                <a href="{% url 'apps.userstory.views.modificar_userstory' userstory.id %}">Modificar</a>
+                                <strong> | </strong>
+                            {% endif %}
 
-                                {% if  perms.userstory.cambiar_estado_us %}
-                                    <a href="{% url 'apps.userstory.views.cambiar_estado_userstory' userstory.id %}">Cambiar Estado</a>
-                                    <strong> | </strong>
-                                {% endif %}
+                            {% if  perms.userstory.cambiar_estado_us %}
+                                <a href="{% url 'apps.userstory.views.cambiar_estado_userstory' userstory.id %}">Cambiar Estado</a>
+                                <strong> | </strong>
+                            {% endif %}
                                      
-                                {% if perms.userstory.delete_userstory %}
-                                    <a href="{% url 'apps.userstory.views.vista_eliminar_userstory' userstory.id %}">Eliminar</a>
-                                    <strong> | </strong>
-                                {% endif %}  
+                            {% if perms.userstory.delete_userstory %}
+                                <a href="{% url 'apps.userstory.views.vista_eliminar_userstory' userstory.id %}">Eliminar</a>
+                                <strong> | </strong>
+                            {% endif %}  
 
-                                <a href="javascript:history.go(-1)">Volver</a>
+                            <a href="javascript:history.go(-1)">Volver</a>
                             </p>
                             </div>                            
                             </div>

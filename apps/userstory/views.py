@@ -12,7 +12,8 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.decorators import user_passes_test
 from django.db.models import Q
 from unipath import Path
-
+from apps.mensaje.models import Mensaje
+from django.core.mail import send_mail
 
 # Create your views here.
 @login_required(login_url = '/')
@@ -85,6 +86,7 @@ def detalle_userstory(request, idUserStory):
     userstory = UserStory.objects.get(pk=idUserStory)
     proyecto = userstory.Proyecto_asignado
     horas_us = CargarHoras.objects.filter(US_asignado=idUserStory)
+
     if userstory.in_kanban:
         tabla = Flujo.objects.get(pk = userstory.Actividad_asignada.idTabla)
     else:
@@ -230,7 +232,10 @@ def asignar_horas_us (request, idUserStory):
 
             formulario.save()
             escribir_archivo("nueva_sub_version", idUserStory, formulario.instance.pk)
+            agregar_horas_registro(idUserStory,formulario.instance.Horas)
             restar_horas_sprint(idSprint, formulario.instance.pk)
+
+            
 
             if (userstory.Estado_de_actividad == 'to_do'):
                 avanzar(idUserStory)
@@ -247,21 +252,30 @@ def asignar_horas_us (request, idUserStory):
     userstory = UserStory.objects.get(pk=idUserStory)
     return render_to_response('userstory/asignar_horas_us.html',{'sprints':sprints ,'userstory':userstory},context_instance=RequestContext(request))
 
+
 def restar_horas_sprint (idSprint, idHorasUS):
     sprint = Sprint.objects.get (pk=idSprint)
     horas_us = CargarHoras.objects.get(pk=idHorasUS)
+    duracion = sprint.Restante
+    duracion = duracion - int(horas_us.Horas)
 
-    sprint.Duracion = sprint.Duracion - int(horas_us.Horas)
-
-    if(sprint.Duracion <= 0 ):
+    if(duracion <= 0 ):
         sprint.Estado = 'Terminado'
+        sprint.Restante = 0
 
         for us in sprint.UserStorys.all():
-            us.Estado = 'Pendiente'
-            us.save()
+            if( us.Estado != 'Terminado'):
+                us.Estado = 'Pendiente'
+                us.Prioridad += 1
+                us.Bloqueado = False
+                us.save()
+
+    else:
+        sprint.Restante = duracion
 
     sprint.save()
-    
+
+
 def escribir_archivo(accion, idUserStory, idHorasUS):
     userstory = UserStory.objects.get(pk=idUserStory)
     direccion= Path(__file__).ancestor(3)
@@ -286,6 +300,7 @@ def escribir_archivo(accion, idUserStory, idHorasUS):
         fo.write ("Descripcion: "+horas_us.Descripcion+"\n")
         fo.write ("-----------------------------------------------------------------\n")
         fo.close()  
+
 
 ################################################################################################3
 
@@ -344,9 +359,10 @@ def avanzar_us(request, idUs):
         @author: Cesar Recalde
     """
     us = UserStory.objects.get(pk = idUs)
-
+    sprint = us.get_sprint()
     actividad = us.Actividad_asignada
     tabla = Flujo.objects.get(pk=actividad.idTabla)
+    
     mensaje = ''
 
 
@@ -370,9 +386,30 @@ def avanzar_us(request, idUs):
         actividad.Done.remove( us )
 
         if( actividad.Orden == len( tabla.Actividades.all() ) ):
+
             us.Estado = 'Terminado'
             us.Estado_de_actividad = 'none'
             us.in_kanban = False
+
+            us.Prioridad = 0
+            us.save()
+            
+            send_mail('test email', "User Story " + us.Nombre + " finalizado", 'is2skp@gmail.com', ["cesar.danrecalde@gmail.com"])
+            sprint.Prioridad_mas_alta = sprint.get_prioridad()
+
+            for us in sprint.UserStorys.all():
+                if( us.Prioridad < sprint.Prioridad_mas_alta and us.Estado != 'Terminado'):
+                    us.Bloqueado = True
+                else:
+                    us.Bloqueado = False
+                us.save()
+
+            
+
+            if( sprint.is_done() ):
+                sprint.Estado = 'Terminado'
+
+            sprint.save()
             mensaje = "El user story a completado el flujo y pasa al estado 'Terminado' "
 
         else:
@@ -384,6 +421,7 @@ def avanzar_us(request, idUs):
             mensaje = "El user story a avanzado al estado 'to_do' de la actividad " + nueva_actividad.Nombre
 
     us.save()
+   
     actividad.save()
     tabla.save()
 
@@ -449,3 +487,23 @@ def recomenzar_us(request, idUs):
     mensaje = " Se retrocedio el us al estado 'to_do' de la actividad" + nueva_actividad.Nombre
     return render_to_response('userstory/operacion_userstory_exito.html',{'mensaje':mensaje},context_instance=RequestContext(request))
 
+def agregar_horas_registro( idUs, horas):
+
+    us = UserStory.objects.get(pk = idUs)
+    proyecto = us.Proyecto_asignado
+    sprint = us.get_sprint()
+
+    dias_pasados = (proyecto.Dia_actual - sprint.Fecha_inicio).days + 1
+    
+
+    for nombre,registro in sprint.Registro:
+        if( nombre == us.Nombre or nombre == 'Sprint' ):
+            
+            restante = registro[-2]
+            registro[-3][1] += horas
+
+            if( restante[1] - horas >= 0 ):
+                registro[-2][1] = registro[-2][1] - horas
+            else:
+                registro[-2][1] = 0
+    sprint.save()

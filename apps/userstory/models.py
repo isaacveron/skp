@@ -67,6 +67,7 @@ class UserStory(models.Model):
 
     Duracion = models.PositiveIntegerField(default=0)
     
+    
     Usuario_creador = models.ForeignKey(User, null=True)
     Proyecto_asignado = models.ForeignKey (Proyecto, null=True)
     Fecha_creacion = models.DateTimeField(auto_now=True, null=True)
@@ -75,6 +76,8 @@ class UserStory(models.Model):
     Estado_de_actividad = models.CharField( max_length=30, choices=Estados_actividad, default='none', unique=False)
     Actividad_asignada = models.ForeignKey( Actividad, null=True )
 
+    Prioridad = models.PositiveIntegerField(null=False, default=0)
+    Bloqueado = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['Nombre']
@@ -96,6 +99,14 @@ class UserStory(models.Model):
         else:
             return 'none'
 
+    def get_sprint(self):
+
+        sprints = self.sprint.filter(Estado = 'En_curso')
+
+        for s in sprints.all():
+            return s
+
+        
 
 class CargarHoras(models.Model):
     Horas = models.PositiveIntegerField(null=True, blank=True, default=0)
