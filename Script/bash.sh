@@ -56,6 +56,8 @@ do
 			fi
 			;;
 		5 )
+			sudo chown root:root -R /var/www/
+			sudo chmod 777 -R /var/www/
 			cd /var/www
 			sudo rm -r -f skp
 			sudo wget https://github.com/isaacveron/skp/archive/master.zip
