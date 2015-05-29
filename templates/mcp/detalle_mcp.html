@@ -12,7 +12,7 @@
                             <div class="message"><p><strong>Nombre: </strong>{{ proyecto.Nombre }}</p></div>
                             <div class="message"><p><strong>Creado por: </strong>{{ proyecto.Usuario_creador }}</p></div>
                             <div class="message"><p><strong>Fecha de Creacion: </strong>{{ proyecto.Fecha_creacion }}</p></div>
-                            
+                            <a href="{% url 'apps.sprint.views.avanzar_dia' proyecto.id %}">Avanzar Dia</a>
                         </table>
 
                     </div>
@@ -26,7 +26,7 @@
             <input type="text" value="Quick Search" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;" name="q" value="{{ query|escape }}" required>
     </form>
 
-    <a href="{% url 'apps.sprint.views.avanzar_dia' proyecto.id %}">Avanzar Dia</a>
+    
     <article class="module width_full">
         <header>
             <h3>User Storys del Proyecto</h3>

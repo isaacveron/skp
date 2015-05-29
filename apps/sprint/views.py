@@ -279,8 +279,13 @@ def ver_burdownchart(request, idSprint):
             valor = d[1]
             suma = suma + valor
             puntos.append( total - suma )
-            paso = paso - h
-            sumas.append( paso )
+            if( paso - h < 0):
+            	sumas.append( 0 )
+            	paso = 0
+
+            else:
+            	paso = paso - h
+            	sumas.append( paso )
             
 
     dias_s = ""
