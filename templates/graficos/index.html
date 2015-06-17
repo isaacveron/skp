@@ -22,7 +22,6 @@ ${demo.css}
 
                 var puntos_s = "{{puntos}}";
                 var dias_s = "{{dias}}";
-                var promedio_s = "{{promedio}}";
                 var ideal_s = "{{ideal}}";
 
                 var dias = dias_s.split(',')
@@ -30,16 +29,14 @@ ${demo.css}
                 var i
 
                 var puntos = puntos_s.split(',')
-                var promedio = promedio_s.split(',')
-                var ideal = ideal_s.split(',')
                 for( i = 0 ; i<puntos.length ; i++){
-
                     puntos[i] = parseInt(puntos[i])
-                    promedio[i] = parseInt(promedio[i])
-                    ideal[i] = parseInt(ideal[i])
                 }
 
-                
+                var ideal = ideal_s.split(',')
+                for( i = 0 ; i<ideal.length ; i++){
+                    ideal[i] = parseInt(ideal[i])
+                }                
 
                 $('#container').highcharts({
                     title: {
@@ -75,10 +72,6 @@ ${demo.css}
                     series: [{
                         name: 'Pendiente',
                         data: puntos
-                    }, {
-                        name: 'Promedio',
-                        data: promedio
-                    
                     }, {
                         name: 'Ideal',
                         data: ideal

@@ -1,8 +1,8 @@
 from django.forms import ModelForm, SelectMultiple
-
 from apps.roles.models import User, Group
 from apps.userstory.models import UserStory, CargarHoras
 from apps.proyectos.models import Proyecto
+import ast
 
 Estados_US = (
     ('AsignadoSprint','AsignadoSprint'),
@@ -20,7 +20,12 @@ class UserStoryForm(ModelForm):
         self.fields['Usuario_asignado'].queryset = User.objects.filter(Proyectos__id=idProyecto)
     class Meta:
         model = UserStory 
-        exclude = ['Bloqueado','Prioridad','Version','Sub_version','in_kanban','Actividad_asignada','Estado_de_actividad','actividad_asignada','estado_actividad','is_active', 'Proyecto_asignado', 'Usuario_creador','Estado' , 'Usuario_creador' , 'Fecha_creacion']
+        exclude = ['Bloqueado','Prioridad','Version','Sub_version',
+                    'in_kanban','Actividad_asignada','Estado_de_actividad',
+                    'actividad_asignada','estado_actividad','is_active',
+                    'Proyecto_asignado', 'Usuario_creador','Estado' , 
+                    'Usuario_creador' , 'Fecha_creacion',
+                    'Fecha_finalizacion','Fecha_inicio','Restante','Registro']
 
 class UserStoryFormMod(ModelForm):
     """
@@ -33,8 +38,12 @@ class UserStoryFormMod(ModelForm):
         self.fields['Usuario_asignado'].queryset = User.objects.filter(Proyectos__id=self.instance.Proyecto_asignado.id)
     class Meta:
         model = UserStory 
-        exclude = ['Bloqueado','Prioridad','Version','Sub_version','in_kanban','Actividad_asignada','Estado_de_actividad','actividad_asignada','estado_actividad','is_active', 'Proyecto_asignado', 'Usuario_creador','Estado' , 'Usuario_creador' , 'Fecha_creacion']
-
+        exclude = ['Bloqueado','Prioridad','Version','Sub_version',
+                    'in_kanban','Actividad_asignada','Estado_de_actividad',
+                    'actividad_asignada','estado_actividad','is_active',
+                    'Proyecto_asignado', 'Usuario_creador','Estado' , 
+                    'Usuario_creador' , 'Fecha_creacion',
+                    'Fecha_finalizacion','Fecha_inicio','Restante','Registro']
 
 class UserStoryFormDelete(ModelForm):    
     class Meta:

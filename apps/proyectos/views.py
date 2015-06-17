@@ -23,6 +23,7 @@ def gestion_de_proyectos(request):
     @return: gestion_de_proyectos.html, donde se listan los proyectos
     @author: Cesar Recalde
   """
+  
   usuario_actor = request.user
   proyectos = Proyecto.objects.all()
   return render_to_response('proyecto/gestion_de_proyectos.html',
@@ -48,11 +49,20 @@ def crear_proyecto(request):
     """
     mensaje="Proyecto creado con exito"
     usuario_actor = request.user
-    proyecto = Proyecto( Usuario_creador=usuario_actor)
+    proyecto = Proyecto( Usuario_creador=usuario_actor )
+
     if request.method == 'POST':
         formulario = ProyectoForm(request.POST, instance=proyecto)
         if formulario.is_valid():
-            formulario.save()
+
+            proyecto = formulario.save()
+
+            proyecto.Duracion = (proyecto.Fecha_finalizacion - proyecto.Fecha_inicio).days * 8
+            proyecto.Restante = proyecto.Duracion
+            proyecto.Dia_actual = proyecto.Fecha_inicio
+            proyecto.Registro.append( proyecto.Duracion )
+            proyecto.save()
+
             proyectos = Proyecto.objects.all()
             return render_to_response('proyecto/operacion_proyecto_exito.html',
                                       {'mensaje': mensaje, 'usuario_actor': usuario_actor, 'proyectos': proyectos},

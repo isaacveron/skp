@@ -49,7 +49,8 @@ INSTALLED_APPS = (
     'apps.sprint',
     'apps.userstory',
     'apps.mcp',
-    'apps.mensaje'
+    'apps.mensaje',
+    'apps.graficos'
 )
 
 MIDDLEWARE_CLASSES = (

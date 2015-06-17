@@ -57,7 +57,9 @@ def crear_userstory(request, idProyecto):
     if request.method == 'POST':
         formulario = UserStoryFormMod(request.POST, instance=userstory)
         if formulario.is_valid():
-            formulario.save()
+            us = formulario.save()
+            us.Restante = us.Duracion
+            us.save()
             escribir_archivo("nueva_version",formulario.instance.pk,"")
             return render_to_response('userstory/operacion_userstory_exito.html',
                                       {'mensaje': mensaje, 'usuario_actor': usuario_actor},
@@ -216,12 +218,15 @@ def eliminar_userstory(request, idUserStory):
                               context_instance=RequestContext(request))
 
 def asignar_horas_us (request, idUserStory):
+    
     userstory = UserStory.objects.get(pk=idUserStory)
     sprints = Sprint.objects.all()
+    
     for sprint in sprints:
         for us in sprint.UserStorys.all():
             if us == userstory:
                 idSprint=sprint.id
+
     mensaje="Horas asiganadas correctamente"
     usuario_actor = request.user
     
@@ -232,10 +237,10 @@ def asignar_horas_us (request, idUserStory):
 
             formulario.save()
             escribir_archivo("nueva_sub_version", idUserStory, formulario.instance.pk)
-            agregar_horas_registro(idUserStory,formulario.instance.Horas)
-            restar_horas_sprint(idSprint, formulario.instance.pk)
-
             
+            agregar_horas_registro(idUserStory,formulario.instance.Horas)
+            
+            restar_horas_sprint(idSprint, formulario.instance.pk)
 
             if (userstory.Estado_de_actividad == 'to_do'):
                 avanzar(idUserStory)
@@ -245,16 +250,15 @@ def asignar_horas_us (request, idUserStory):
                                       context_instance=RequestContext(request))
     else:
         formulario = CargarHorasForm()
+
     return render_to_response('userstory/asignar_horas_us.html',
                               {'formulario': formulario,'usuario_actor': usuario_actor},
                               context_instance=RequestContext(request))
 
-    userstory = UserStory.objects.get(pk=idUserStory)
-    return render_to_response('userstory/asignar_horas_us.html',{'sprints':sprints ,'userstory':userstory},context_instance=RequestContext(request))
-
 
 def restar_horas_sprint (idSprint, idHorasUS):
     sprint = Sprint.objects.get (pk=idSprint)
+    proyecto = sprint.Proyecto_asignado
     horas_us = CargarHoras.objects.get(pk=idHorasUS)
     duracion = sprint.Restante
     duracion = duracion - int(horas_us.Horas)
@@ -262,6 +266,7 @@ def restar_horas_sprint (idSprint, idHorasUS):
     if(duracion <= 0 ):
         sprint.Estado = 'Terminado'
         sprint.Restante = 0
+        proyecto.sprint_activo = False
 
         for us in sprint.UserStorys.all():
             if( us.Estado != 'Terminado'):
@@ -273,6 +278,9 @@ def restar_horas_sprint (idSprint, idHorasUS):
     else:
         sprint.Restante = duracion
 
+    proyecto.Restante -= int(horas_us.Horas)
+    
+    proyecto.save()
     sprint.save()
 
 
@@ -360,6 +368,7 @@ def avanzar_us(request, idUs):
     """
     us = UserStory.objects.get(pk = idUs)
     sprint = us.get_sprint()
+    proyecto = sprint.Proyecto_asignado
     actividad = us.Actividad_asignada
     tabla = Flujo.objects.get(pk=actividad.idTabla)
     
@@ -407,8 +416,11 @@ def avanzar_us(request, idUs):
             
 
             if( sprint.is_done() ):
-                sprint.Estado = 'Terminado'
 
+                sprint.Estado = 'Terminado'
+                proyecto.sprint_activo = False
+
+            proyecto.save()
             sprint.save()
             mensaje = "El user story a completado el flujo y pasa al estado 'Terminado' "
 
@@ -492,18 +504,21 @@ def agregar_horas_registro( idUs, horas):
     us = UserStory.objects.get(pk = idUs)
     proyecto = us.Proyecto_asignado
     sprint = us.get_sprint()
-
-    dias_pasados = (proyecto.Dia_actual - sprint.Fecha_inicio).days + 1
     
+    if( us.Restante - horas >= 0 ):
+        us.Restante -= horas
+    else:
+        us.Restante = 0
 
-    for nombre,registro in sprint.Registro:
-        if( nombre == us.Nombre or nombre == 'Sprint' ):
-            
-            restante = registro[-2]
-            registro[-3][1] += horas
+    us.Registro[-1] += horas
 
-            if( restante[1] - horas >= 0 ):
-                registro[-2][1] = registro[-2][1] - horas
-            else:
-                registro[-2][1] = 0
+    if( sprint.Registro[-1] + horas <= sprint.Duracion ):
+        sprint.Registro[-1] += horas
+    else:
+        sprint.Registro[-1] = Duracion
+    
+    proyecto.Registro[-1] += horas
+
+    proyecto.save()
+    us.save() 
     sprint.save()

@@ -20,7 +20,10 @@ class SprintForm(ModelForm):
 
     class Meta:
         model = Sprint 
-        exclude = ['Fecha_inicio','Restante','Registro','Prioridad_mas_alta','Restringido','Duracion','is_active','Proyecto_asignado','Estado' , 'Usuario_creador' , 'Fecha_creacion']
+        exclude = ['Fecha_inicio','Prioridad_mas_alta',
+                    'Restringido','is_active','Proyecto_asignado',
+                    'Estado' , 'Usuario_creador' , 'Fecha_creacion',
+                    'Fecha_finalizacion','Fecha_inicio','Restante','Duracion','Registro']
            
 class SprintFormMod(ModelForm):
     """
@@ -34,8 +37,11 @@ class SprintFormMod(ModelForm):
         self.fields['Tabla_asignada'].queryset = Proyecto.objects.get(pk=self.instance.Proyecto_asignado.id).Tablas.all()
     class Meta:
         model = Sprint 
-        exclude = ['Fecha_inicio','Restante','Registro','Prioridad_mas_alta','Restringido','Duracion','is_active','Proyecto_asignado','Estado' , 'Usuario_creador' , 'Fecha_creacion']
-
+        exclude = ['Fecha_inicio','Prioridad_mas_alta',
+                    'Restringido','is_active','Proyecto_asignado',
+                    'Estado' , 'Usuario_creador' , 'Fecha_creacion',
+                    'Fecha_finalizacion','Fecha_inicio','Restante','Duracion','Registro']
+        
 class SprintFormDelete(ModelForm):    
     class Meta:
         model = Sprint
