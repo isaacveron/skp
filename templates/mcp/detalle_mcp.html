@@ -16,10 +16,18 @@
                                 <p>
                                 <a href="{% url 'apps.graficos.views.ver_burdownchart_proyecto' proyecto.id %}">Ver Burndownchart del proyecto</a>
                                 <strong> | </strong>
-                                <a href="{% url 'apps.sprint.views.avanzar_dia' proyecto.id %}">Avanzar Dia</a>
+                                {% if proyecto.Estado != 'Terminado' %}
+                                    <a href="{% url 'apps.sprint.views.avanzar_dia' proyecto.id %}">Avanzar Dia</a>
+                                {% endif %}
                                 </p>
                             </div>
-                            
+                            {% if proyecto.Estado != 'Terminado' and not proyecto.sprint_activo and proyecto.is_done %}
+                                <div>
+                                    <p>
+                                    <a href="{% url 'apps.proyectos.views.finalizar_proyecto' proyecto.id %}">Terminar Proyecto</a>
+                                    </p>
+                                </div>
+                            {% endif %}
                         </table>
                     </div>
                 </div>
@@ -34,7 +42,7 @@
     <article class="module width_full">
         <header>
             <h3>User Storys del Proyecto</h3>
-            {% if usuario_actor.can_add_proyecto %}
+            {% if usuario_actor.can_add_proyecto and proyecto.Estado != 'Terminado'%}
                 <a href="{% url 'apps.userstory.views.crear_userstory' proyecto.id %}"><th align="right"><input type="image" src="{{ STATIC_URL }}pagina_principal/images/mas.png" title="Crear"></th></a>
             {% endif %}
         </header>
@@ -92,7 +100,7 @@
             <header>
                 <h3>Sprints del proyecto </h3>
 
-                {% if usuario_actor == proyecto.Scrum_Master %}
+                {% if usuario_actor == proyecto.Scrum_Master and proyecto.Estado != 'Terminado' %}
                     <a href="{% url 'apps.sprint.views.crear_sprint' proyecto.id %}"><th align="right"><input type="image" src="{{ STATIC_URL }}pagina_principal/images/mas.png" title="Crear"></th></a>
                 {% endif %}
             </header>
@@ -131,7 +139,9 @@
             <header>
                 <h3>Administracion de Tablas </h3>
 
-                <a href="{% url 'apps.mcp.views.vista_agregar_tabla' proyecto.id %}"><th align="right"><input type="image" src="{{ STATIC_URL }}pagina_principal/images/mas.png" title="Crear"></th></a>
+                {% if proyecto.Estado != 'Terminado' %}
+                    <a href="{% url 'apps.mcp.views.vista_agregar_tabla' proyecto.id %}"><th align="right"><input type="image" src="{{ STATIC_URL }}pagina_principal/images/mas.png" title="Crear"></th></a> 
+                {% endif %}
             </header>
 
             <div class="module_content">

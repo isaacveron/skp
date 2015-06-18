@@ -122,6 +122,7 @@
                                             	{% if grupo == usuario_actor%}
                                             		<tr class="clickableRow" href='{% url "apps.mcp.views.detalle_mcp" proyecto.id %}'>
                                             		<th>{{ proyecto.Nombre }}</th>
+                                            		<th align="center"><font color="#240CDA">{{proyecto.Estado}}
                                             	{% endif %}
                                             {% endfor %}
                                         {% endif %}

@@ -19,7 +19,7 @@
                             <div class="message"><p><strong>Prioridad mas alta: </strong>{{ sprint.Prioridad_mas_alta }}</p></div>
                             <div class="message">
                             <p>
-                                {% if sprint.Estado == 'Pendiente' %}
+                                {% if sprint.Estado == 'Pendiente' and sprint.Proyecto_asignado.Estado != 'Terminado'%}
 
                                     {% if perms.sprint.change_sprint %}
                                         <a href="{% url 'apps.sprint.views.modificar_sprint' sprint.id%}">Modificar</a>
@@ -45,7 +45,7 @@
 
                                 {% endif %}
 
-                                {% if sprint.Estado == 'En_curso' and perms.sprint.detener_sprint %}
+                                {% if sprint.Estado == 'En_curso' and perms.sprint.detener_sprint and sprint.Proyecto_asignado.Estado != 'Terminado'%}
                                     <a href="{% url 'apps.sprint.views.vista_detener_sprint' sprint.id%}">Detener Sprint </a>
                                     <strong> | </strong>
                                     <a href="{% url 'apps.graficos.views.ver_backlog' sprint.id%}"> Ver Sprint Backlog </a>
@@ -59,7 +59,7 @@
                                         <strong> | </strong>
                                         <a href="{% url 'apps.graficos.views.ver_burdownchart' sprint.id%}">Ver Burdownchart</a>
                                         <strong> | </strong>
-                                        {% if perms.sprint.delete_sprint %}
+                                        {% if perms.sprint.delete_sprint and sprint.Proyecto_asignado.Estado != 'Terminado' %}
                                             <a href="{% url 'apps.sprint.views.vista_eliminar_sprint' sprint.id%}">Eliminar</a>
                                             <strong> | </strong>
                                         {% endif %}

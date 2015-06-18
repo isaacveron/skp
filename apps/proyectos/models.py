@@ -3,6 +3,7 @@ from apps.roles.models import Group
 from apps.usuario.models import User
 from apps.flujos.models import Flujo
 from datetime import datetime, timedelta
+from apps import userstory
 import ast
 
 class ListField(models.TextField):
@@ -65,6 +66,7 @@ class Proyecto(models.Model):
     Dia_actual = models.DateField(default = datetime.now())
     sprint_activo = models.BooleanField(default=False)
 
+
     Registro = ListField( null=True )
     Duracion = models.PositiveIntegerField(default=0)
     Restante = models.PositiveIntegerField(default = 0)
@@ -77,5 +79,13 @@ class Proyecto(models.Model):
     class Meta:
         ordering = ['Nombre']
 
+    def is_done(self):
 
+        userstorys = userstory.models.UserStory.objects.filter( Proyecto_asignado = self )
+
+        for us in userstorys:
+            if( us.Estado != 'Terminado' ):
+                return False
+
+        return True
 

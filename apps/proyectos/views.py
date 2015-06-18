@@ -60,7 +60,7 @@ def crear_proyecto(request):
             proyecto.Duracion = (proyecto.Fecha_finalizacion - proyecto.Fecha_inicio).days * 8
             proyecto.Restante = proyecto.Duracion
             proyecto.Dia_actual = proyecto.Fecha_inicio
-            proyecto.Registro.append( proyecto.Duracion )
+            proyecto.Registro.append( 0 )
             proyecto.save()
 
             proyectos = Proyecto.objects.all()
@@ -182,3 +182,17 @@ def eliminar_proyecto(request, idProyecto):
     return render_to_response('proyecto/operacion_proyecto_exito.html',
                               {'mensaje':mensaje, 'usuario_actor': usuario_actor, 'proyectos': proyectos},
                               context_instance=RequestContext(request))
+
+
+def finalizar_proyecto(request, idProyecto):
+
+    proyecto = Proyecto.objects.get(pk=idProyecto)
+    usuario_actor = request.user
+
+    if( not proyecto.sprint_activo and proyecto.is_done() ):
+
+        proyecto.Estado = 'Terminado'
+        proyecto.save()
+
+    proyectos = Proyecto.objects.all()
+    return render_to_response('index.html', {'usuario_actor':usuario_actor, 'proyectos':proyectos}, context_instance = RequestContext(request))

@@ -26,9 +26,9 @@
                             <div class="message"><p><strong>Bloqueo: </strong>{{ userstory.Bloqueado }}</p></div>
                             <div class="message">
                             <p>
-                            {% if userstory.Estado == 'AsignadoSprintActivo' %}
+                            {% if userstory.Estado == 'AsignadoSprintActivo' and userstory.Proyecto_asignado.Estado != 'Terminado'%}
 
-                                {% if not userstory.Bloqueado %}
+                                {% if not userstory.Bloqueado  %}
                                     {% if  perms.userstory.asignar_horas_us %}
                                         {% if userstory.Estado_de_actividad != 'done'  %}
                                             <a href="{% url 'apps.userstory.views.asignar_horas_us' userstory.id %}">Asignar Horas</a>
@@ -67,17 +67,17 @@
                             {% endif %}
 
 
-                            {% if perms.userstory.change_userstory %}
+                            {% if perms.userstory.change_userstory and userstory.Proyecto_asignado.Estado != 'Terminado'%}
                                 <a href="{% url 'apps.userstory.views.modificar_userstory' userstory.id %}">Modificar</a>
                                 <strong> | </strong>
                             {% endif %}
 
-                            {% if  perms.userstory.cambiar_estado_us %}
+                            {% if  perms.userstory.cambiar_estado_us and userstory.Proyecto_asignado.Estado != 'Terminado'%}
                                 <a href="{% url 'apps.userstory.views.cambiar_estado_userstory' userstory.id %}">Cambiar Estado</a>
                                 <strong> | </strong>
                             {% endif %}
                                      
-                            {% if perms.userstory.delete_userstory %}
+                            {% if perms.userstory.delete_userstory and userstory.Proyecto_asignado.Estado != 'Terminado' %}
                                 <a href="{% url 'apps.userstory.views.vista_eliminar_userstory' userstory.id %}">Eliminar</a>
                                 <strong> | </strong>
                             {% endif %}  
