@@ -3,6 +3,7 @@ from apps.usuario.models import User
 from apps.proyectos.models import Proyecto
 from apps.flujos.models import Flujo, Actividad
 import ast
+from apps.archivos.models import Document
 
 class ListField(models.TextField):
     __metaclass__ = models.SubfieldBase
@@ -144,3 +145,4 @@ class CargarHoras(models.Model):
     Horas = models.PositiveIntegerField(null=True, blank=True, default=0)
     Descripcion = models.TextField(null=True)
     US_asignado= models.ForeignKey(UserStory, null=True)
+    Archivos_adjuntos = models.ManyToManyField(Document, null=True, related_name='archivos_adjuntos')

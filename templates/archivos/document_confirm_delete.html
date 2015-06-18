@@ -1,0 +1,20 @@
+{% extends "index.html" %}
+
+{% block cuerpo %}
+        <article class="module width_full">
+            <header><h3>Eliminar Archivo</h3></header>
+            <div class="module_content">
+                <div class="tab_container">
+                    <div id="tab1" class="tab_content">
+                  		<form method='post'>
+    						{% csrf_token %}
+    						<p>¿Esta seguro de eliminar el archivo "{{ object }}"?</p>
+    						<input type='submit' value='Confirm' />
+							</form>
+					</div>
+				</div>
+			</div>
+		</article>
+{%endblock cuerpo%}
+
+

@@ -1,0 +1,34 @@
+{% extends "index.html" %}
+
+{% block cuerpo %}
+        <article class="module width_full">
+            <header>
+            <h3>Adjuntar Archivo</h3>
+                <a href="{% url 'document.add' %}"><th align="right"><input type="image" src="{{ STATIC_URL }}pagina_principal/images/mas.png" title="Crear"></th></a>
+            </header>
+            <div class="module_content">
+                <div class="tab_container">
+                    <div id="tab1" class="tab_content">
+                   
+                        {% if object_list %}
+                            <table>
+                                {% for obj in object_list %}
+                                    <td>
+                                    {% if obj.docfile and obj.estado == False%}
+                                        <a href='{% url "db_file_storage.get_file" %}?name={{ obj.docfile }}' target='_blank'>
+                                        <img height=64 width=64 src="{% url 'db_file_storage.get_file' %}?name={{ obj.docfile }}" />
+                                        </a>
+                                        <br/>
+                                        <a href='{{ obj.get_absolute_url }}'>{{ obj }}</a>
+                                    {% endif %}
+                                    </td>
+                                {% endfor %}
+                            </table>
+                        {% else %}
+                            <p>No items found.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </article>
+{%endblock cuerpo%}

@@ -1,0 +1,26 @@
+{% extends "index.html" %}
+
+{% block cuerpo %}
+        <article class="module width_full">
+            <header><h3>Adjuntar Archivo</h3></header>
+            <div class="module_content">
+                <div class="tab_container">
+                    <div id="tab1" class="tab_content">
+                  		<form method='post' {% if form.is_multipart %}enctype='multipart/form-data'{% endif %}>
+    						{% csrf_token %}
+    						{{ form.as_p }}
+    						<p><input type='submit' value="Adjuntar" /></p>
+						</form>
+
+						{% if form.instance.pk %}
+    					<hr/>
+    						<div align='center'>
+        						<a href='{% url "document.delete" pk=form.instance.pk %}'>Delete</a>
+    						</div>
+						{% endif %}
+						<hr/>
+					</div>
+				</div>
+			</div>
+		</article>
+{%endblock cuerpo%}

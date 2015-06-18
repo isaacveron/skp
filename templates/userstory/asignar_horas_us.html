@@ -1,9 +1,11 @@
 {% extends 'index.html' %}
 
 {% block cuerpo %}
-    <section id="main" class="column">
         <article class="module width_full">
-            <header><h3>Operacion Userstory</h3></header>
+           <header>
+            <h3>Adjuntar Archivo</h3>
+                <a href="{% url 'document.add' %}"><th align="right"><input type="image" src="{{ STATIC_URL }}pagina_principal/images/mas.png" title="Crear"></th></a>
+            </header>
             <div class="module_content">
                 <div class="tab_container">
                     <div id="tab1" class="tab_content">
@@ -22,5 +24,4 @@
                 </div>
             </div>
         </article>
-    </section>
 {%endblock cuerpo%}

@@ -13,10 +13,11 @@
                             <div class="message"><p><strong>Creado por: </strong>{{ proyecto.Usuario_creador }}</p></div>
                             <div class="message"><p><strong>Fecha de Creacion: </strong>{{ proyecto.Fecha_creacion }}</p></div>
                             <div class="message">
-                                <p><a href="{% url 'apps.graficos.views.ver_burdownchart_proyecto' proyecto.id %}">Ver Burndownchart del proyecto</a></p>
-                            </div>
-                            <div class="message">
-                                <p><a href="{% url 'apps.sprint.views.avanzar_dia' proyecto.id %}">Avanzar Dia</a></p>
+                                <p>
+                                <a href="{% url 'apps.graficos.views.ver_burdownchart_proyecto' proyecto.id %}">Ver Burndownchart del proyecto</a>
+                                <strong> | </strong>
+                                <a href="{% url 'apps.sprint.views.avanzar_dia' proyecto.id %}">Avanzar Dia</a>
+                                </p>
                             </div>
                             
                         </table>

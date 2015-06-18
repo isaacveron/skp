@@ -104,10 +104,16 @@
                                 <table class="tablesorter" cellspacing="0"> 
                                     <div class="message"><p><strong>Horas: </strong>{{ us.Horas }}</p></div>
                                     <div class="message"><p><strong>Descripcion de Actividad: </strong>{{ us.Descripcion }}</p></div>
+                                    {% for archivos in us.Archivos_adjuntos.all %}
+                                        <a href='{% url "db_file_storage.get_file" %}?name={{ archivos.docfile }}' target='_blank'>
+                                        <img height=64 width=64 src="{% url 'db_file_storage.get_file' %}?name={{ archivos.docfile }}" />
+                                        </a>                                   
+                                    {% endfor %}
                                 </table>
                             </div>
                         </div>
                     </div>
             </article> 
         {% endfor %}
+        
 {% endblock cuerpo %}

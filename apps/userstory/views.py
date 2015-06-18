@@ -14,6 +14,7 @@ from django.db.models import Q
 from unipath import Path
 from apps.mensaje.models import Mensaje
 from django.core.mail import send_mail
+from apps.archivos.models import Document
 
 # Create your views here.
 @login_required(login_url = '/')
@@ -241,6 +242,15 @@ def asignar_horas_us (request, idUserStory):
             agregar_horas_registro(idUserStory,formulario.instance.Horas)
             
             restar_horas_sprint(idSprint, formulario.instance.pk)
+
+            horas_us = CargarHoras.objects.get(pk=formulario.instance.pk)
+            archivos = Document.objects.all()
+            for archivo in archivos:
+                if (archivo.estado==False):
+                    horas_us.Archivos_adjuntos.add(archivo)
+                    archivo.estado = True
+                    archivo.save()
+                    horas_us.save()
 
             if (userstory.Estado_de_actividad == 'to_do'):
                 avanzar(idUserStory)

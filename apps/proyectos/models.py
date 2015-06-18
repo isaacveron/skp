@@ -46,7 +46,6 @@ class Proyecto(models.Model):
     """
 
     Estados_P = (
-        ('Pendiente', 'Pendiente'),
         ('Activo','Activo'),
         ('Terminado','Terminado'),
         ('Cancelado','Cancelado'),
@@ -59,7 +58,6 @@ class Proyecto(models.Model):
     Cliente = models.CharField( max_length=30 , blank=True, null=True)
     Estado = models.CharField( max_length=30, choices=Estados_P, default='Activo', unique=False)
     
-    Estado = models.CharField( max_length=15, default='Pendiente', unique=False)
     Usuario_creador = models.ForeignKey(User, null=True)
     Fecha_creacion = models.DateTimeField(auto_now=True, null=True)
     Tablas = models.ManyToManyField(Flujo, null=True)

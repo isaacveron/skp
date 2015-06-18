@@ -34,6 +34,7 @@ EMAIL_USE_TLS = True
 
 
 # Application definition
+DEFAULT_FILE_STORAGE = 'db_file_storage.storage.DatabaseFileStorage'
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -50,7 +51,11 @@ INSTALLED_APPS = (
     'apps.userstory',
     'apps.mcp',
     'apps.mensaje',
-    'apps.graficos'
+    'apps.graficos',
+    'apps.archivos',
+    'apps.reportes',
+    
+    'db_file_storage',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -85,9 +90,9 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-PY'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Asuncion'
 
 USE_I18N = True
 
