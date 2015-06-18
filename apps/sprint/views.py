@@ -428,44 +428,39 @@ def avanzar_dia(request, idProyecto):
 
     proyecto.Dia_actual += timedelta( days = 1)
 
-    if( proyecto.Dia_actual >= proyecto.Fecha_finalizacion ):
 
-        proyecto.Estado = 'Terminado'
 
-    else:
+    proyecto.Registro.append(0)
 
-        proyecto.Registro.append(0)
-        proyecto.Registro[-1] = proyecto.Registro[-2]
+    flag = 0
+    for s in sprints:
+        if( s.Estado == 'En_curso' ):
+            sprint = s
+            flag = 1
+            break
 
-        flag = 0
-        for s in sprints:
-            if( s.Estado == 'En_curso' ):
-                sprint = s
-                flag = 1
-                break
+    if( flag == 1):
 
-        if( flag == 1):
+        if( proyecto.Dia_actual >= sprint.Fecha_finalizacion ):
+            
+            sprint.Estado = 'Terminado'
+            proyecto.sprint_activo = False
 
-            if( proyecto.Dia_actual >= sprint.Fecha_finalizacion ):
-                
-                sprint.Estado = 'Terminado'
-                proyecto.sprint_activo = False
-
-                for us in sprint.UserStorys.all():
-                    if( us.Estado != 'Terminado'):
-                        us.Estado = 'Pendiente'
-                        us.Prioridad += 1
-                        us.Bloqueado = False
-                        us.save()
-
-            else:
-                sprint.Registro.append( 0 )
-
-                for us in sprint.UserStorys.all():
-                    us.Registro.append(0)
+            for us in sprint.UserStorys.all():
+                if( us.Estado != 'Terminado'):
+                    us.Estado = 'Pendiente'
+                    us.Prioridad += 1
+                    us.Bloqueado = False
                     us.save()
 
-            sprint.save()
+        else:
+            sprint.Registro.append( 0 )
+
+            for us in sprint.UserStorys.all():
+                us.Registro.append(0)
+                us.save()
+
+        sprint.save()
 
     proyecto.save()
         
