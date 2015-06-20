@@ -85,10 +85,14 @@
 			<li class="icn_jump_back"><a href="{% url 'apps.mensaje.views.enviar_mensaje' %}">Enviar Mensaje</a></li>
 		</ul>
 		<hr>	
-		<h3>Acerca</h3>
+		<h3>Reportes</h3>
 		<ul class="toggle">
-			<li class="icn_settings"><a href="{% url 'apps.usuario.views.index' %}">Nosotros</a></li>
-			<li class="icn_settings"><a href="{% url 'apps.reportes.views.reporte' %}">Reporte</a></li>
+			<li  class="icn_edit_article"><a href="{% url 'apps.reportes.views.reportes' %}">Reportes</a></li>
+		</ul>
+		<hr>
+		<h3>Inicio</h3>
+		<ul class="toggle">
+			<li class="icn_settings"><a href="{% url 'apps.usuario.views.index' %}">Home</a></li>
 		</ul>
 		<hr>
 	{% endblock aside %}

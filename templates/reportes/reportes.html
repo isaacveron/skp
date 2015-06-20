@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+
+
+{% block cuerpo %}
+     <article class="module width_full">
+        <header><h3>Reportes</h3></header>
+        <div class="module_content">
+            <div class="tab_container">
+                <div id="tab1" class="tab_content">
+                    <table class="tablesorter" cellspacing="0"> 
+                        <div class="message"><p><a href="{% url 'apps.reportes.views.llamada_reporte_uno' %}">Cantidad de trabajos en curso por equipo</a></p></div>
+                        <div class="message"><p><a href="{% url 'apps.reportes.views.llamada_reporte_dos' %}">Cantidad de trabajos por usuario pendiente, en curso, finalizados</a></p></div>
+                        <div class="message"><p><a href="{% url 'apps.reportes.views.llamada_reporte_tres' %}">Lista clasificada por orden de prioridad de todas las actividades  para completar un proyecto</a></p></div> 
+                        <div class="message"><p><a href="{% url 'apps.reportes.views.llamada_reporte_cuatro' %}">Lista de Tiempo estimado por  proyecto y la ejecución del mismo</a></p></div> 
+                        <div class="message"><p><a href="{% url 'apps.reportes.views.llamada_reporte_cinco' %}">El Backlog del Producto, lista ordenada de HU, en el orden que esperamos deban terminarse</a></p></div> 
+                        <div class="message"><p><a href="{% url 'apps.reportes.views.llamada_reporte_seis' %}">El Backlog del Sprin, lista de los elementos del Backlog del Producto, elegidos para ser desarrollador en el Sprint actual</a></p></div>                        
+                    </table>
+                </div>
+            </div>
+        </div>  
+    </article>  
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'index.html' %}
+
+{% block cuerpo %}		
+	{% if proyectos|length > 0 %}
+        {% for proyecto in proyectos %}
+            {% if proyecto.pk > 0 %}                             
+                <article class="module width_full">
+                    <header>
+                        <h3>{{proyecto.Nombre}}</h3>
+                    </header>
+        			<div class="module_content">
+                        <div class="tab_container">
+                            <div id="tab1" class="tab_content">
+                                <table class="tablesorter" cellspacing="0"> 
+                                    <thead> 
+                                        {% for sprint in sprints  %}
+                                            {% if sprint.Proyecto_asignado == proyecto %}
+                                        		<tr class="clickableRow" href='{% url "apps.reportes.views.vista_reporte_seis" sprint.id %}'>
+                                        		<th>{{ sprint.Nombre }}</th>
+                                        	{% endif %}   
+                                        {% endfor %}                                  
+                                    </thead>                        
+                                </table>
+                            </div>
+                        </div>
+                    </div>  
+                </article>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <tr><td class="warning">No hay proyectos de usuario registrados aun</td>
+    {% endif %}
+	{% endblock cuerpo %}

@@ -1,0 +1,34 @@
+{% extends 'index.html' %}
+
+{% block cuerpo %}
+        <article class="module width_full">
+            <header><h3>Reporte exitoso</h3></header>
+            <div class="module_content">
+                <div class="tab_container">
+                    <div id="tab1" class="tab_content">
+                        <table class="tablesorter" cellspacing="0"> 
+                            <div class="module_content">
+                                <h4 class="alert_success">Reporte creado con exito si quiere ver el reporte puede hacer click en el link de abajo.</h4>
+                                <br>
+                                {% if opcion == 'uno' %}
+                                    <a target="_blank" href="{% url 'apps.reportes.views.ver_reporte_uno' %}">Ver Reporte</a>
+                                {% elif opcion == 'dos' %}
+                                    <a target="_blank" href="{% url 'apps.reportes.views.ver_reporte_dos' %}">Ver Reporte</a>
+                                {% elif opcion == 'tres'%}
+                                    <a target="_blank" href="{% url 'apps.reportes.views.ver_reporte_tres' %}">Ver Reporte</a>
+                                {% elif opcion == 'cuatro' %}
+                                    <a target="_blank" href="{% url 'apps.reportes.views.ver_reporte_cuatro' %}">Ver Reporte</a>
+                                {% elif opcion == 'cinco' %}
+                                    <a target="_blank" href="{% url 'apps.reportes.views.ver_reporte_cinco' %}">Ver Reporte</a>
+                                {% elif opcion == 'seis' %}
+                                    
+                                {% endif %}
+                                
+                                <a href="javascript:history.go(-1)">Volver</a>
+                            </div>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </article>
+{%endblock cuerpo%}
